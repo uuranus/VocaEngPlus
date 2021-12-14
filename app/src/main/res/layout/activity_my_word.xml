@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:backgroundTint="@color/white"
+    tools:context=".MyWordActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+
+            <ImageButton
+                android:id="@+id/helpbtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/gradation"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_question"
+                app:tint="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="단어장"
+                android:textColor="@color/black"
+                android:fontFamily="@font/bold_font"/>
+            <Spinner
+                android:id="@+id/spinner"
+                android:spinnerMode="dropdown"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/emptyrecyclervie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="단어장이 비어있습니다"
+            android:fontFamily="@font/main_font"
+            android:gravity="center"
+            android:textColor="@color/bluegray"
+            android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+</LinearLayout>

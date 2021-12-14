@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="단어장 수정하기"
+        android:fontFamily="@font/bold_font"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="제목"
+        android:fontFamily="@font/bold_font"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/editcategoryname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:hint="단어장 이름을 작성하세요"
+        android:ems="10"
+        android:inputType="text"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/main_font"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="내용"
+        android:fontFamily="@font/bold_font"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/editcategorydescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:inputType="text"
+        android:backgroundTint="@color/black"
+        android:hint="단어장 내용을 입력하세요"
+        android:fontFamily="@font/main_font"/>
+</LinearLayout>

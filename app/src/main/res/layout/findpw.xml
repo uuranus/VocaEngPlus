@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="비밀번호 찾기"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/bold_font"/>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="비밀번호 재설정 이메일을 받을 주소를 적어주세요"
+        android:textColor="@color/black"
+        android:fontFamily="@font/main_font"/>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:fontFamily="@font/main_font"
+        android:text="(가입된 이메일이 아니라면 메일이 가지 않습니다.)"
+        android:textColor="@color/black"
+        android:textSize="10sp" />
+
+    <EditText
+        android:id="@+id/emailforpw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="20"
+        android:inputType="textEmailAddress"
+        android:backgroundTint="@color/black"/>
+</LinearLayout>

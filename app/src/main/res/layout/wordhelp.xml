@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="[단어장 보기]"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bold_font"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="영단어를 클릭하면 한국어 뜻을 볼 수 있습니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="[단어 즐겨찾기]"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bold_font"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="별표시를 클릭하면 내 단어장에 즐겨찾기를 할 수 있습니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="[단어 추가,삭제,수정]"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bold_font"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오른쪽 상단의 + 버튼을 클릭하면 단어를 추가할 수 있습니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이미 존재하는 단어를 또 추가할 경우 덮어씌워집니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="영단어를 길게 클릭하면 단어를 수정할 수 있습니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="단어를 왼쪽으로 밀면 해당 단어를 삭제할 수 있습니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="[단어 추가,수정 시 주의사항]"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bold_font"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="영단어는 특수문자(@#$%^&amp;*+/&lt;&gt;=[].\)와 한국어를 제외한 2~40자의 영문자 또는 숫자여야 합니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="한국어 뜻은 특수문자(@#$%^\&amp;*+/&lt;&gt;=)와 영어를 제외한 1~40자의 한글 또는 숫자여야 합니다."
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이 때, 한국어 뜻에는 자음 또는 모음만 있는 글자를 포함할 수 없습니다. (ex. ㅇㅇ)"
+                android:textColor="@color/black"
+                android:fontFamily="@font/main_font"
+                android:textSize="12sp"/>
+
+        </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

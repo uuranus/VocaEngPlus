@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_camera"
+            android:title="계정"/>
+        <item
+            android:id="@+id/nav_pwchange"
+            android:icon="@drawable/ic_setting"
+            android:title="비밀번호 재설정" />
+        <item
+            android:id="@+id/nav_quit"
+            android:icon="@drawable/ic_baseline_power_settings_new_24"
+            android:title="탈퇴" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_baseline_logout_24"
+            android:title="로그아웃" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_baseline_help_outline_24"
+            android:title="문의하기" />
+    </group>
+</menu>

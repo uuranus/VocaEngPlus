@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NaverActivity"
+    android:padding="10dp"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <ImageButton
+            android:id="@+id/naverhelpbtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_question"
+            android:background="@drawable/gradation"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:layout_gravity="center"
+        android:src="@drawable/translation_illust"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"/>
+    <TextView
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="번역할 문장을 입력해주세요"
+        android:textColor="@color/black"
+        android:fontFamily="@font/bold_font"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/source"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="한국어"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bold_font"/>
+
+        <ImageButton
+            android:id="@+id/imagebutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/lang_switch"
+            android:background="@android:color/transparent"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:tint="@color/bluegray" />
+
+        <TextView
+            android:id="@+id/target"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="영어"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bold_font"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/inputWord"
+            android:layout_width="0dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+        <Button
+            android:id="@+id/searchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            android:text="번역"
+            android:fontFamily="@font/bold_font"/>
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/searchresult"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="15dp"
+        android:layout_weight="1"
+        android:textColor="@color/bluegray"
+        android:fontFamily="@font/main_font"/>
+
+    <LinearLayout
+        android:id="@+id/addlayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="10dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+
+        <TextView
+            android:id="@+id/naveraddbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/gradation"
+            android:text="단어 추가하기"
+            android:textColor="@color/white"
+            android:fontFamily="@font/bold_font"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

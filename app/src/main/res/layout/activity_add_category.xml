@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:backgroundTint="@color/white"
+    tools:context=".AddCategory">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView25"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="새 단어장 추가하기"
+            android:layout_margin="5dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:fontFamily="@font/bold_font"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="단어장 이름"
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+        <EditText
+            android:id="@+id/editnewcategoryname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:ems="10"
+            android:inputType="text"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_margin="15dp"
+        android:id="@+id/writer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="작성자  "
+        android:textColor="@color/black"
+        android:fontFamily="@font/main_font"/>
+
+    <TextView
+        android:layout_margin="15dp"
+        android:id="@+id/addDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="추가 날짜  "
+        android:textColor="@color/black"
+        android:fontFamily="@font/main_font"/>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_margin="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내용  "
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+        <EditText
+            android:id="@+id/editnewcategorydescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="0dp"
+            android:ems="10"
+            android:inputType="textMultiLine"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="15dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="15"
+            android:text="단어 목록"
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+        <ImageButton
+            android:id="@+id/addbtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_plus"
+            android:background="@android:color/transparent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:tint="@color/blue" />
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vocalist"
+        android:layout_width="match_parent"
+        android:padding="15dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="0dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_margin="5dp"
+            android:id="@+id/addcancelbtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            android:padding="0dp"
+            android:fontFamily="@font/bold_font"/>
+
+        <Button
+            android:layout_margin="5dp"
+            android:id="@+id/addokbtn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="추가하기"
+            android:padding="0dp"
+            android:fontFamily="@font/bold_font"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="[게스트 로그인]"
+                android:textColor="@color/black"
+                android:fontFamily="@font/bold_font"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="게스트 계정으로 로그인 할 수 있습니다."
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/main_font"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="다른 계정으로 로그인 시 게스트 계정은 사라집니다."
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/main_font"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="[계정]을 통해 이메일 계정으로 변경할 수 있습니다."
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/main_font"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="[주의사항]"
+                android:textColor="@color/black"
+                android:fontFamily="@font/bold_font"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="커뮤니티 기능이 제한됩니다."
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/main_font"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="커뮤니티 조회는 할 수 있지만, 다운/업로드, 좋아요는 불가합니다."
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/main_font"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로그아웃이 불가합니다."
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/main_font"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="게스트 계정으로 진행하시겠습니까?"
+                    android:textColor="@color/bluegray"
+                    android:fontFamily="@font/main_font"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

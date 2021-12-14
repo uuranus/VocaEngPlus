@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bottomline"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/communitymaintitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:layout_margin="5dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bold_font"/>
+
+        <ImageButton
+            android:id="@+id/communitymainbtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/communitymainwriterprofile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/default2"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/communitymainwriter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_margin="5dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+        <TextView
+            android:id="@+id/communitymainupload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:layout_margin="5dp"
+            android:gravity="end"
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_font"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/communitymaindescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/black"
+        android:fontFamily="@font/main_font"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8" />
+
+        <ImageView
+            android:id="@+id/communitymainlikeicon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/like"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+        <TextView
+            android:id="@+id/communitymainlike"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1200"
+            android:fontFamily="@font/main_font"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/black"/>
+
+        <ImageView
+            android:id="@+id/communitymaindownloadicon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ddownload"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/communitymaindownload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1000"
+            android:textColor="@color/black"
+            android:fontFamily="@font/main_font" />
+    </LinearLayout>
+
+</LinearLayout>

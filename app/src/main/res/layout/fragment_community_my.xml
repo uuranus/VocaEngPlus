@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CommunityMyFragment">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mytable"
+        android:layout_marginTop="10dp"
+        >
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="좋아요 한 수"
+                android:fontFamily="@font/bold_font"
+                android:textColor="@color/black"
+                android:textSize="10sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="좋아요 받은 수"
+                android:fontFamily="@font/bold_font"
+                android:textColor="@color/black"
+                android:textSize="10sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="올린 단어장 수"
+                android:fontFamily="@font/bold_font"
+                android:textColor="@color/black"
+                android:textSize="10sp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="다운로드 된 수"
+                android:fontFamily="@font/bold_font"
+                android:textColor="@color/black"
+                android:textSize="10sp"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/communitymylike"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="0회"
+                android:fontFamily="@font/main_font"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/communitymyliked"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="0회"
+                android:fontFamily="@font/main_font"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/communitymyupload"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="0개"
+                android:fontFamily="@font/main_font"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/communitymydownloaded"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="0개"
+                android:fontFamily="@font/main_font"
+                android:textColor="@color/black"/>
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/emptyrecyclervie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="올릴 단어장이 없습니다"
+        android:fontFamily="@font/main_font"
+        android:gravity="center"
+        android:textColor="@color/bluegray"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/communitymycategoryrecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

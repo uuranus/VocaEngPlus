@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:backgroundTint="@color/white"
+    tools:context=".SettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/changebackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="10"
+                android:text="내 단어장 리스트"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:fontFamily="@font/bold_font"/>
+
+            <ImageButton
+                android:id="@+id/addcategorybtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_plus"
+                android:background="@android:color/transparent"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:tint="@color/blue" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/emptyrecyclervie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="단어장이 없습니다"
+            android:fontFamily="@font/main_font"
+            android:gravity="center"
+            android:textColor="@color/bluegray"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+</LinearLayout>
