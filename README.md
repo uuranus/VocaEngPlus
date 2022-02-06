@@ -1,10 +1,10 @@
-# VocaEngPlus
+# VocaEngPlus (보카잉플러스)
 
 
 
 ## Description
 > 만들고 공유하는 나만의 단어장, 보카잉플러스 앱입니다. 영어단어 암기를 도와주는 어플리케이션으로 테스트, 오답노트, 커뮤니티 등 총 8가지의 기능을 제공합니다.
-> 학교과제로 제작한 보카잉(VocaEng) 앱에 새로운 기능과 디자인을 업그레드하여 사용성을 향상시켰습니다.
+> 학교과제로 제작한 보카잉(VocaEng) 앱에 새로운 기능과 디자인을 업그레이드하여 사용성을 향상시켰습니다.
 * 플레이스토어 링크 <https://play.google.com/store/apps/details?id=com.vocaengplus.vocaengplus>
 
 
@@ -14,9 +14,9 @@
 * 이메일 주소 (for 커뮤니티)
 
 ## Prerequisite
-* firebase realtime database, auth
+* Firebase Realtime Database, Auth
 * PhilJay:MPAndroidChart <https://github.com/PhilJay/MPAndroidChart>
-* jsoup
+* jsoup https://github.com/jhy/jsoup
 
 ## Installation
 * git clone https://github.com/uuranus/VocaEngPlus.git
@@ -34,13 +34,13 @@
   <img width="250" src="https://user-images.githubusercontent.com/72340294/152672533-86fb5f6e-8a80-4bd2-a231-cb636f43ff56.jpg">
   
 * ### 테스트
-  단어장별로 단어테스트를 볼 수 있습니다. 
+  단어장별로 단어테스트를 볼 수 있습니다.  
   3지선다형으로 최대 10 단어씩 진행됩니다.
 
   <img width="250" src="https://user-images.githubusercontent.com/72340294/152672535-b539bc34-cd14-4288-8a00-29693f977f44.jpg">
   
 * ### 오답노트
-  테스트 본 단어중 맞추지 못한 단어들이 자동으로 쌓입니다. 
+  테스트 본 단어중 맞추지 못한 단어들이 자동으로 쌓입니다.  
   단어를 하나씩 카드뷰로 볼 수 있습니다.
   
   <img width="250" src="https://user-images.githubusercontent.com/72340294/152672534-1a5d65c9-eb4f-48c1-ae84-0f3fbf353abc.jpg">
@@ -61,7 +61,7 @@
   <img width="250" src="https://user-images.githubusercontent.com/72340294/152672529-ac660e07-0214-4205-b51e-233b1ee840e2.jpg">
   
 * ### 커뮤니티
-  내가 만든 단어장을 다른 사람들과 공유하고
+  내가 만든 단어장을 다른 사람들과 공유하고  
   다른 사람들이 만든 단어장을 다운받고 좋아요할 수 있습니다.
 
   <img width="250" src="https://user-images.githubusercontent.com/72340294/152672541-8170cd47-7fa1-4183-b796-9e4df1cca490.jpg">
@@ -72,7 +72,7 @@
   <img width="250" src="https://user-images.githubusercontent.com/72340294/152672540-2ac1378c-e1a7-43ab-9112-774a00ac50b2.jpg">
   
 * 로그인 & 회원가입 & 마이페이지
-  이메일 인증을 통해 회원가입을 할 수 있고
+  이메일 인증을 통해 회원가입을 할 수 있고  
   프로필 사진과 닉네임을 변경할 수 있습니다.
 
   <img width="250" src="https://user-images.githubusercontent.com/72340294/152673761-7b484cd2-32df-4b48-a597-1bf0502bc06f.jpg">
