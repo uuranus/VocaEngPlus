@@ -23,12 +23,11 @@ import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import com.vocaengplus.vocaengplus.BuildConfig
 
 class NaverActivity : AppCompatActivity() {
     lateinit var clientId:String
     lateinit var clientSecret:String
-    val initialization= Initialization
+    val initialization = Initialization
     lateinit var validation: Validation
     var isKortoEng=true
 
@@ -38,8 +37,8 @@ class NaverActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_naver)
 
-        clientId=resources.getString(BuildC)
-        clientSecret=resources.getString(BuildConfig.)
+        clientId=resources.getString(R.string.clientID)
+        clientSecret=resources.getString(R.string.clientSecret)
         init()
         initNaver()
     }
