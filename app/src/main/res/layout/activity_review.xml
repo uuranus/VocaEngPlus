@@ -7,7 +7,7 @@
     android:padding="10dp"
     android:backgroundTint="@color/white"
     android:orientation="vertical"
-    tools:context=".ReviewActivity">
+    tools:context=".ui.review.ReviewActivity">
 
 
     <LinearLayout

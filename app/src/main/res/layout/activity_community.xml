@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="10dp"
     android:backgroundTint="@color/white"
-    tools:context=".CommunityActivity">
+    tools:context=".ui.community.CommunityActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

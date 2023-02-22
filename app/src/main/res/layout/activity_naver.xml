@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NaverActivity"
+    tools:context=".ui.search.NaverActivity"
     android:padding="10dp"
     android:backgroundTint="@color/white"
     android:orientation="vertical">
