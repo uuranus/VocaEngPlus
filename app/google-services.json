@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1051690614927",
+    "firebase_url": "https://vocaengplus-default-rtdb.firebaseio.com",
+    "project_id": "vocaengplus",
+    "storage_bucket": "vocaengplus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051690614927:android:b7e47028192d39761270fa",
+        "android_client_info": {
+          "package_name": "com.vocaengplus.vocaengplus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051690614927-oqhl2d2pv2g1qdj7fqh5gr8h8e0g5up2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vocaengplus.vocaengplus",
+            "certificate_hash": "74092a5ff5c0f000bffc1c1fc3e39bc0d2624709"
+          }
+        },
+        {
+          "client_id": "1051690614927-1amc9hn35oni53q23i121o594ansf3c6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-jwTt34yaHe43wrfOjbm6sy8c1_h7stA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051690614927-1amc9hn35oni53q23i121o594ansf3c6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
