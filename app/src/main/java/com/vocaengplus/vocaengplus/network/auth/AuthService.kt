@@ -8,15 +8,16 @@ import com.vocaengplus.vocaengplus.model.data.new.Fail
 import com.vocaengplus.vocaengplus.model.data.new.NetworkState
 import com.vocaengplus.vocaengplus.model.data.new.Success
 import com.vocaengplus.vocaengplus.model.data.new.UserAuth
+import com.vocaengplus.vocaengplus.network.NetworkCallback
 
 object AuthService {
     private val firebaseAuth = Firebase.auth
 
-    fun getCurrentUID(): String = firebaseAuth.currentUser?.uid ?: ""
+    fun getCurrentUID(): String {
+        return firebaseAuth.currentUser?.uid.orEmpty()
+    }
 
     fun getCurrentUserInfo(): UserAuth? {
-        firebaseAuth.currentUser ?: return null
-
         return firebaseAuth.currentUser?.let {
             UserAuth(
                 it.uid,
@@ -27,43 +28,49 @@ object AuthService {
         }
     }
 
-    fun getCurrentUserIdToken(callback: (Result<String>) -> Unit) {
+    fun getCurrentUserIdToken(callback: NetworkCallback) {
         firebaseAuth.currentUser?.let { user ->
             user.getIdToken(true)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        callback(Result.success(it.result.token ?: ""))
+                        callback.onDataLoaded(Result.success(it.result.token ?: ""))
                     } else {
-                        callback(Result.failure(Exception()))
+                        callback.onDataFailed(Result.failure<UserAuth>(Exception()))
                     }
                 }
-        } ?: callback(Result.failure(Exception("로그인이 되어있지 않습니다")))
+        } ?: callback.onDataFailed(Result.failure<UserAuth>(Exception("로그인이 되어있지 않습니다")))
     }
 
-    fun login(email: String, password: String, callback: (NetworkState<UserAuth>) -> Unit) =
+    fun login(email: String, password: String, callback: NetworkCallback) {
         loginWithEmailAndPassword(email, password, callback)
+    }
 
     fun loginWithGoogle(
         credential: GoogleAuthCredential,
-        callback: (NetworkState<UserAuth>) -> Unit
-    ) = loginWithCredential(credential, callback)
+        callback: NetworkCallback
+    ) {
+        loginWithCredential(credential, callback)
+    }
 
+    fun logOut() {
+        firebaseAuth.signOut()
+    }
 
-    fun logOut() = firebaseAuth.signOut()
-
-    fun quit() = firebaseAuth.currentUser?.delete()
+    fun quit() {
+        firebaseAuth.currentUser?.delete()
+    }
 
     private fun loginWithEmailAndPassword(
         email: String,
         password: String,
-        callback: (NetworkState<UserAuth>) -> Unit
+        callback: NetworkCallback
     ) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val user = it.result.user
                     user?.let { u ->
-                        callback(
+                        callback.onDataLoaded(
                             Success(
                                 UserAuth(
                                     u.uid,
@@ -76,20 +83,20 @@ object AuthService {
                     }
                     Result
                 } else {
-                    callback(Fail("로그인에 실패하였습니다"))
+                    callback.onDataFailed(Fail<UserAuth>("로그인에 실패하였습니다"))
                 }
             }
     }
 
     private fun loginWithCredential(
         credential: AuthCredential,
-        callback: (NetworkState<UserAuth>) -> Unit
+        callback: NetworkCallback
     ) {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 val user = it.result.user
                 user?.let { u ->
-                    callback(
+                    callback.onDataLoaded(
                         Success(
                             UserAuth(
                                 u.uid,
@@ -102,7 +109,7 @@ object AuthService {
                 }
                 Result
             } else {
-                callback(Fail("로그인에 실패하였습니다"))
+                callback.onDataFailed(Fail<UserAuth>("로그인에 실패하였습니다"))
             }
         }
     }
