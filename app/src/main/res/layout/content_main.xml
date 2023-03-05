@@ -8,6 +8,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -22,14 +23,24 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageView
+            <!--            <ImageView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:layout_gravity="top|center_horizontal"-->
+            <!--                android:layout_weight="0.4"-->
+            <!--                android:adjustViewBounds="true"-->
+            <!--                android:scaleType="fitXY"-->
+            <!--                android:src="@drawable/title1" />-->
+
+            <com.vocaengplus.vocaengplus.view.MainTitleView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:padding="5dp"
                 android:layout_gravity="top|center_horizontal"
                 android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title1" />
+                android:clipToPadding="false"
+                app:numberText="1"
+                app:titleText="단어장" />
 
             <ImageView
                 android:id="@+id/wordbtn"
@@ -269,7 +280,6 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:src="@drawable/icon8" />
-
 
 
         </LinearLayout>
