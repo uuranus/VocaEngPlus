@@ -1,129 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:backgroundTint="@color/white"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".ui.login.LoginActivity">
 
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="0.2"
-     android:orientation="vertical"/>
+    <ImageView
+        android:id="@+id/loginImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/login_illust"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
- <ImageView
-       android:layout_width="wrap_content"
-       android:layout_height="0dp"
-       android:layout_weight="1"
-       android:layout_margin="20dp"
-       android:adjustViewBounds="true"
-       android:scaleType="fitXY"
-       android:src="@drawable/login_illust"/>
-
- <LinearLayout
-     android:layout_width="match_parent"
-     android:layout_height="0dp"
-     android:layout_weight="0.9"
-     android:gravity="center"
-     android:orientation="vertical">
-
-  <EditText
-      android:id="@+id/et_email"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="15dp"
-      android:layout_marginRight="15dp"
-      android:layout_marginBottom="15dp"
-      android:ems="10"
-      android:hint="이메일(아이디)"
-      android:inputType="textEmailAddress"
-      android:backgroundTint="@color/black"
-      android:fontFamily="@font/main_font"
-      android:padding="0dp"/>
-
-  <EditText
-      android:id="@+id/et_pwd"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:layout_marginLeft="15dp"
-      android:layout_marginRight="15dp"
-      android:ems="10"
-      android:hint="비밀번호"
-      android:inputType="textPassword"
-      android:backgroundTint="@color/black"
-      android:fontFamily="@font/main_font"
-      android:padding="0dp"/>
-
- </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_login"
+    <EditText
+        android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="이메일(아이디)"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/loginImageView" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:ems="10"
+        android:hint="비밀번호"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+
+    <TextView
+        android:id="@+id/findPasswordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="비밀번호를 잊으셨나요?"
+        android:textColor="@color/bluegray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:text="로그인"
-        android:fontFamily="@font/bold_font"
-        android:padding="0dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/findPasswordTextView" />
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1"
-      android:orientation="vertical">
+    <TextView
+        android:id="@+id/registerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:text="회원가입"
+        app:layout_constraintEnd_toStartOf="@id/guestButton"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guestButton" />
 
-   <TextView
-       android:id="@+id/btn_register"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:layout_weight="1"
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/gray"
+        android:orientation="vertical"
+        android:layout_marginTop="3dp"
+        app:layout_constraintBottom_toBottomOf="@id/guestButton"
+        app:layout_constraintEnd_toStartOf="@id/guestButton"
+        app:layout_constraintStart_toEndOf="@id/registerTextView"
+        app:layout_constraintTop_toTopOf="@id/guestButton" />
 
-       android:backgroundTint="@color/black"
-       android:gravity="center"
-       android:text="아직 회원이 아니신가요?"
-       android:textColor="@color/bluegray"
-       android:textSize="18sp"
-       android:fontFamily="@font/main_font"/>
+    <TextView
+        android:id="@+id/guestButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="게스트 입장"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/registerTextView"
+        app:layout_constraintTop_toBottomOf="@id/loginButton" />
 
-   <TextView
-       android:id="@+id/btn_findpw"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:layout_weight="1"
-
-       android:backgroundTint="@color/black"
-       android:gravity="center"
-       android:text="비밀번호를 잊으셨나요?"
-       android:textColor="@color/bluegray"
-       android:textSize="12sp"
-       android:fontFamily="@font/main_font"/>
-
-   <TextView
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:layout_weight="1"
-
-       android:backgroundTint="@color/black"
-       android:gravity="center" />
-   <TextView
-       android:id="@+id/btn_guest"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:layout_weight="1"
-
-       android:backgroundTint="@color/black"
-       android:gravity="center"
-       android:text="게스트 입장"
-       android:textColor="@color/bluegray"
-       android:textSize="16sp"
-       android:fontFamily="@font/main_font"/>
-
-
-  </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

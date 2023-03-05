@@ -52,14 +52,14 @@ class LoginActivity : AppCompatActivity() {
         validation= Validation()
 
         binding.apply {
-            btnRegister.setOnClickListener {
+            registerTextView.setOnClickListener {
 
                 //회원가입 화면 전환
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
             }
 
-            btnFindpw.setOnClickListener {
+            findPasswordTextView.setOnClickListener {
                 val dlgBinding= FindpwBinding.inflate(layoutInflater)
                 val builder= AlertDialog.Builder(this@LoginActivity)
                 builder.setView(dlgBinding.root)
@@ -96,13 +96,13 @@ class LoginActivity : AppCompatActivity() {
                 dlg.show()
             }
 
-            btnLogin.setOnClickListener {
-                if(etEmail.text.isBlank()||etPwd.text.isBlank()){
+            loginButton.setOnClickListener {
+                if(emailEditText.text.isBlank()||passwordEditText.text.isBlank()){
                     Toast.makeText(this@LoginActivity,"아이디, 비밀번호를 입력하세요.",Toast.LENGTH_SHORT).show()
                 }
                 else{
                     //로그인 요청
-                    firebaseauth.signInWithEmailAndPassword(etEmail.text.toString(),etPwd.text.toString()).addOnCompleteListener { task ->
+                    firebaseauth.signInWithEmailAndPassword(emailEditText.text.toString(),passwordEditText.text.toString()).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             //유효한 회원인지 확인
                             if(firebaseauth.currentUser?.isEmailVerified == true){
@@ -143,7 +143,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
 
-            btnGuest.setOnClickListener {
+            guestButton.setOnClickListener {
                 val dlgBinding= GuestBinding.inflate(layoutInflater)
                 val builder= AlertDialog.Builder(this@LoginActivity)
                 builder.setView(dlgBinding.root)
