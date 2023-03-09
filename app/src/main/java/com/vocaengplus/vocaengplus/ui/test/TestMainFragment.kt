@@ -48,7 +48,7 @@ class TestMainFragment : Fragment() {
         databaseref= initialization.getDBref()
         uid=initialization.getuid()
 
-        binding!!.helpbtn.setOnClickListener {
+        binding!!.helpButton.setOnClickListener {
             val dlgBinding= TesthelpBinding.inflate(layoutInflater)
             val builder= AlertDialog.Builder(requireContext())
             builder.setView(dlgBinding.root)
@@ -62,8 +62,8 @@ class TestMainFragment : Fragment() {
         }
 
         val testtypes=arrayOf("영어 문제 - 한국어 답","한국어 문제 - 영어 답")
-        binding!!.testtype.adapter= ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line,testtypes)
-        binding!!.testtype.setSelection(0)
+        binding!!.testTypeSpinner.adapter= ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line,testtypes)
+        binding!!.testTypeSpinner.setSelection(0)
 
 
         categories=ArrayList<String>()
@@ -73,12 +73,12 @@ class TestMainFragment : Fragment() {
             }
             category= categories[0]
 
-            binding!!.testcategory.adapter= ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line,categories)
-            binding!!.testcategory.setSelection(0)
+            binding!!.testCategorySpinner.adapter= ArrayAdapter(requireContext(), R.layout.simple_dropdown_item_1line,categories)
+            binding!!.testCategorySpinner.setSelection(0)
 
             binding!!.teststartbtn.setOnClickListener {   //단어장 목록을 가져와야 테스트 시작 가능
-                val testcategory=binding!!.testcategory.selectedItem.toString()
-                val testtype=binding!!.testtype.selectedItem.toString()
+                val testcategory=binding!!.testCategorySpinner.selectedItem.toString()
+                val testtype=binding!!.testCategorySpinner.selectedItem.toString()
 
                 databaseref.child("UserData").child(uid.toString()).child("downloadData").child(testcategory).child("words")
                     .get().addOnSuccessListener {snapshot->

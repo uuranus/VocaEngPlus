@@ -49,7 +49,7 @@ class TestFragment(val category:String, val data: ArrayList<Voca>, val type:Stri
 
         binding!!.apply {
             if(type=="e"){
-                question.text=data[index].word.toUpperCase()
+                questionTextView.text=data[index].word.toUpperCase()
                 when(random.nextInt(3)){
                     0 ->{
                         radioButton.text=data[index].meaning
@@ -75,7 +75,7 @@ class TestFragment(val category:String, val data: ArrayList<Voca>, val type:Stri
                 }
             }
             else{
-                question.text=data[index].meaning
+                questionTextView.text=data[index].meaning
                 when (random.nextInt(3)) {
                     0 -> {
                         radioButton.text = data[index].word
