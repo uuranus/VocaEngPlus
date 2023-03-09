@@ -34,9 +34,9 @@ class ReviewActivity : AppCompatActivity() {
         init()
     }
     private fun init() {
-        binding.engword.text="단어를 선택해주세요"
-        binding.engmeaning.visibility= View.INVISIBLE
-        binding.blackbox.visibility= View.INVISIBLE
+        binding.engWordTextView.text="단어를 선택해주세요"
+        binding.meaningTextView.visibility= View.INVISIBLE
+        binding.blackBox.visibility= View.INVISIBLE
 
         //단어 가져오기
         initRecyclerView()
@@ -58,7 +58,7 @@ class ReviewActivity : AppCompatActivity() {
         databaseReference= initialization.getDBref()
         uid=initialization.getuid()
 
-        recyclerView=binding.reviewrecycler
+        recyclerView=binding.reviewRecyclerView
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
 
         val query=databaseReference.child("UserData").child(uid.toString()).child("downloadData")
@@ -72,15 +72,15 @@ class ReviewActivity : AppCompatActivity() {
         adapter.itemClickListener=object: ReviewAdapter.OnItemClickListener {
 
             override fun OnItemClick(holder: ReviewAdapter.ViewHolder, view: View, position: Int) {
-                binding.engword.text=holder.word.text.toString().toUpperCase()
-                binding.engmeaning.text=holder.meaning.text.toString()
+                binding.engWordTextView.text=holder.word.text.toString().toUpperCase()
+                binding.meaningTextView.text=holder.meaning.text.toString()
 
-                binding.engmeaning.visibility= View.INVISIBLE
-                binding.blackbox.visibility= View.VISIBLE
+                binding.meaningTextView.visibility= View.INVISIBLE
+                binding.blackBox.visibility= View.VISIBLE
 
-                binding.blackbox.setOnClickListener {
-                    binding.blackbox.visibility= View.INVISIBLE
-                    binding.engmeaning.visibility= View.VISIBLE
+                binding.blackBox.setOnClickListener {
+                    binding.blackBox.visibility= View.INVISIBLE
+                    binding.meaningTextView.visibility= View.VISIBLE
                 }
             }
         }
