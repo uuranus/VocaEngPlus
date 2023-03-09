@@ -12,13 +12,13 @@ import java.util.*
 
 class TestResultAdapter(val resultdata: ArrayList<Voca>): RecyclerView.Adapter<TestResultAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val word=itemView.findViewById<TextView>(R.id.word)
-        val meaning=itemView.findViewById<TextView>(R.id.meaning)
-        val result=itemView.findViewById<ImageView>(R.id.result)
-        var count=itemView.findViewById<TextView>(R.id.count)
+        val word=itemView.findViewById<TextView>(R.id.wordTextView)
+        val meaning=itemView.findViewById<TextView>(R.id.meaningTextView)
+        val result=itemView.findViewById<ImageView>(R.id.resultImageView)
+        var count=itemView.findViewById<TextView>(R.id.countTextView)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.testresultrow,parent,false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_test_result,parent,false)
         return ViewHolder(view)
     }
 
