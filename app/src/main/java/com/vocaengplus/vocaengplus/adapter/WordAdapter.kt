@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.databinding.RowBinding
+import com.vocaengplus.vocaengplus.databinding.ItemWordBinding
 import com.vocaengplus.vocaengplus.model.data.Voca
 
 class WordAdapter(options:FirebaseRecyclerOptions<Voca>):FirebaseRecyclerAdapter<Voca, WordAdapter.ViewHolder>(options) {
@@ -21,10 +21,10 @@ class WordAdapter(options:FirebaseRecyclerOptions<Voca>):FirebaseRecyclerAdapter
     }
     var itemClickListener: OnItemClickListener?=null
 
-    inner class ViewHolder(val binding: RowBinding): RecyclerView.ViewHolder(binding.root){
-        val word: TextView =itemView.findViewById(R.id.word)
-        val meaning: TextView =itemView.findViewById(R.id.meaning)
-        val star: ImageView =itemView.findViewById(R.id.star)
+    inner class ViewHolder(val binding: ItemWordBinding): RecyclerView.ViewHolder(binding.root){
+        val word: TextView =itemView.findViewById(R.id.engWordTextView)
+        val meaning: TextView =itemView.findViewById(R.id.meanWordTextView)
+        val star: ImageView =itemView.findViewById(R.id.starImageView)
         init{
             word.setOnClickListener{
                 itemClickListener?.OnItemClick(this,adapterPosition)
@@ -40,7 +40,7 @@ class WordAdapter(options:FirebaseRecyclerOptions<Voca>):FirebaseRecyclerAdapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=RowBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val view=ItemWordBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(view)
     }
 

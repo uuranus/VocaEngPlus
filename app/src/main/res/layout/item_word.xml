@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/englishWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/text_vertical_margin"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/engWordTextView"
+            style="@style/TextAppearance.VocaEngplus.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/starImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="VocaEngPlus" />
+
+        <ImageView
+            android:id="@+id/starImageView"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:adjustViewBounds="true"
+            android:clickable="true"
+            android:contentDescription="즐겨찾기 버튼"
+            android:focusable="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/meanWordTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tint="@color/bluegray"
+        tools:text="보카잉플러스" />
+
+</LinearLayout>

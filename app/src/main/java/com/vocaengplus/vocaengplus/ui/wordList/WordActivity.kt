@@ -65,13 +65,13 @@ class WordActivity : AppCompatActivity() {
             }
             category= categories[isSelected]
 
-            binding.spinner.adapter= ArrayAdapter(this, R.layout.simple_dropdown_item_1line,categories)
-            binding.spinner.setSelection(isSelected)
+            binding.wordSpinner.adapter= ArrayAdapter(this, R.layout.simple_dropdown_item_1line,categories)
+            binding.wordSpinner.setSelection(isSelected)
 
             initRecyclerView()
         }
 
-        binding.spinner.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
+        binding.wordSpinner.onItemSelectedListener=object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 category=categories.get(position)
                 isSelected=position
@@ -84,7 +84,7 @@ class WordActivity : AppCompatActivity() {
 
         }
 
-        binding.helpbtn.setOnClickListener {
+        binding.helpButton.setOnClickListener {
             val dlgBinding= WordhelpBinding.inflate(layoutInflater)
             val builder= AlertDialog.Builder(this)
             builder.setView(dlgBinding.root)
@@ -97,7 +97,7 @@ class WordActivity : AppCompatActivity() {
             dlg.show()
         }
 
-        binding.addvocabtn.setOnClickListener {
+        binding.addVocaButton.setOnClickListener {
             val dlgBinding= AddvocaBinding.inflate(layoutInflater)
             val dlgbuilder= AlertDialog.Builder(this)
             dlgbuilder.setView(dlgBinding.root)
@@ -161,7 +161,7 @@ class WordActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        recyclerView=binding.recyclerview
+        recyclerView=binding.wordRecyclerView
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
 
         //해당단어장 단어 가져와서 recyclerView에 출력
