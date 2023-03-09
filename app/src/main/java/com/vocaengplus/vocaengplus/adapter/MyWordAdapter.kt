@@ -19,9 +19,9 @@ class MyWordAdapter(val items:ArrayList<Voca>): RecyclerView.Adapter<MyWordAdapt
 
 
     inner class ViewHolder(val itemView:View) : RecyclerView.ViewHolder(itemView) {
-        val word: TextView = itemView.findViewById(R.id.word)
-        val meaning: TextView = itemView.findViewById(R.id.meaning)
-        val category: TextView = itemView.findViewById(R.id.category)
+        val word: TextView = itemView.findViewById(R.id.engWordTextView)
+        val meaning: TextView = itemView.findViewById(R.id.meanWordTextView)
+        val category: TextView = itemView.findViewById(R.id.categoryTextView)
 
         init {
             word.setOnClickListener {
@@ -34,7 +34,7 @@ class MyWordAdapter(val items:ArrayList<Voca>): RecyclerView.Adapter<MyWordAdapt
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.mywordrow, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_my_word, parent, false)
         return ViewHolder(view)
     }
 

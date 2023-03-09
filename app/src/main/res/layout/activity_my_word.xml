@@ -1,74 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:backgroundTint="@color/white"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".ui.myWord.MyWordActivity">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="end"
-            android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/helpButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:adjustViewBounds="true"
+        android:background="@drawable/gradation"
+        android:contentDescription="도움말 버튼"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/wordTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="단어장"
+        app:layout_constraintBottom_toBottomOf="@id/helpButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/helpButton" />
 
-            <ImageButton
-                android:id="@+id/helpbtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="5dp"
-                android:adjustViewBounds="true"
-                android:background="@drawable/gradation"
-                android:scaleType="fitXY"
-                android:src="@drawable/ic_question"
-                app:tint="@color/white" />
+    <Spinner
+        android:id="@+id/wordSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_horizontal_margin"
+        android:spinnerMode="dropdown"
+        app:layout_constraintBottom_toBottomOf="@id/helpButton"
+        app:layout_constraintEnd_toStartOf="@id/helpButton"
+        app:layout_constraintStart_toEndOf="@id/wordTextView"
+        app:layout_constraintTop_toTopOf="@id/helpButton" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:gravity="start"
-                android:text="단어장"
-                android:textColor="@color/black"
-                android:fontFamily="@font/bold_font"/>
-            <Spinner
-                android:id="@+id/spinner"
-                android:spinnerMode="dropdown"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/emptyrecyclervie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="단어장이 비어있습니다"
-            android:fontFamily="@font/main_font"
-            android:gravity="center"
-            android:textColor="@color/bluegray"
-            android:visibility="gone"/>
+    <TextView
+        android:id="@+id/emptyRecyclerTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="단어장이 비어있습니다"
+        android:textColor="@color/bluegray"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/helpButton"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        android:id="@+id/wordRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/title_body_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/helpButton"
+        tools:listitem="@layout/item_my_word" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
