@@ -15,7 +15,7 @@ import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.di.Initialization
 
-class NaverAddDiaglog(v: View) :DialogFragment() {
+class SearchAddDiaglog(v: View) :DialogFragment() {
     private val v=v
 
     lateinit var databaseref:DatabaseReference

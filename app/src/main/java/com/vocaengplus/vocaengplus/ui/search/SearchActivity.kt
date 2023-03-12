@@ -6,7 +6,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.BuildConfig
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.ui.util.Validation
 import com.vocaengplus.vocaengplus.databinding.NaveraddwordBinding
@@ -24,7 +23,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 
-class NaverActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
     lateinit var clientId:String
     lateinit var clientSecret:String
     val initialization = Initialization
@@ -35,7 +34,7 @@ class NaverActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_naver)
+        setContentView(R.layout.activity_search)
 
         clientId=resources.getString(R.string.clientID)
         clientSecret=resources.getString(R.string.clientSecret)
@@ -196,7 +195,7 @@ class NaverActivity : AppCompatActivity() {
                     dlgBinding.naveraddmeaning.text=dlgBinding.naveraddmeaning.text.toString().substring(0, 41)
                 }
             }
-            val dlg= NaverAddDiaglog(dlgBinding.root)
+            val dlg= SearchAddDiaglog(dlgBinding.root)
 
             dlg.show(supportFragmentManager, "NaverAddDialog")
         }

@@ -23,7 +23,7 @@ import com.vocaengplus.vocaengplus.ui.community.CommunityActivity
 import com.vocaengplus.vocaengplus.ui.profile.ProfileActivity
 import com.vocaengplus.vocaengplus.ui.myWord.MyWordActivity
 import com.vocaengplus.vocaengplus.ui.review.ReviewActivity
-import com.vocaengplus.vocaengplus.ui.search.NaverActivity
+import com.vocaengplus.vocaengplus.ui.search.SearchActivity
 import com.vocaengplus.vocaengplus.ui.setting.SettingActivity
 import com.vocaengplus.vocaengplus.ui.statistics.StatisticsActivity
 import com.vocaengplus.vocaengplus.ui.test.TestActivity
@@ -170,7 +170,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             naverbtn.setOnClickListener {
-                val intent=Intent(this@MainActivity, NaverActivity::class.java)
+                val intent=Intent(this@MainActivity, SearchActivity::class.java)
                 startActivity(intent)
             }
             statisticsbtn.setOnClickListener {
