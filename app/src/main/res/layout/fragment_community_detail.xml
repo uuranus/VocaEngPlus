@@ -1,147 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.community.CommunityDetailFragment">
-    <LinearLayout
-        android:id="@+id/trashlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_margin="5dp"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"/>
-
-    </LinearLayout>
 
     <TextView
-        android:id="@+id/communitycategoryname"
-        android:layout_width="match_parent"
+        android:id="@+id/titleTextView"
+        style="@style/TextAppearance.VocaEngplus.Title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="단어장 제목"
-        android:gravity="center"
-        android:fontFamily="@font/bold_font"
-        android:textSize="20sp"
-        android:textColor="@color/black"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/writerprofileimg"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/default1"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"/>
-        <TextView
-            android:id="@+id/communitywriter"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:layout_margin="5dp"
-            android:paddingLeft="5dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/main_font"/>
-
-        <TextView
-            android:id="@+id/communityupload"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:layout_margin="5dp"
-            android:gravity="end"
-            android:textColor="@color/black"
-            android:fontFamily="@font/main_font"/>
-
-        <ImageButton
-            android:id="@+id/deletecategory"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:src="@drawable/ic_trash"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="@android:color/transparent"
-            android:visibility="invisible"/>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/profileImageView"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/default1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
 
     <TextView
-        android:id="@+id/communitydescription"
-        android:layout_width="match_parent"
+        android:id="@+id/writerTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text=""
-        android:fontFamily="@font/main_font"
-        android:textColor="@color/black"/>
+        android:layout_marginStart="@dimen/text_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="@id/profileImageView"
+        app:layout_constraintStart_toEndOf="@id/profileImageView"
+        app:layout_constraintTop_toTopOf="@id/profileImageView"
+        tools:text="보카잉플러" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/uploadDateTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        app:layout_constraintBottom_toBottomOf="@id/profileImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/profileImageView"
+        tools:text="2023-03-16" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8" />
+    <Button
+        android:id="@+id/deleteButton"
+        style="@style/Theme.VocaEngPlus.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="삭제"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible" />
 
-        <ImageButton
-            android:id="@+id/communitylikebtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/like"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
-        <TextView
-            android:id="@+id/communitylike"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1200"
-            android:fontFamily="@font/main_font"
-            android:layout_marginRight="10dp"
-            android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/descriptionTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profileImageView"
+        tools:text="보카잉플러스 단어장입니다" />
 
-        <ImageButton
-            android:id="@+id/communitydownloadbtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ddownload"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY" />
+    <ImageButton
+        android:id="@+id/likeImageView"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:layout_marginEnd="@dimen/text_horizontal_margin"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/like"
+        app:layout_constraintBottom_toBottomOf="@id/likeTextView"
+        app:layout_constraintEnd_toStartOf="@id/likeTextView"
+        app:layout_constraintTop_toTopOf="@id/likeTextView" />
 
-        <TextView
-            android:id="@+id/communitydownload"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1000"
-            android:textColor="@color/black"
-            android:fontFamily="@font/main_font" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/likeTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/text_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="@id/downloadTextView"
+        app:layout_constraintEnd_toStartOf="@id/downloadImageView"
+        tools:text="1200" />
+
+    <ImageButton
+        android:id="@+id/downloadImageView"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:layout_marginEnd="@dimen/text_horizontal_margin"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ddownload"
+        app:layout_constraintBottom_toBottomOf="@id/downloadTextView"
+        app:layout_constraintEnd_toStartOf="@id/downloadTextView"
+        app:layout_constraintTop_toTopOf="@id/downloadTextView" />
+
+    <TextView
+        android:id="@+id/downloadTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionTextView"
+        tools:text="1000" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/commmunitydetailrecyclerview"
-        android:layout_width="match_parent"
+        android:id="@+id/detailRecyclerView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="10"/>
+        android:layout_marginTop="@dimen/title_body_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/deleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/downloadTextView"
+        tools:listitem="@layout/item_community_detail" />
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,62 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.community.CommunityMyFragment">
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:id="@+id/infoTable"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/mytable"
-        android:layout_marginTop="10dp"
-        >
+        android:padding="@dimen/text_horizontal_margin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="좋아요 한 수"
-                android:fontFamily="@font/bold_font"
-                android:textColor="@color/black"
-                android:textSize="10sp"/>
+                android:text="좋아요 한 수" />
+
             <TextView
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_horizontal_margin"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="좋아요 받은 수"
-                android:fontFamily="@font/bold_font"
-                android:textColor="@color/black"
-                android:textSize="10sp"/>
+                android:text="좋아요 받은 수" />
+
             <TextView
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_horizontal_margin"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="올린 단어장 수"
-                android:fontFamily="@font/bold_font"
-                android:textColor="@color/black"
-                android:textSize="10sp"/>
+                android:text="올린 단어장 수" />
+
             <TextView
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_horizontal_margin"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="다운로드 된 수"
-                android:fontFamily="@font/bold_font"
-                android:textColor="@color/black"
-                android:textSize="10sp"/>
+                android:text="다운로드 된 수" />
         </TableRow>
 
         <TableRow
@@ -65,65 +62,75 @@
 
             <TextView
                 android:id="@+id/communitymylike"
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_horizontal_margin"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="0회"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"/>
+                tools:text="0회" />
+
             <TextView
                 android:id="@+id/communitymyliked"
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_horizontal_margin"
+                android:layout_marginTop="@dimen/text_horizontal_margin"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="0회"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"/>
+                tools:text="0회" />
 
             <TextView
                 android:id="@+id/communitymyupload"
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_horizontal_margin"
+                android:layout_marginTop="@dimen/text_horizontal_margin"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="0개"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"/>
+                tools:text="0개" />
 
             <TextView
                 android:id="@+id/communitymydownloaded"
+                style="@style/TextAppearance.VocaEngplus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/text_horizontal_margin"
+                android:layout_marginTop="@dimen/text_horizontal_margin"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:padding="5dp"
-                android:text="0개"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"/>
+                tools:text="0개" />
 
         </TableRow>
 
     </TableLayout>
 
     <TextView
-        android:id="@+id/emptyrecyclervie"
-        android:layout_width="match_parent"
+        android:id="@+id/emptyRecyclerTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="올릴 단어장이 없습니다"
-        android:fontFamily="@font/main_font"
-        android:gravity="center"
         android:textColor="@color/bluegray"
-        android:visibility="gone" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/infoTable"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/communitymycategoryrecyclerview"
-        android:layout_width="match_parent"
+        android:id="@+id/myRecyclerView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_marginTop="@dimen/title_body_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/infoTable"
+        tools:listitem="@layout/item_community_my" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,49 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bottomline"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/communitymytitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="12"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            android:fontFamily="@font/bold_font"/>
-
-        <ImageButton
-            android:id="@+id/communitymybtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="5dp"
-            android:src="@drawable/uupload"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true" />
-    </LinearLayout>
+    android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/communitymydescription"
-        android:layout_width="match_parent"
+        android:id="@+id/titleTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:maxLines="1"
+        android:layout_marginEnd="@dimen/text_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="@id/uploadButton"
+        app:layout_constraintEnd_toStartOf="@id/uploadButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/uploadButton"
+        tools:text="보카잉플러스 단어장" />
+
+    <ImageButton
+        android:id="@+id/uploadButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/uupload"
+        app:layout_constraintBottom_toBottomOf="@id/titleTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/descriptionTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        tools:text="보카잉플러스 단어장입니다"
         android:ellipsize="end"
-        android:textColor="@color/black"
-        android:fontFamily="@font/main_font"/>
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
