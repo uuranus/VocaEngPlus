@@ -45,10 +45,10 @@ class SearchActivity : AppCompatActivity() {
     private fun init(){
         validation= Validation()
 
-        val source=findViewById<TextView>(R.id.source)
-        val target=findViewById<TextView>(R.id.target)
-        val imagebtn=findViewById<ImageButton>(R.id.imagebutton)
-        val helpbtn=findViewById<ImageButton>(R.id.naverhelpbtn)
+        val source=findViewById<TextView>(R.id.sourceTextView)
+        val target=findViewById<TextView>(R.id.targetTextView)
+        val imagebtn=findViewById<ImageButton>(R.id.switchImageButton)
+        val helpbtn=findViewById<ImageButton>(R.id.helpButton)
 
         imagebtn.setOnClickListener {
             if(isKortoEng){
@@ -77,12 +77,12 @@ class SearchActivity : AppCompatActivity() {
 
     }
     private fun initNaver(){
-        val searchbtn=findViewById<Button>(R.id.searchbtn)
-        val searchresult=findViewById<TextView>(R.id.searchresult)
+        val searchbtn=findViewById<Button>(R.id.searchButton)
+        val searchresult=findViewById<TextView>(R.id.searchResultTextView)
         var result:String=""
 
         searchbtn.setOnClickListener {
-            val inputword=findViewById<EditText>(R.id.inputWord)
+            val inputword=findViewById<EditText>(R.id.inputWordEditText)
             if(isKortoEng){
                 if(!validation.isValidateMeaning(inputword.text.toString())){
                     Toast.makeText(this, "한국어 뜻 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -144,11 +144,8 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 withContext(Dispatchers.Main){
-                    val resultarea=findViewById<TextView>(R.id.searchresult)
+                    val resultarea=findViewById<TextView>(R.id.searchResultTextView)
                     resultarea.text=result
-
-                    val addlayout=findViewById<LinearLayout>(R.id.addlayout)
-                    addlayout.visibility= View.VISIBLE
 
                     addWord()
 
@@ -164,33 +161,33 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun addWord(){
-        val naveraddbtn=findViewById<TextView>(R.id.naveraddbtn)
+        val naveraddbtn=findViewById<TextView>(R.id.wordAddButton)
         naveraddbtn.setOnClickListener {
             val dlgBinding= NaveraddwordBinding.inflate(layoutInflater)
             if(isKortoEng){
-                if(findViewById<TextView>(R.id.searchresult).text.toString().length<=1){
+                if(findViewById<TextView>(R.id.searchResultTextView).text.toString().length<=1){
                     Toast.makeText(this, "영단어가 올바르지 않아 추가할 수 없습니다", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                if(!validation.isValidateWord(findViewById<TextView>(R.id.searchresult).text.toString())){
+                if(!validation.isValidateWord(findViewById<TextView>(R.id.searchResultTextView).text.toString())){
                     Toast.makeText(this, "영단어 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                dlgBinding.naveraddword.text=findViewById<TextView>(R.id.searchresult).text
+                dlgBinding.naveraddword.text=findViewById<TextView>(R.id.searchResultTextView).text
                 if(dlgBinding.naveraddword.text.toString().length>40){
                     dlgBinding.naveraddword.text=dlgBinding.naveraddword.text.toString().substring(0, 41)
                 }
-                dlgBinding.naveraddmeaning.text=findViewById<EditText>(R.id.inputWord).text
+                dlgBinding.naveraddmeaning.text=findViewById<EditText>(R.id.inputWordEditText).text
             }
             else{
-                if(!validation.isValidateMeaning(findViewById<TextView>(R.id.searchresult).text.toString())){
+                if(!validation.isValidateMeaning(findViewById<TextView>(R.id.searchResultTextView).text.toString())){
                     Toast.makeText(this, "한국어 뜻 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                dlgBinding.naveraddword.text=findViewById<EditText>(R.id.inputWord).text
-                dlgBinding.naveraddmeaning.text=findViewById<TextView>(R.id.searchresult).text
+                dlgBinding.naveraddword.text=findViewById<EditText>(R.id.inputWordEditText).text
+                dlgBinding.naveraddmeaning.text=findViewById<TextView>(R.id.searchResultTextView).text
                 if(dlgBinding.naveraddmeaning.text.toString().length>40){
                     dlgBinding.naveraddmeaning.text=dlgBinding.naveraddmeaning.text.toString().substring(0, 41)
                 }

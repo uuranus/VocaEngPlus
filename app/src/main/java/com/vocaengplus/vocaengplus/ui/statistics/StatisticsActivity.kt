@@ -37,7 +37,7 @@ class StatisticsActivity : AppCompatActivity() {
         binding= ActivityStatisticsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.helpbtn.setOnClickListener {
+        binding.helpButton.setOnClickListener {
             val dlgBinding= StatisticshelpBinding.inflate(layoutInflater)
             val builder= AlertDialog.Builder(this)
             builder.setView(dlgBinding.root)
@@ -52,12 +52,12 @@ class StatisticsActivity : AppCompatActivity() {
 
 
 
-        binding.beforemonth.setOnClickListener {
+        binding.preMonthButton.setOnClickListener {
             mon--
             checkClickable()
             init()
         }
-        binding.nextmonth.setOnClickListener {
+        binding.nextMonthButton.setOnClickListener {
             mon++
             checkClickable()
             init()
@@ -70,22 +70,22 @@ class StatisticsActivity : AppCompatActivity() {
 
     private fun checkClickable(){
         if(mon==-2){
-            binding.beforemonth.isClickable=false
-            binding.beforemonth.isActivated=false
-            binding.nextmonth.isClickable=true
-            binding.nextmonth.isActivated=true
+            binding.preMonthButton.isClickable=false
+            binding.preMonthButton.isActivated=false
+            binding.nextMonthButton.isClickable=true
+            binding.nextMonthButton.isActivated=true
         }
         else if(mon==-1){
-            binding.beforemonth.isClickable=true
-            binding.beforemonth.isActivated=true
-            binding.nextmonth.isClickable=true
-            binding.nextmonth.isActivated=true
+            binding.preMonthButton.isClickable=true
+            binding.preMonthButton.isActivated=true
+            binding.nextMonthButton.isClickable=true
+            binding.nextMonthButton.isActivated=true
         }
         else if(mon==0){
-            binding.beforemonth.isClickable=true
-            binding.beforemonth.isActivated=true
-            binding.nextmonth.isClickable=false
-            binding.nextmonth.isActivated=false
+            binding.preMonthButton.isClickable=true
+            binding.preMonthButton.isActivated=true
+            binding.nextMonthButton.isClickable=false
+            binding.nextMonthButton.isActivated=false
         }
     }
 
@@ -96,37 +96,37 @@ class StatisticsActivity : AppCompatActivity() {
         uid=initialization.getuid()
         d_date=getdate(mon)
 
-        binding.date.text="${d_date.substring(0,4)}년 ${d_date.substring(5,7)}월 통계"
+        binding.dateTextView.text="${d_date.substring(0,4)}년 ${d_date.substring(5,7)}월 통계"
 
         databaseref.child("UserLog").child(uid).get().addOnSuccessListener {snapshot->
             if(snapshot.hasChild(d_date.substring(0,7))){
                 binding.apply{
-                    totaltest.text="총 테스트한 수 : ${snapshot.child(d_date.substring(0,7)).child("Test").child("testcount").value.toString()}번"
+                    totalTestTextView.text="총 테스트한 수 : ${snapshot.child(d_date.substring(0,7)).child("Test").child("testcount").value.toString()}번"
                     val tc=snapshot.child(d_date.substring(0,7)).child("Test").child("totalcount").value.toString().toInt()
-                    totalcount.text="총 테스트한 단어 수 :  ${tc}개"
+                    totalCountTextView.text="총 테스트한 단어 수 :  ${tc}개"
                     val cc=snapshot.child(d_date.substring(0,7)).child("Test").child("corcount").value.toString().toInt()
-                    corcount.text="총 맞은 단어 수 :  ${cc}개"
-                    wrongcount.text="총 틀린 단어 수 :  ${snapshot.child(d_date.substring(0,7)).child("Test").child("wrongcount").value.toString()}개"
+                    correctCountTextView.text="총 맞은 단어 수 :  ${cc}개"
+                    wrongCountTextView.text="총 틀린 단어 수 :  ${snapshot.child(d_date.substring(0,7)).child("Test").child("wrongcount").value.toString()}개"
                     var cp=0f
                     if(tc!=0){
                         cp= (((cc / tc.toFloat()) * 10000).roundToInt().toFloat() /100)
                     }
-                    corpercent.text="정답률 :  ${cp}%"
+                    correctPercentTextView.text="정답률 :  ${cp}%"
 
 
                     val nc=snapshot.child(d_date.substring(0,7)).child("AddDelete").child("addCategory").value.toString().toInt()
-                    newcategory.text="새로 추가한 단어장 :  ${nc}개"
+                    newCategoryTextView.text="새로 추가한 단어장 :  ${nc}개"
                     val nw=snapshot.child(d_date.substring(0,7)).child("AddDelete").child("addWord").value.toString().toInt()
-                    newwword.text="새로 추가한 단어 :  ${nw}개"
+                    newWordTextView.text="새로 추가한 단어 :  ${nw}개"
                     val dc=snapshot.child(d_date.substring(0,7)).child("AddDelete").child("deleteCategory").value.toString().toInt()
-                    deletecategory.text="새로 삭제한 단어장 :  ${dc}개"
+                    deleteCategoryTextView.text="새로 삭제한 단어장 :  ${dc}개"
                     val dw=snapshot.child(d_date.substring(0,7)).child("AddDelete").child("deleteWord").value.toString().toInt()
-                    deleteword.text="새로 삭제한 단어 :  ${dw}개"
+                    deleteWordTextView.text="새로 삭제한 단어 :  ${dw}개"
                     var ap=0f
                     if((nc+nw+dc+dw)!=0){
                        ap=((((nc + nw) / (nc + nw + dc + dw).toFloat()) * 10000).roundToInt().toFloat() /100)
                     }
-                    addpercent.text="추가율 :  ${ap}%"
+                    addPercentTextView.text="추가율 :  ${ap}%"
 
                 }
                 initChart() //데이터 가져오고 차트 초기화 (initData 를 하는 경우 차트 진행이 먼저 되면 안되기 때문)
@@ -244,7 +244,7 @@ class StatisticsActivity : AppCompatActivity() {
         data.setData(bardata)
         data.setData(linedata)
 
-        val xAxis= binding.combinechart.xAxis //x축 가져오기
+        val xAxis= binding.chart.xAxis //x축 가져오기
 
         xAxis.apply{
             position= XAxis.XAxisPosition.BOTTOM  //x축 데이터는 아래에 위치
@@ -257,7 +257,7 @@ class StatisticsActivity : AppCompatActivity() {
             isGranularityEnabled=true //x축 간격을 제한하는 세분화 기능
         }
 
-        val yAxisLeft= binding.combinechart.axisLeft //왼족 y축 가져오기 테스트, 정답률 같이 사용
+        val yAxisLeft= binding.chart.axisLeft //왼족 y축 가져오기 테스트, 정답률 같이 사용
         yAxisLeft.apply{
             textColor=Color.BLACK
             granularity=1f //y축 데이터 표시 간격
@@ -265,7 +265,7 @@ class StatisticsActivity : AppCompatActivity() {
             axisMinimum=0f
         }
 
-        val yAxisRight= binding.combinechart.axisRight //오른쪽 y축 비활성화
+        val yAxisRight= binding.chart.axisRight //오른쪽 y축 비활성화
         yAxisRight.apply{
             textColor= Color.BLACK
             granularity=1f //y축 데이터 표시 간격
@@ -273,7 +273,7 @@ class StatisticsActivity : AppCompatActivity() {
             axisMinimum=0f
         }
 
-        binding.combinechart.apply{ //차트 세팅
+        binding.chart.apply{ //차트 세팅
             legend.apply {  //범례 세팅
                 textSize=10f //텍스트 크기(float 형)
                 verticalAlignment= Legend.LegendVerticalAlignment.BOTTOM //수직 조정 -> 위로
@@ -288,10 +288,10 @@ class StatisticsActivity : AppCompatActivity() {
         }
 
 
-        binding.combinechart.data=data
-        binding.combinechart.drawOrder= arrayOf<CombinedChart.DrawOrder>(CombinedChart.DrawOrder.BAR,CombinedChart.DrawOrder.LINE) //바 위에 꺽은 선 그래프 그리기기
-        binding.combinechart.notifyDataSetChanged()
-        binding.combinechart.invalidate()
+        binding.chart.data=data
+        binding.chart.drawOrder= arrayOf<CombinedChart.DrawOrder>(CombinedChart.DrawOrder.BAR,CombinedChart.DrawOrder.LINE) //바 위에 꺽은 선 그래프 그리기기
+        binding.chart.notifyDataSetChanged()
+        binding.chart.invalidate()
     }
 
     private fun getdate(month:Int) : String{

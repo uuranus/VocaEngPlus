@@ -63,7 +63,7 @@
 
     <Button
         android:id="@+id/endTestButton"
-        style="@style/TextAppearance.VocaEngplus.Button"
+        style="@style/Theme.VocaEngPlus.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="테스트 종료"

@@ -21,9 +21,9 @@
         android:id="@+id/preMonthButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/title_body_margin"
         android:layout_weight="1"
         android:adjustViewBounds="true"
-        android:layout_marginTop="@dimen/title_body_margin"
         android:background="@android:color/transparent"
         android:padding="10dp"
         android:scaleType="fitXY"
@@ -90,94 +90,98 @@
 
             <TextView
                 android:id="@+id/newCategoryTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body" />
+                android:layout_weight="1" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/text_vertical_margin"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/totalCountTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/newWordTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body" />
+                android:layout_weight="1" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/text_vertical_margin"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/correctCountTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body" />
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/deleteCategoryTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body" />
+                android:layout_weight="1" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/text_vertical_margin"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/wrongCountTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/deleteWordTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body" />
+                android:layout_weight="1" />
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="@dimen/text_vertical_margin"
             android:layout_weight="1">
 
             <TextView
                 android:id="@+id/correctPercentTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body"/>
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/addPercentTextView"
+                style="@style/TextAppearance.VocaEngplus.Body"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                style="@style/TextAppearance.VocaEngplus.Body"/>
+                android:layout_weight="1" />
 
         </TableRow>
 

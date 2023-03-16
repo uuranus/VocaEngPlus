@@ -33,7 +33,7 @@ class CommunityMyAdapter(val items:ArrayList<CommunityForUpload>, val uploads:Ar
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.communitymyrow, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_community_my, parent, false)
         return ViewHolder(view)
     }
 
