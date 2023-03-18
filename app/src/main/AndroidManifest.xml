@@ -30,7 +30,7 @@
         <activity android:name=".ui.login.RegisterActivity" />
         <activity android:name=".ui.community.CommunityActivity" />
         <activity android:name=".ui.statistics.StatisticsActivity" />
-        <activity android:name=".ui.search.NaverActivity" />
+        <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.myWord.MyWordActivity" />
         <activity android:name=".ui.review.ReviewActivity" />
         <activity android:name=".ui.test.TestActivity" />

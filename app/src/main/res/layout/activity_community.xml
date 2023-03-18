@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:backgroundTint="@color/white"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".ui.community.CommunityActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/helpButton"
+        style="@style/Theme.VocaEngPlus.Button.IconButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:src="@drawable/ic_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/helpbtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/ic_question"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:background="@drawable/gradation"
-            app:tint="@color/white" />
-
-        <ImageButton
-            android:id="@+id/mybtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/gradation"
-            android:src="@drawable/ic_me"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            app:tint="@color/white"/>
-
-
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/myButton"
+        style="@style/Theme.VocaEngPlus.Button.IconButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:layout_marginEnd="@dimen/button_horizontal_margin"
+        android:src="@drawable/ic_me"
+        app:layout_constraintEnd_toStartOf="@id/helpButton"
+        app:layout_constraintTop_toTopOf="@id/helpButton" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment"
-        android:layout_width="match_parent"
+        android:id="@+id/communityFragment"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+        android:layout_marginTop="@dimen/title_body_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/myButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

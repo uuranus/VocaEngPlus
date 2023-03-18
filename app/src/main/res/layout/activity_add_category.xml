@@ -1,176 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:backgroundTint="@color/white"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".ui.setting.AddCategory">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/textView25"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="새 단어장 추가하기"
-            android:layout_margin="5dp"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            android:fontFamily="@font/bold_font"/>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-        <TextView
-            android:id="@+id/textView26"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="단어장 이름"
-            android:textColor="@color/black"
-            android:fontFamily="@font/main_font"/>
-
-        <EditText
-            android:id="@+id/editnewcategoryname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:ems="10"
-            android:inputType="text"
-            android:backgroundTint="@color/black"
-            android:fontFamily="@font/main_font"/>
-
-    </LinearLayout>
-
     <TextView
-        android:layout_margin="15dp"
-        android:id="@+id/writer"
+        android:id="@+id/titleTextView"
+        style="@style/TextAppearance.VocaEngplus.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="작성자  "
-        android:textColor="@color/black"
-        android:fontFamily="@font/main_font"/>
+        android:gravity="center"
+        android:text="새 단어장 추가하기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_margin="15dp"
-        android:id="@+id/addDate"
-        android:layout_width="match_parent"
+        android:id="@+id/categoryNameTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/title_title_margin"
+        android:text="단어장 이름"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+    <EditText
+        android:id="@+id/categoryNameEditText"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/text_horizontal_margin"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@id/categoryNameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/categoryNameTextView"
+        app:layout_constraintTop_toTopOf="@id/categoryNameTextView" />
+
+    <TextView
+        android:id="@+id/writerTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        android:text="작성자  "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/categoryNameEditText" />
+
+    <TextView
+        android:id="@+id/addDateTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
         android:text="추가 날짜  "
-        android:textColor="@color/black"
-        android:fontFamily="@font/main_font"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/writerTextView" />
 
-    <LinearLayout
-        android:padding="10dp"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/descriptionTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        android:text="내용  "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addDateTextView" />
 
-        <TextView
-            android:id="@+id/textView27"
-            android:layout_margin="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내용  "
-            android:textColor="@color/black"
-            android:fontFamily="@font/main_font"/>
-
-        <EditText
-            android:id="@+id/editnewcategorydescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="0dp"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:backgroundTint="@color/black"
-            android:fontFamily="@font/main_font"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:padding="15dp"
-        android:gravity="center"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/descriptionEditText"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:inputType="textMultiLine"
+        android:padding="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/descriptionTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/descriptionTextView"
+        app:layout_constraintTop_toTopOf="@id/descriptionTextView" />
 
-        <TextView
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="15"
-            android:text="단어 목록"
-            android:textColor="@color/black"
-            android:fontFamily="@font/main_font"/>
+    <TextView
+        android:id="@+id/wordListTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        android:text="단어 목록"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionTextView" />
 
-        <ImageButton
-            android:id="@+id/addbtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/ic_plus"
-            android:background="@android:color/transparent"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            app:tint="@color/blue" />
-    </LinearLayout>
-
+    <ImageButton
+        android:id="@+id/addWordButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/wordListTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/wordListTextView"
+        app:srcCompat="@drawable/ic_plus" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/vocalist"
-        android:layout_width="match_parent"
-        android:padding="15dp"
+        android:id="@+id/wordListRecyclerView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/cancelButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addWordButton"
+        tools:listitem="@layout/item_setting_word" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/cancelButton"
+        style="@style/Theme.VocaEngPlus.Button"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="0dp"
-        android:orientation="horizontal">
+        android:text="취소"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/okButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:layout_margin="5dp"
-            android:id="@+id/addcancelbtn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="취소"
-            android:padding="0dp"
-            android:fontFamily="@font/bold_font"/>
+    <Button
+        android:id="@+id/okButton"
+        style="@style/Theme.VocaEngPlus.Button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="추가하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cancelButton" />
 
-        <Button
-            android:layout_margin="5dp"
-            android:id="@+id/addokbtn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="추가하기"
-            android:padding="0dp"
-            android:fontFamily="@font/bold_font"/>
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

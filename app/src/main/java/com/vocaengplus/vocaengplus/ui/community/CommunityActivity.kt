@@ -20,7 +20,7 @@ class CommunityActivity : AppCompatActivity() {
 
     private fun init(){
        binding.apply{
-           helpbtn.setOnClickListener {
+           helpButton.setOnClickListener {
                val dlgBinding= CommunityhelpBinding.inflate(layoutInflater)
                val builder= AlertDialog.Builder(this@CommunityActivity)
                builder.setView(dlgBinding.root)
@@ -32,7 +32,7 @@ class CommunityActivity : AppCompatActivity() {
                val dlg=builder.create()
                dlg.show()
            }
-           mybtn.setOnClickListener {
+           myButton.setOnClickListener {
                replaceFragment(CommunityMyFragment(), "communitymy")
            }
        }
@@ -43,7 +43,7 @@ class CommunityActivity : AppCompatActivity() {
             return
         }
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment,fragment,tag)
+        fragmentTransaction.replace(R.id.communityFragment,fragment,tag)
         fragmentTransaction.commit()
     }
 

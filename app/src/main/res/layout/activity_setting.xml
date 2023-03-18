@@ -1,68 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:backgroundTint="@color/white"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context=".ui.setting.SettingActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/titleTextView"
+        style="@style/TextAppearance.VocaEngplus.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 단어장 리스트"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/addCategoryButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_plus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue" />
+
+    <TextView
+        android:id="@+id/emptyRecyclerTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="단어장이 없습니다"
+        android:textColor="@color/bluegray"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:visibility="visible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/myCategoryRecyclerView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/title_body_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:listitem="@layout/item_category">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+    </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                android:id="@+id/changebackground"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="10"
-                android:text="내 단어장 리스트"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:fontFamily="@font/bold_font"/>
-
-            <ImageButton
-                android:id="@+id/addcategorybtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_plus"
-                android:background="@android:color/transparent"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                app:tint="@color/blue" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/emptyrecyclervie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="단어장이 없습니다"
-            android:fontFamily="@font/main_font"
-            android:gravity="center"
-            android:textColor="@color/bluegray"
-            android:visibility="gone"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

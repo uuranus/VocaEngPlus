@@ -102,7 +102,7 @@
 
     <Button
         android:id="@+id/teststartbtn"
-        style="@style/TextAppearance.VocaEngplus.Button"
+        style="@style/Theme.VocaEngPlus.Button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="테스트 시작!"

@@ -30,7 +30,7 @@ class AddCategoryAdapter(val wordlist: ArrayList<Voca>): RecyclerView.Adapter<Ad
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.wordlistlayout,parent,false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_setting_word,parent,false)
         return ViewHolder(view)
     }
 

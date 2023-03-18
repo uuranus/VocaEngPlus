@@ -1,98 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.community.CommunityMainFramgent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/searchCategoryEditText"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:layout_marginEnd="@dimen/text_horizontal_margin"
+        android:hint="검색할 단어장 이름을 입력하세요"
+        android:inputType="text"
+        app:layout_constraintEnd_toStartOf="@id/searchButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/searchCategory"
-            android:padding="0dp"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:layout_margin="5dp"
-            android:layout_height="wrap_content"
-            android:hint="검색할 단어장 이름을 입력하세요"
-            android:inputType="text"
-            android:backgroundTint="@color/black"
-            android:fontFamily="@font/main_font"/>
+    <ImageButton
+        android:id="@+id/searchButton"
+        style="@style/Theme.VocaEngPlus.Button.IconButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/searchCategoryEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchCategoryEditText" />
 
-        <ImageButton
-            android:id="@+id/searchbtn"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:src="@drawable/ic_search"
-            android:scaleType="fitXY"
-            android:adjustViewBounds="true"
-            android:background="@drawable/gradation"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/sortDownloadButton"
+        style="@style/Theme.VocaEngPlus.Button.SmallButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="@dimen/button_vertical_margin"
+        android:text="다운로드 순"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCategoryEditText" />
 
-        <TextView
-            android:id="@+id/sortdownload"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="다운로드 순"
-            android:gravity="center"
-            android:background="@drawable/gradation"
-            android:fontFamily="@font/main_font"
-            android:textSize="12sp"
-            android:textColor="@color/white"/>
+    <Button
+        android:id="@+id/sortLikeButton"
+        style="@style/Theme.VocaEngPlus.Button.SmallButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/button_horizontal_margin"
+        android:text="좋아요 순"
+        app:layout_constraintStart_toEndOf="@id/sortDownloadButton"
+        app:layout_constraintTop_toTopOf="@id/sortDownloadButton" />
 
-        <TextView
-            android:id="@+id/sortlike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="좋아요 순"
-            android:gravity="center"
-            android:background="@drawable/gradation"
-            android:fontFamily="@font/main_font"
-            android:textSize="12sp"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/sortrecent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="업로드 순"
-            android:gravity="center"
-            android:background="@drawable/gradation"
-            android:fontFamily="@font/main_font"
-            android:textSize="12sp"
-            android:textColor="@color/white"/>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/sortRecentButton"
+        style="@style/Theme.VocaEngPlus.Button.SmallButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/button_horizontal_margin"
+        android:text="업로드 순"
+        app:layout_constraintStart_toEndOf="@id/sortLikeButton"
+        app:layout_constraintTop_toTopOf="@id/sortLikeButton" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/communityrecyclerview"
-        android:layout_width="match_parent"
+        android:id="@+id/communityMainRecyclerView"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_community_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sortDownloadButton" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

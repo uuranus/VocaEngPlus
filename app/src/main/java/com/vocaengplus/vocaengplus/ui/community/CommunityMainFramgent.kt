@@ -36,12 +36,12 @@ class CommunityMainFramgent : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         validation= Validation()
         binding!!.apply{
-            searchbtn.setOnClickListener {
-                if(!validation.checkInput(arrayOf(searchCategory.text.toString()))) {
+            searchButton.setOnClickListener {
+                if(!validation.checkInput(arrayOf(searchCategoryEditText.text.toString()))) {
                     Toast.makeText(requireContext(),"검색할 내용을 입력해주세요",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                if(!validation.isValidateCategoryName(searchCategory.text.toString())){
+                if(!validation.isValidateCategoryName(searchCategoryEditText.text.toString())){
                     Toast.makeText(requireContext(),"단어장 이름이 올바르지 않습니다.",Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
@@ -49,7 +49,7 @@ class CommunityMainFramgent : Fragment() {
                 Initialization.getDBref().child("Community").child("categories").get().addOnSuccessListener {
                     val cateogries=ArrayList<CommunityCategory>()
                     for(chld in it.children){
-                        if(chld.key.toString().contains(searchCategory.text.toString())){
+                        if(chld.key.toString().contains(searchCategoryEditText.text.toString())){
                             val words=ArrayList<Voca>()
                             for(c in chld.child("words").children){
                                 words.add(Voca(c.child("category").value.toString(),c.child("word").value.toString(),c.child("meaning").value.toString(),0))
@@ -71,7 +71,7 @@ class CommunityMainFramgent : Fragment() {
                 }
             }
 
-            searchCategory.addTextChangedListener(object:TextWatcher{
+            searchCategoryEditText.addTextChangedListener(object:TextWatcher{
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 }
 
@@ -79,23 +79,22 @@ class CommunityMainFramgent : Fragment() {
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    if(searchCategory.text.length==0){
+                    if(searchCategoryEditText.text.length==0){
                         totaldata("download")
                     }
                 }
 
             })
 
-            sortdownload.setOnClickListener {
+            sortDownloadButton.setOnClickListener {
                 totaldata("download")
             }
-            sortlike.setOnClickListener {
+            sortLikeButton.setOnClickListener {
                 totaldata("like")
             }
-            sortrecent.setOnClickListener {
+            sortRecentButton.setOnClickListener {
                 totaldata("uploadDate")
             }
-
 
         }
 
@@ -136,7 +135,7 @@ class CommunityMainFramgent : Fragment() {
     }
 
     private fun initRecyclerView(data:ArrayList<CommunityCategory>){
-        recyclerview=binding!!.communityrecyclerview
+        recyclerview=binding!!.communityMainRecyclerView
         recyclerview.layoutManager= LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
 
         adapter = CommunityMainAdapter(data)

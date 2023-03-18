@@ -9,13 +9,10 @@
 
     <ImageButton
         android:id="@+id/helpbtn"
+        style="@style/Theme.VocaEngPlus.Button.IconButton"
         android:layout_width="@dimen/icon_button_size"
         android:layout_height="@dimen/icon_button_size"
-        android:layout_gravity="end"
-        android:adjustViewBounds="true"
-        android:background="@drawable/gradation"
         android:contentDescription="도움말 버튼"
-        android:scaleType="fitXY"
         android:src="@drawable/ic_question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,12 +43,13 @@
 
     <TextView
         android:id="@+id/blackBox"
-        style="@style/TextAppearance.VocaEngplus.Button"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:background="@drawable/gradation"
         android:paddingHorizontal="@dimen/activity_horizontal_margin"
         android:text="클릭하여 뜻 확인하기"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@id/meaningTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,6 +74,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/title_body_margin"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_review"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

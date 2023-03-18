@@ -17,7 +17,7 @@ class CommunityDetailAdapter(val items: CommunityCategory): RecyclerView.Adapter
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.communitydetailrow, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_community_detail, parent, false)
         return ViewHolder(view)
     }
 

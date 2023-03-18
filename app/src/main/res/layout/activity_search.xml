@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context=".ui.search.SearchActivity">
+
+    <ImageButton
+        android:id="@+id/helpButton"
+        style="@style/Theme.VocaEngPlus.Button.IconButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:contentDescription="검색 도움말 버튼"
+        android:src="@drawable/ic_question"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/searchImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/title_title_margin"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/translation_illust"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/helpButton" />
+
+    <TextView
+        android:id="@+id/infoTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/title_body_margin"
+        android:text="번역할 문장을 입력해주세요"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchImageView" />
+
+    <TextView
+        android:id="@+id/sourceTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="한국어"
+        app:layout_constraintBottom_toBottomOf="@id/switchImageButton"
+        app:layout_constraintEnd_toStartOf="@id/switchImageButton"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/switchImageButton" />
+
+    <ImageButton
+        android:id="@+id/switchImageButton"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/icon_button_size"
+        android:layout_marginHorizontal="@dimen/title_body_margin"
+        android:layout_marginTop="@dimen/title_body_margin"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:contentDescription="한영 번역 순서 바꾸기"
+        android:scaleType="fitXY"
+        android:src="@drawable/lang_switch"
+        app:layout_constraintDimensionRatio="1.5:1"
+        app:layout_constraintEnd_toStartOf="@id/targetTextView"
+        app:layout_constraintStart_toEndOf="@id/sourceTextView"
+        app:layout_constraintTop_toBottomOf="@id/infoTextView"
+        app:tint="@color/bluegray" />
+
+    <TextView
+        android:id="@+id/targetTextView"
+        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="영어"
+        app:layout_constraintBottom_toBottomOf="@id/switchImageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/switchImageButton"
+        app:layout_constraintTop_toTopOf="@id/switchImageButton" />
+
+    <EditText
+        android:id="@+id/inputWordEditText"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/text_horizontal_margin"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@id/searchButton"
+        app:layout_constraintEnd_toStartOf="@id/searchButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchButton" />
+
+    <Button
+        android:id="@+id/searchButton"
+        style="@style/Theme.VocaEngPlus.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/title_title_margin"
+        android:text="번역"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/targetTextView" />
+
+    <TextView
+        android:id="@+id/searchResultTextView"
+        style="@style/TextAppearance.VocaEngplus.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        android:lines="8"
+        android:maxLines="8"
+        tools:text="VocaEngPlus"
+        android:textColor="@color/bluegray"
+        app:layout_constraintEnd_toEndOf="@id/searchButton"
+        app:layout_constraintStart_toStartOf="@id/inputWordEditText"
+        app:layout_constraintTop_toBottomOf="@id/searchButton" />
+
+    <Button
+        android:id="@+id/wordAddButton"
+        style="@style/Theme.VocaEngPlus.Button.SmallButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_vertical_margin"
+        android:text="단어 추가하기"
+        app:layout_constraintStart_toStartOf="@id/inputWordEditText"
+        app:layout_constraintTop_toBottomOf="@id/searchResultTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
