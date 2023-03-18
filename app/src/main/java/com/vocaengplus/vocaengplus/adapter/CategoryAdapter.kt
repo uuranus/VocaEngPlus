@@ -6,7 +6,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.databinding.CategoryrowBinding
+import com.vocaengplus.vocaengplus.databinding.ItemCategoryBinding
 import com.vocaengplus.vocaengplus.model.data.Category
 
 class CategoryAdapter(val items: ArrayList<Category>): RecyclerView.Adapter<CategoryAdapter.ViewHolder>() {
@@ -17,13 +17,13 @@ class CategoryAdapter(val items: ArrayList<Category>): RecyclerView.Adapter<Cate
 
     var itemClickListener: OnItemClickListener? = null
 
-    inner class ViewHolder(val binding: CategoryrowBinding) : RecyclerView.ViewHolder(binding.root) {
-        val categoryname: TextView = itemView.findViewById(R.id.categoryname)
-        val categorywriter: TextView = itemView.findViewById(R.id.categorywriter)
-        val downloaddate: TextView = itemView.findViewById(R.id.downloaddate)
-        val description: TextView = itemView.findViewById(R.id.description)
-        val editbtn:ImageButton=itemView.findViewById(R.id.editbtn)
-        val deletebtn: ImageButton = itemView.findViewById(R.id.deletebtn)
+    inner class ViewHolder(val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
+        val categoryname: TextView = itemView.findViewById(R.id.titleTextView)
+        val categorywriter: TextView = itemView.findViewById(R.id.writerTextView)
+        val downloaddate: TextView = itemView.findViewById(R.id.downloadDateTextView)
+        val description: TextView = itemView.findViewById(R.id.descriptionTextView)
+        val editbtn:ImageButton=itemView.findViewById(R.id.editButton)
+        val deletebtn: ImageButton = itemView.findViewById(R.id.deleteButton)
 
         init {
             deletebtn.setOnClickListener {
@@ -36,7 +36,7 @@ class CategoryAdapter(val items: ArrayList<Category>): RecyclerView.Adapter<Cate
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = CategoryrowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 

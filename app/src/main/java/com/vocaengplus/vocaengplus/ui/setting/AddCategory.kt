@@ -50,12 +50,12 @@ class AddCategory : AppCompatActivity() {
         databaseref= Initialization.getDBref()
         uid= Initialization.getuid()
 
-        binding.writer.text="작성자  ${firebaseUser.displayName}"
+        binding.writerTextView.text="작성자  ${firebaseUser.displayName}"
         date= Initialization.getdate()
-        binding.addDate.text="추가 날짜  ${date}"
+        binding.addDateTextView.text="추가 날짜  ${date}"
 
 
-        recyclerView=binding.vocalist
+        recyclerView=binding.wordListRecyclerView
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
 
         adapter= AddCategoryAdapter(wordlist)
@@ -65,10 +65,10 @@ class AddCategory : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         }
-        binding.vocalist.adapter=adapter
+        binding.wordListRecyclerView.adapter=adapter
 
 
-        binding.addbtn.setOnClickListener {
+        binding.addWordButton.setOnClickListener {
             val dlgBinding= AddvocaBinding.inflate(layoutInflater)
             val dlgbuilder= AlertDialog.Builder(this)
             dlgbuilder.setView(dlgBinding.root)
@@ -101,9 +101,9 @@ class AddCategory : AppCompatActivity() {
             dlg.show()
         }
 
-        binding.addokbtn.setOnClickListener {
-            categoryname=binding.editnewcategoryname.text.toString()
-            val description=binding.editnewcategorydescription.text.toString()
+        binding.okButton.setOnClickListener {
+            categoryname=binding.categoryNameEditText.text.toString()
+            val description=binding.descriptionEditText.text.toString()
 
             if(categoryname.length==0){
                 Toast.makeText(this,"단어장 이름을 입력해주세요",Toast.LENGTH_SHORT).show()
@@ -168,13 +168,11 @@ class AddCategory : AppCompatActivity() {
                 }
         }
 
-        binding.addcancelbtn.setOnClickListener {
+        binding.cancelButton.setOnClickListener {
             setResult(RESULT_CANCELED)
             finish()
         }
 
-
     }
-
 
 }

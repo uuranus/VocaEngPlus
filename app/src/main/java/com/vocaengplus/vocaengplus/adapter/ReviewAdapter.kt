@@ -30,7 +30,7 @@ class ReviewAdapter(options: FirebaseRecyclerOptions<Voca>): FirebaseRecyclerAda
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.reviewrow,parent,false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_review,parent,false)
         return ViewHolder(view)
     }
 
