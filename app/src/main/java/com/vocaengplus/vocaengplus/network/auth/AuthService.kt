@@ -4,11 +4,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.vocaengplus.vocaengplus.model.data.new.Fail
-import com.vocaengplus.vocaengplus.model.data.new.NetworkState
-import com.vocaengplus.vocaengplus.model.data.new.Success
 import com.vocaengplus.vocaengplus.model.data.new.UserAuth
-import com.vocaengplus.vocaengplus.network.NetworkCallback
 
 object AuthService {
     private val firebaseAuth = Firebase.auth
@@ -28,28 +24,28 @@ object AuthService {
         }
     }
 
-    fun getCurrentUserIdToken(callback: NetworkCallback) {
+    fun getCurrentUserIdToken(successHandler: (String) -> Unit, errorHandler: (String) -> Unit) {
         firebaseAuth.currentUser?.let { user ->
             user.getIdToken(true)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        callback.onDataLoaded(Result.success(it.result.token ?: ""))
+                        successHandler(it.result.token ?: "")
                     } else {
-                        callback.onDataFailed(Result.failure<UserAuth>(Exception()))
+                        errorHandler("토큰을 가져오는데 실패했습니다")
                     }
                 }
-        } ?: callback.onDataFailed(Result.failure<UserAuth>(Exception("로그인이 되어있지 않습니다")))
+        } ?: errorHandler("로그인이 되어있지 않습니다")
     }
 
-    fun login(email: String, password: String, callback: NetworkCallback) {
-        loginWithEmailAndPassword(email, password, callback)
+    fun login(email: String, password: String, successHandler: (String) -> Unit) {
+        loginWithEmailAndPassword(email, password, successHandler)
     }
 
     fun loginWithGoogle(
         credential: GoogleAuthCredential,
-        callback: NetworkCallback
+        successHandler: (String) -> Unit
     ) {
-        loginWithCredential(credential, callback)
+        loginWithCredential(credential, successHandler)
     }
 
     fun logOut() {
@@ -63,53 +59,49 @@ object AuthService {
     private fun loginWithEmailAndPassword(
         email: String,
         password: String,
-        callback: NetworkCallback
+        successHandler: (String) -> Unit
     ) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val user = it.result.user
                     user?.let { u ->
-                        callback.onDataLoaded(
-                            Success(
-                                UserAuth(
-                                    u.uid,
-                                    u.email ?: "GUEST",
-                                    u.displayName ?: "익명",
-                                    u.photoUrl
-                                )
-                            )
+                        successHandler(
+                            u.uid
+//                            UserAuth(
+//                                u.uid,
+//                                u.email ?: "GUEST",
+//                                u.displayName ?: "익명",
+//                                u.photoUrl
+//                            )
                         )
                     }
-                    Result
                 } else {
-                    callback.onDataFailed(Fail<UserAuth>("로그인에 실패하였습니다"))
+//                    callback(Result.failure(Exception("로그인에 실패하였습니다")))
                 }
             }
     }
 
     private fun loginWithCredential(
         credential: AuthCredential,
-        callback: NetworkCallback
+        successHandler: (String) -> Unit
     ) {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
                 val user = it.result.user
                 user?.let { u ->
-                    callback.onDataLoaded(
-                        Success(
-                            UserAuth(
-                                u.uid,
-                                u.email ?: "GUEST",
-                                u.displayName ?: "익명",
-                                u.photoUrl
-                            )
-                        )
+                    successHandler(
+                        u.uid
+//                        UserAuth(
+//                            u.uid,
+//                            u.email ?: "GUEST",
+//                            u.displayName ?: "익명",
+//                            u.photoUrl
+//                        )
                     )
                 }
-                Result
             } else {
-                callback.onDataFailed(Fail<UserAuth>("로그인에 실패하였습니다"))
+//                callback(Result.failure(Exception("로그인에 실패하였습니다")))
             }
         }
     }

@@ -12,49 +12,46 @@ import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.ItemWordBinding
 import com.vocaengplus.vocaengplus.model.data.Voca
 
-class WordAdapter(options:FirebaseRecyclerOptions<Voca>):FirebaseRecyclerAdapter<Voca, WordAdapter.ViewHolder>(options) {
+class WordAdapter(options: FirebaseRecyclerOptions<Voca>) :
+    FirebaseRecyclerAdapter<Voca, WordAdapter.ViewHolder>(options) {
 
-    interface OnItemClickListener{
-        fun OnItemClick(holder: ViewHolder, position:Int)
-        fun OnStarClick(holder: ViewHolder, view: View, position:Int)
-        fun OnItemLongClick(holder: ViewHolder, position:Int):Boolean
+    interface OnItemClickListener {
+        fun OnItemClick(holder: ViewHolder, position: Int)
+        fun OnStarClick(holder: ViewHolder, view: View, position: Int)
+        fun OnItemLongClick(holder: ViewHolder, position: Int): Boolean
     }
-    var itemClickListener: OnItemClickListener?=null
 
-    inner class ViewHolder(val binding: ItemWordBinding): RecyclerView.ViewHolder(binding.root){
-        val word: TextView =itemView.findViewById(R.id.engWordTextView)
-        val meaning: TextView =itemView.findViewById(R.id.meanWordTextView)
-        val star: ImageView =itemView.findViewById(R.id.starImageView)
-        init{
-            word.setOnClickListener{
-                itemClickListener?.OnItemClick(this,adapterPosition)
-            }
-            word.setOnLongClickListener {
-                itemClickListener?.OnItemLongClick(this,adapterPosition) == true
-            }
-            star.setOnClickListener {
-                itemClickListener?.OnStarClick(this,it,adapterPosition)
+    var itemClickListener: OnItemClickListener? = null
+
+    inner class ViewHolder(val binding: ItemWordBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.run {
+                engWordTextView.setOnClickListener {
+                    itemClickListener?.OnItemClick(this@ViewHolder, adapterPosition)
+                }
+                engWordTextView.setOnLongClickListener {
+                    itemClickListener?.OnItemLongClick(this@ViewHolder, adapterPosition) == true
+                }
+                starImageView.setOnClickListener {
+                    itemClickListener?.OnStarClick(this@ViewHolder, it, adapterPosition)
+                }
             }
 
+        }
+
+        fun bind(voca: Voca) {
+            binding.item = voca
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view=ItemWordBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val view = ItemWordBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(view)
     }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, model: Voca) {
-        holder.word.text=model.word
-        holder.meaning.text=model.meaning
-        holder.meaning.visibility= View.GONE
-        if(model.checked==0){
-            holder.star.isSelected=false
-        }
-        else if(model.checked==1){
-            holder.star.isSelected=true
-        }
+        holder.bind(model)
     }
 
 }
