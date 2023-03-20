@@ -43,7 +43,7 @@ class AddCategory : AppCompatActivity() {
     }
 
     fun init(){
-        validation= Validation()
+        validation= Validation
 
         firebaseAuth= Initialization.getFBauth()
         firebaseUser= Initialization.getFBuser()

@@ -1,10 +1,7 @@
 package com.vocaengplus.vocaengplus.network
 
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.vocaengplus.vocaengplus.model.data.new.UserData
-import com.vocaengplus.vocaengplus.network.auth.AuthService
-import com.vocaengplus.vocaengplus.ui.util.DB_ROOT_KEY
+import com.vocaengplus.vocaengplus.model.data.newData.UserData
+import com.vocaengplus.vocaengplus.model.data.newData.UserWordList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -18,10 +15,10 @@ interface DatabaseService {
         @Path("uid") uid: String
     ): Response<UserData>
 
-    @GET("/UserWordList/{uid}")
+    @GET("/UserWordList/{uid}.json")
     fun getUserWordList(
         @Query("auth") token: String,
         @Path("uid") uid: String
-    ): Response<UserWordList>
+    ): Response<List<UserWordList>>
 
 }

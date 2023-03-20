@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -28,12 +29,12 @@ class LoginActivity : AppCompatActivity() {
     var nickname:String=""
     val default=arrayOf("default1.png","default2.png","default3.png")
     val random= Random()
+    private val viewModel:LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
         init()
     }
@@ -49,11 +50,10 @@ class LoginActivity : AppCompatActivity() {
         initialization.setDatabase()
         firebaseauth = initialization.getFBauth()
         databaseref = initialization.getDBref()
-        validation= Validation()
+        validation= Validation
 
         binding.apply {
             registerTextView.setOnClickListener {
-
                 //회원가입 화면 전환
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
@@ -97,49 +97,49 @@ class LoginActivity : AppCompatActivity() {
             }
 
             loginButton.setOnClickListener {
-                if(emailEditText.text.isBlank()||passwordEditText.text.isBlank()){
-                    Toast.makeText(this@LoginActivity,"아이디, 비밀번호를 입력하세요.",Toast.LENGTH_SHORT).show()
-                }
-                else{
+//                if(emailEditText.text.isBlank()||passwordEditText.text.isBlank()){
+//                    Toast.makeText(this@LoginActivity,"아이디, 비밀번호를 입력하세요.",Toast.LENGTH_SHORT).show()
+//                }
+//                else{
                     //로그인 요청
-                    firebaseauth.signInWithEmailAndPassword(emailEditText.text.toString(),passwordEditText.text.toString()).addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            //유효한 회원인지 확인
-                            if(firebaseauth.currentUser?.isEmailVerified == true){
-                                databaseref.child("UserData").get().addOnSuccessListener {
-                                    if (it.hasChild(firebaseauth.currentUser!!.uid)) {
-                                        Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                        intent.flags=
-                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                                        intent.putExtra("isLogined", true)
-                                        startActivity(intent)
-                                        finish()
-                                    } else { //재로그인하는 경우
-                                        initialization.setCurrentUser()
-                                        initialization.initUserData(nickname)
-                                        initialization.initCommunity()
-                                        initialization.initUserLog()
+//                    firebaseauth.signInWithEmailAndPassword(emailEditText.text.toString(),passwordEditText.text.toString()).addOnCompleteListener { task ->
+//                        if (task.isSuccessful) {
+//                            //유효한 회원인지 확인
+//                            if(firebaseauth.currentUser?.isEmailVerified == true){
+//                                databaseref.child("UserData").get().addOnSuccessListener {
+//                                    if (it.hasChild(firebaseauth.currentUser!!.uid)) {
+//                                        Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+//                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                                        intent.flags=
+//                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+//                                        intent.putExtra("isLogined", true)
+//                                        startActivity(intent)
+//                                        finish()
+//                                    } else { //재로그인하는 경우
+//                                        initialization.setCurrentUser()
+//                                        initialization.initUserData(nickname)
+//                                        initialization.initCommunity()
+//                                        initialization.initUserLog()
+//
+//                                        Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+//                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+//                                        intent.flags=
+//                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+//                                        intent.putExtra("isLogined", true)
+//                                        startActivity(intent)
+//                                        finish()
+//                                    }
+//                                }
+//                            }
+//                            else{
+//                                Toast.makeText(this@LoginActivity, "이메일 인증을 해주세요.", Toast.LENGTH_SHORT).show()
+//                            }
+//                        } else {
+//                            //로그인 실패
+//                            Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
 
-                                        Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
-                                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                                        intent.flags=
-                                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                                        intent.putExtra("isLogined", true)
-                                        startActivity(intent)
-                                        finish()
-                                    }
-                                }
-                            }
-                            else{
-                                Toast.makeText(this@LoginActivity, "이메일 인증을 해주세요.", Toast.LENGTH_SHORT).show()
-                            }
-                        } else {
-                            //로그인 실패
-                            Toast.makeText(this@LoginActivity, "로그인 실패", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
             }
 
 

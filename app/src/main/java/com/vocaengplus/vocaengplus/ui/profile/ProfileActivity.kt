@@ -42,7 +42,7 @@ class ProfileActivity : AppCompatActivity() {
         firebaseAuth=initialization.getFBauth()
         firebaseUser=initialization.getFBuser()
         storageref=initialization.getStorageref()
-        validation= Validation()
+        validation= Validation
 
         binding.apply{
             storageref.child(firebaseUser.photoUrl.toString()).downloadUrl.addOnSuccessListener {

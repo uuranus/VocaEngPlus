@@ -38,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        validation= Validation()
+        validation= Validation
 
         firebaseauth = initialization.getFBauth()
         databaseref = initialization.getDBref()

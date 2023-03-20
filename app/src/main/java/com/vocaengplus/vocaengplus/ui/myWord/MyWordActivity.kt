@@ -45,7 +45,7 @@ class MyWordActivity : AppCompatActivity() {
     }
 
     fun init(){
-        validation= Validation()
+        validation= Validation
         firebaseauth= initialization.getFBauth()
         firebaseUser=initialization.getFBuser()
         databaseref= initialization.getDBref()

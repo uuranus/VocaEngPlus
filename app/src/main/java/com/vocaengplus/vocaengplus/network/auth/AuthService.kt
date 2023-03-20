@@ -4,7 +4,7 @@ import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.vocaengplus.vocaengplus.model.data.new.UserAuth
+import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 
 object AuthService {
     private val firebaseAuth = Firebase.auth

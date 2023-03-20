@@ -9,14 +9,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
-import com.vocaengplus.vocaengplus.adapter.ItemDividerDecoration
 import com.vocaengplus.vocaengplus.ui.util.Validation
 import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.adapter.WordAdapter
@@ -25,8 +23,6 @@ import com.vocaengplus.vocaengplus.databinding.AddvocaBinding
 import com.vocaengplus.vocaengplus.databinding.EditvocaBinding
 import com.vocaengplus.vocaengplus.databinding.WordhelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.model.data.new.UserAuth
-import com.vocaengplus.vocaengplus.network.NetworkCallback
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 
 class WordActivity : AppCompatActivity() {
@@ -51,7 +47,7 @@ class WordActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        validation = Validation()
+        validation = Validation
 
 
         firebaseauth = initialization.getFBauth()

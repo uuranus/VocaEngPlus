@@ -1,4 +1,4 @@
-package com.vocaengplus.vocaengplus.model.data.new
+package com.vocaengplus.vocaengplus.model.data.newData
 
 data class UserData(
     val nickname:String,

@@ -43,7 +43,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        validation= Validation()
+        validation= Validation
 
         val source=findViewById<TextView>(R.id.sourceTextView)
         val target=findViewById<TextView>(R.id.targetTextView)

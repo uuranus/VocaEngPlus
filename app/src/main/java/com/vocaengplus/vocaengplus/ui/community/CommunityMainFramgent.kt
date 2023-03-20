@@ -34,7 +34,7 @@ class CommunityMainFramgent : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        validation= Validation()
+        validation= Validation
         binding!!.apply{
             searchButton.setOnClickListener {
                 if(!validation.checkInput(arrayOf(searchCategoryEditText.text.toString()))) {

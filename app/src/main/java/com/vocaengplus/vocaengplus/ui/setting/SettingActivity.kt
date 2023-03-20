@@ -48,7 +48,7 @@ class SettingActivity : AppCompatActivity() {
         databaseref = initialization.getDBref()
         firebaseUser = initialization.getFBuser()
         uid = initialization.getuid()
-        validation = Validation()
+        validation = Validation
         date = initialization.getdate()
 
         initRecyclerView()
