@@ -32,15 +32,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:hint="이메일(아이디)"
             app:errorEnabled="true"
+            app:hintEnabled="false"
             app:layout_constraintTop_toBottomOf="@id/loginImageView">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:afterTextChanged="@{()->viewModel.onIdChanged()}"
+                android:afterTextChanged="@{() -> viewModel.onIdChanged()}"
                 android:background="@android:color/transparent"
+                android:hint="이메일(아이디)"
                 android:inputType="textEmailAddress"
                 android:text="@={viewModel.id}" />
 
@@ -51,7 +52,7 @@
             error="@{viewModel.passwordErrorText}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="비밀번호"
+            app:hintEnabled="false"
             app:layout_constraintTop_toBottomOf="@id/emailEditText">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -59,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:afterTextChanged="@{() -> viewModel.onPasswordChanged()}"
                 android:background="@android:color/transparent"
+                android:hint="비밀번호"
                 android:inputType="textPassword"
                 android:text="@={viewModel.password}" />
 
