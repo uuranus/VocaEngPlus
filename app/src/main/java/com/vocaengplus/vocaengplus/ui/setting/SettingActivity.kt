@@ -12,15 +12,14 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.vocaengplus.vocaengplus.adapter.CategoryAdapter
-import com.vocaengplus.vocaengplus.ui.util.Validation
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.databinding.ActivitySettingBinding
 import com.vocaengplus.vocaengplus.databinding.EditcategoryBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.model.data.Category
 import com.vocaengplus.vocaengplus.model.data.CategoryForEdit
+import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.ui.util.Validation
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 class SettingActivity : AppCompatActivity() {

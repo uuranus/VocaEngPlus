@@ -19,9 +19,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.vocaengplus.vocaengplus.*
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.ui.community.CommunityActivity
-import com.vocaengplus.vocaengplus.ui.profile.ProfileActivity
 import com.vocaengplus.vocaengplus.ui.myWord.MyWordActivity
+import com.vocaengplus.vocaengplus.ui.profile.ProfileActivity
 import com.vocaengplus.vocaengplus.ui.review.ReviewActivity
 import com.vocaengplus.vocaengplus.ui.search.SearchActivity
 import com.vocaengplus.vocaengplus.ui.setting.SettingActivity

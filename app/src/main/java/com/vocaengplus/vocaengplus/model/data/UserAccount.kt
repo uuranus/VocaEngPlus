@@ -1,7 +1,5 @@
 package com.vocaengplus.vocaengplus.model.data
 
-import com.vocaengplus.vocaengplus.model.data.Category
-
 data class UserAccount(
     var emailId: String,
     var nickname: String,

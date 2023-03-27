@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.model.data.Voca
-import java.util.*
 
 class AddCategoryAdapter(val wordlist: ArrayList<Voca>): RecyclerView.Adapter<AddCategoryAdapter.ViewHolder>() {
 

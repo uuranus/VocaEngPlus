@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.adapter.CommunityMyAdapter
-import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.databinding.FragmentCommunityMyBinding
+import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.model.data.CommunityForLikeDownload
 import com.vocaengplus.vocaengplus.model.data.CommunityForUpload
+import com.vocaengplus.vocaengplus.model.data.Voca
 
 class CommunityMyFragment : Fragment() {
     var binding: FragmentCommunityMyBinding? = null

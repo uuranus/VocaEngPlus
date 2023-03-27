@@ -11,9 +11,9 @@ import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.DatabaseReference
-import com.vocaengplus.vocaengplus.ui.util.Validation
 import com.vocaengplus.vocaengplus.databinding.ActivityRegisterBinding
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.ui.util.Validation
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {

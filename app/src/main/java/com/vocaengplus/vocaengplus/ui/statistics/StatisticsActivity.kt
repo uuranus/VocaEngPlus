@@ -19,7 +19,6 @@ import com.vocaengplus.vocaengplus.databinding.StatisticshelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class StatisticsActivity : AppCompatActivity() {

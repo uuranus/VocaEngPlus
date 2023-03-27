@@ -15,15 +15,14 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
-import com.vocaengplus.vocaengplus.ui.util.Validation
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.adapter.WordAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityWordBinding
 import com.vocaengplus.vocaengplus.databinding.AddvocaBinding
 import com.vocaengplus.vocaengplus.databinding.EditvocaBinding
 import com.vocaengplus.vocaengplus.databinding.WordhelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.network.auth.AuthService
+import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.ui.util.Validation
 
 class WordActivity : AppCompatActivity() {
     lateinit var binding: ActivityWordBinding
@@ -56,11 +55,6 @@ class WordActivity : AppCompatActivity() {
         uid = initialization.getuid()
         date = initialization.getdate()
 
-        AuthService.getCurrentUserIdToken(successHandler ={
-                println("it $it")
-        }, errorHandler = {
-            println("Error $it")
-        })
 
         databaseref.child("UserData").child(firebaseUser.uid).child("downloadNames")
             .get().addOnSuccessListener {

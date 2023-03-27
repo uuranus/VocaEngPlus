@@ -10,15 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.database.*
-import com.vocaengplus.vocaengplus.adapter.CommunityDetailAdapter
-import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.adapter.CommunityDetailAdapter
 import com.vocaengplus.vocaengplus.databinding.FragmentCommunityDetailBinding
-import com.vocaengplus.vocaengplus.model.data.Category
-import com.vocaengplus.vocaengplus.model.data.CommunityCategory
-import com.vocaengplus.vocaengplus.model.data.CommunityForLikeDownload
-import com.vocaengplus.vocaengplus.model.data.CommunityWriter
+import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.model.data.*
 
 class CommunityDetailFragment(val data: CommunityCategory) : Fragment() {
     var binding: FragmentCommunityDetailBinding? = null

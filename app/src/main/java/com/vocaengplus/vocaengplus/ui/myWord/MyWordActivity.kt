@@ -15,12 +15,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.vocaengplus.vocaengplus.adapter.MyWordAdapter
-import com.vocaengplus.vocaengplus.ui.util.Validation
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.databinding.ActivityMyWordBinding
 import com.vocaengplus.vocaengplus.databinding.EditvocaBinding
 import com.vocaengplus.vocaengplus.databinding.MywordhelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.ui.util.Validation
 
 class MyWordActivity : AppCompatActivity() {
     lateinit var binding: ActivityMyWordBinding
