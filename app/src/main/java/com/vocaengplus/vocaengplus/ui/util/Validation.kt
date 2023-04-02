@@ -15,7 +15,7 @@ object Validation {
 
     fun isValidateEmail(email: String): Boolean {
         val emailValidation =
-            "^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*.[a-zA-Z0-9]{2,3}$".toRegex()
+            """^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.[a-zA-Z0-9]{2,3}$""".toRegex()
         if (emailValidation.matches(email)) {
             return true
         }
@@ -23,7 +23,7 @@ object Validation {
     }
 
     fun isValidateNickname(nickname: String): Boolean {
-        val nicknameValidation = "^[a-zA-Z0-9가-힣]{2,10}$".toRegex()
+        val nicknameValidation = """^[a-zA-Z0-9가-힣]{2,10}$""".toRegex()
         if (nicknameValidation.matches(nickname)) {
             return true
         }
@@ -31,7 +31,7 @@ object Validation {
     }
 
     fun isValidatePassword(password: String): Boolean {
-        val passwordValidation = "^(?=.*[a-zA-Z])(?=.*[!@#\$%^*/])(?=.*[0-9]).{8,20}$".toRegex()
+        val passwordValidation = """^.{6,20}$""".toRegex()
         if (passwordValidation.matches(password)) {
             return true
         }
