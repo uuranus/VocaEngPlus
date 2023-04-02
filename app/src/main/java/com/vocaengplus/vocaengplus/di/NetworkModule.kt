@@ -1,10 +1,9 @@
 package com.vocaengplus.vocaengplus.di
 
-import com.google.gson.GsonBuilder
 import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.StorageService
 import com.vocaengplus.vocaengplus.network.auth.AuthService
-import com.vocaengplus.vocaengplus.ui.util.DATABSE_BASE_URL
+import com.vocaengplus.vocaengplus.ui.util.DATABASE_BASE_URL
 import com.vocaengplus.vocaengplus.ui.util.STORAGE_BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -38,7 +37,7 @@ object NetworkModule {
     fun provideDatabaseRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
-            .baseUrl(DATABSE_BASE_URL)
+            .baseUrl(DATABASE_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

@@ -3,6 +3,7 @@ package com.vocaengplus.vocaengplus.model.data.repository
 import com.vocaengplus.vocaengplus.model.data.LoginDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.model.data.newData.UserData
+import com.vocaengplus.vocaengplus.model.data.newData.toUserDataDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import javax.inject.Inject
 
@@ -24,11 +25,11 @@ class LoginRepository @Inject constructor(
         println("token ${idToken}")
         if (idToken.isEmpty()) return Result.failure(Exception("로그인이 되어있지 않습니다"))
 
-        val response = dataSource.makeNewUserData(idToken, userData)
-        if (response.isSuccessful) {
-            return Result.success(true)
+        val response = dataSource.makeNewUserData(idToken, userData.toUserDataDto())
+        return if (response.isSuccessful) {
+            Result.success(true)
         } else {
-            return Result.failure(Exception("로그인에 실패했습니다"))
+            Result.failure(Exception("로그인에 실패했습니다"))
         }
     }
 
