@@ -36,7 +36,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                error="@{viewModel.emailErrorText}"
+                error="@{viewModel.emailErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/title_title_margin"
@@ -50,15 +50,15 @@
                     android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="이메일"
                     android:afterTextChanged="@{()->viewModel.onEmailChanged()}"
+                    android:hint="이메일"
                     android:text="@={viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                error="@{viewModel.passwordErrorText}"
+                error="@{viewModel.passwordErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/button_vertical_margin"
@@ -75,16 +75,16 @@
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:afterTextChanged="@{()->viewModel.onPasswordChanged()}"
                     android:hint="비밀번호"
                     android:inputType="textPassword"
-                    android:afterTextChanged="@{()->viewModel.onPasswordChanged()}"
                     android:text="@={viewModel.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordCheckLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                error="@{viewModel.passwordCheckErrorText}"
+                error="@{viewModel.passwordCheckErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/button_vertical_margin"
@@ -101,16 +101,16 @@
                     android:id="@+id/passwordCheckEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:afterTextChanged="@{()->viewModel.onPasswordCheckChanged()}"
                     android:hint="비밀번호 확인"
                     android:inputType="textPassword"
-                    android:afterTextChanged="@{()->viewModel.onPasswordCheckChanged()}"
                     android:text="@={viewModel.passwordCheck}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nicknameLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                error="@{viewModel.nicknameErrorText}"
+                error="@{viewModel.nicknameErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/button_vertical_margin"
@@ -126,10 +126,10 @@
                     android:id="@+id/nicknameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:afterTextChanged="@{()->viewModel.onNicknameChanged()}"
                     android:hint="닉네임"
                     android:inputType="text"
                     android:maxLength="20"
-                    android:afterTextChanged="@{()->viewModel.onNicknameChanged()}"
                     android:text="@={viewModel.nickname}" />
 
             </com.google.android.material.textfield.TextInputLayout>

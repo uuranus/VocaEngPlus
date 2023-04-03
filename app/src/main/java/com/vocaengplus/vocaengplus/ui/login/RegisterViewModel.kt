@@ -1,41 +1,53 @@
 package com.vocaengplus.vocaengplus.ui.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.vocaengplus.vocaengplus.model.data.newData.UserData
+import com.vocaengplus.vocaengplus.model.data.repository.LoginRepository
 import com.vocaengplus.vocaengplus.ui.util.Validation
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(
+    private val repository: LoginRepository
+) : ViewModel() {
 
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
     val passwordCheck = MutableStateFlow("")
     val nickname = MutableStateFlow("")
 
-    private val _emailErrorText = MutableStateFlow("")
-    val emailErrorText: StateFlow<String> get() = _emailErrorText
+    private val _emailErrorState = MutableStateFlow(ErrorState(true, ""))
+    val emailErrorState: StateFlow<ErrorState> get() = _emailErrorState
 
-    private val _passwordErrorText = MutableStateFlow("")
-    val passwordErrorText: StateFlow<String> get() = _passwordErrorText
+    private val _passwordErrorState = MutableStateFlow(ErrorState(true, ""))
+    val passwordErrorState: StateFlow<ErrorState> get() = _passwordErrorState
 
-    private val _passwordCheckErrorText = MutableStateFlow("")
-    val passwordCheckErrorText: StateFlow<String> get() = _passwordCheckErrorText
+    private val _passwordCheckErrorState = MutableStateFlow(ErrorState(true, ""))
+    val passwordCheckErrorState: StateFlow<ErrorState> get() = _passwordCheckErrorState
 
-    private val _nicknameErrorText = MutableStateFlow("")
-    val nicknameErrorText: StateFlow<String> get() = _nicknameErrorText
+    private val _nicknameErrorState = MutableStateFlow(ErrorState(true, ""))
+    val nicknameErrorState: StateFlow<ErrorState> get() = _nicknameErrorState
+
+    private val _toastMessage = MutableStateFlow("")
+    val toastMessage: StateFlow<String> get() = _toastMessage
 
     fun onEmailChanged() {
         val emailValue = email.value
 
         if (emailValue.isEmpty()) {
-            _emailErrorText.value = "이메일을 입력해주세요"
+            _emailErrorState.value = ErrorState(false, "이메일을 입력해주세요")
             return
         }
 
         if (Validation.isValidateEmail(emailValue).not()) {
-            _emailErrorText.value = "이메일 형식이 올바르지 않습니다"
+            _emailErrorState.value = ErrorState(false, "이메일 형식이 올바르지 않습니다")
         } else {
-            _emailErrorText.value = ""
+            _emailErrorState.value = ErrorState(true, "")
         }
     }
 
@@ -43,14 +55,14 @@ class RegisterViewModel : ViewModel() {
         val passwordValue = password.value
 
         if (passwordValue.isEmpty()) {
-            _passwordErrorText.value = "비밀번호를 입력해주세요"
+            _passwordErrorState.value = ErrorState(false, "비밀번호를 입력해주세요")
             return
         }
 
         if (Validation.isValidatePassword(passwordValue).not()) {
-            _passwordErrorText.value = "비밀번호는 6~20글자 이어야 합니다"
+            _passwordErrorState.value = ErrorState(false, "비밀번호는 6~20글자 이어야 합니다")
         } else {
-            _passwordErrorText.value = ""
+            _passwordErrorState.value = ErrorState(true, "")
         }
     }
 
@@ -59,32 +71,59 @@ class RegisterViewModel : ViewModel() {
         val passwordValue = password.value
 
         if (passwordCheckValue.isEmpty()) {
-            _passwordCheckErrorText.value = ""
+            _passwordCheckErrorState.value = ErrorState(false, "비밀번호를 입력해주세요")
             return
         }
 
         if (passwordCheckValue != passwordValue) {
-            _passwordCheckErrorText.value = "비밀번호가 일치하지 않습니다"
+            _passwordCheckErrorState.value = ErrorState(false, "비밀번호가 일치하지 않습니다")
         } else {
-            _passwordCheckErrorText.value = ""
+            _passwordCheckErrorState.value = ErrorState(true, "")
         }
     }
 
     fun onNicknameChanged() {
         val nicknameValue = nickname.value
         if (nicknameValue.isEmpty()) {
-            _nicknameErrorText.value = "닉네임을 입력해주세요"
+            _nicknameErrorState.value = ErrorState(false, "닉네임을 입력해주세요")
             return
         }
 
         if (Validation.isValidateNickname(nicknameValue).not()) {
-            _nicknameErrorText.value = "닉네임은 2~10글자이어야 합니다 (특수문자 불가)"
+            _nicknameErrorState.value = ErrorState(false, "닉네임은 2~10글자이어야 합니다 (특수문자 불가)")
         } else {
-            _nicknameErrorText.value = ""
+            _nicknameErrorState.value = ErrorState(true, "")
         }
     }
 
-    fun register(){
+    fun register() {
+        if (_nicknameErrorState.value.isSuccess.not() ||
+            _passwordErrorState.value.isSuccess.not() ||
+            _passwordCheckErrorState.value.isSuccess.not() ||
+            _nicknameErrorState.value.isSuccess.not()
+        ) return
+
+
+        viewModelScope.launch {
+            val registerResult = repository.requestRegister(email.value, password.value)
+
+            println("register $registerResult")
+            if (registerResult.isSuccess) {
+                registerResult.getOrNull()?.let {
+                    val newUserData = UserData(
+                        it.name,
+                        it.uid,
+                        System.currentTimeMillis(),
+                        false
+                    )
+                    val result = repository.requestMakeNewUserData(newUserData)
+                    println("result $result")
+                }
+
+            } else {
+                _toastMessage.value = registerResult.exceptionOrNull()?.message ?: ""
+            }
+        }
 
     }
 }

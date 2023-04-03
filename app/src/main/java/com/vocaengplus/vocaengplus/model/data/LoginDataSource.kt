@@ -21,8 +21,12 @@ class LoginDataSource @Inject constructor(
         return authService.loginAsGuest()
     }
 
-    suspend fun makeNewUserData(idToken: String, userData: UserDataDTO): Response<PostDTO> {
-        return databaseService.postUserData(userData.uid, idToken, userData)
+    suspend fun makeNewUserData(idToken: String, userData: UserDataDTO): Response<UserDataDTO> {
+        return databaseService.putUserData(userData.uid, idToken, userData)
+    }
+
+    suspend fun register(email: String, password: String): Result<UserAuth> {
+        return authService.register(email, password)
     }
 
 }

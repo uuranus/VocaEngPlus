@@ -79,25 +79,6 @@ object AuthService {
             authResult.user?.let {
                 Result.success(UserAuth(it.uid, it.email ?: "", it.displayName ?: "", it.photoUrl))
             } ?: Result.failure(Exception("로그인에 실패했습니다"))
-//            if (authResult) {
-//                val user = it.result.user
-//                user?.let { u ->
-//                    result =
-//                        Result.success(
-//                            UserAuth(
-//                                u.uid,
-//                                u.email ?: "GUEST",
-//                                u.displayName ?: "익명",
-//                                u.photoUrl
-//                            )
-//                        )
-//                    println("success $result")
-//                }
-//            } else {
-//                result =
-//                    println("failure $result")
-//            }
-
 
         } catch (e: FirebaseException) {
             Result.failure(Exception("로그인에 실패하였습니다"))
@@ -137,6 +118,20 @@ object AuthService {
                     UserAuth(it.uid, it.email ?: "", it.displayName ?: "", it.photoUrl)
                 )
             } ?: Result.failure(Exception("게스트 로그인에 실패했습니다"))
+        } catch (e: FirebaseException) {
+            Result.failure(Exception("로그인에 실패하였습니다"))
+        }
+    }
+
+
+    suspend fun register(email: String, password: String): Result<UserAuth> {
+        return try {
+            val authResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+
+            authResult.user?.let {
+                Result.success(UserAuth(it.uid, it.email ?: "", it.displayName ?: "", it.photoUrl))
+            } ?: Result.failure(Exception("로그인에 실패했습니다"))
+
         } catch (e: FirebaseException) {
             Result.failure(Exception("로그인에 실패하였습니다"))
         }

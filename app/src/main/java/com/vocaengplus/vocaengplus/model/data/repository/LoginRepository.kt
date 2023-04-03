@@ -5,6 +5,7 @@ import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.model.data.newData.UserData
 import com.vocaengplus.vocaengplus.model.data.newData.toUserDataDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService
+import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(
@@ -31,6 +32,10 @@ class LoginRepository @Inject constructor(
         } else {
             Result.failure(Exception("로그인에 실패했습니다"))
         }
+    }
+
+    suspend fun requestRegister(email: String, password: String): Result<UserAuth> {
+        return dataSource.register(email, password)
     }
 
 }

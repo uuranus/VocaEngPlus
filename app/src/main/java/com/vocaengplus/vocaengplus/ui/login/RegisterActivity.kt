@@ -3,9 +3,6 @@ package com.vocaengplus.vocaengplus.ui.login
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -17,8 +14,10 @@ import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.ActivityRegisterBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.ui.util.Validation
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
@@ -32,7 +31,12 @@ class RegisterActivity : AppCompatActivity() {
         binding.run {
             lifecycleOwner = this@RegisterActivity
             viewModel = registerViewModel
+
+            registerButton.setOnClickListener {
+                registerViewModel.register()
+            }
         }
+
 //        init()
     }
 

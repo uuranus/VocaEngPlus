@@ -12,3 +12,19 @@ data class UserDataDTO(
 data class PostDTO(
     @SerializedName("name") val name: String
 )
+
+data class WordListDTO(
+    @SerializedName("wordListName") val wordListName: String,
+    @SerializedName("wordListWriter") val wordListWriter: String,
+    @SerializedName("wordListWriterToken") val wordListWriterToken: String,
+    @SerializedName("downloadDate") val downLoadDate: Long,
+    @SerializedName("description") val description: String,
+    @SerializedName("words") val words: List<WordDTO>
+)
+
+data class WordDTO(
+    @SerializedName("word") val word: String,
+    @SerializedName("meaning") val meaning: String,
+    @SerializedName("checked") val checked: Boolean,
+    @SerializedName("wordList") val wordList: String
+)
