@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.model.data.Voca
-import java.util.*
 
 class TestResultAdapter(val resultdata: ArrayList<Voca>): RecyclerView.Adapter<TestResultAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

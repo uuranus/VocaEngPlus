@@ -18,7 +18,6 @@ import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.model.data.Category
 import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.ui.util.Validation
-import java.util.*
 
 class AddCategory : AppCompatActivity() {
     lateinit var binding: ActivityAddCategoryBinding
@@ -43,7 +42,7 @@ class AddCategory : AppCompatActivity() {
     }
 
     fun init(){
-        validation= Validation()
+        validation= Validation
 
         firebaseAuth= Initialization.getFBauth()
         firebaseUser= Initialization.getFBuser()

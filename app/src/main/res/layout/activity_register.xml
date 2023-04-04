@@ -1,121 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.login.RegisterActivity"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
-    android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.vocaengplus.vocaengplus.ui.login.RegisterViewModel" />
+    </data>
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".ui.login.RegisterActivity">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="10dp"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin">
 
             <ImageView
+                android:id="@+id/registerImageView"
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="25dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:src="@drawable/register_illust"
-                android:layout_marginTop="25dp"/>
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.25"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/email_layout"
+                error="@{viewModel.emailErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                app:errorEnabled="true">
+                android:layout_marginTop="@dimen/title_title_margin"
+                app:errorEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/registerImageView">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/et_email"
-                    android:hint="이메일"/>
+                    android:afterTextChanged="@{()->viewModel.onEmailChanged()}"
+                    android:hint="이메일"
+                    android:text="@={viewModel.email}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/pw_layout"
+                error="@{viewModel.passwordErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                app:errorEnabled="true"
+                android:layout_marginTop="@dimen/button_vertical_margin"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
+                app:errorEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/emailLayout"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/et_pwd"
-                    android:maxLength="20"
+                    android:afterTextChanged="@{()->viewModel.onPasswordChanged()}"
+                    android:hint="비밀번호"
                     android:inputType="textPassword"
-                    android:hint="비밀번호"/>
+                    android:text="@={viewModel.password}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordCheckLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/repw_layout"
+                error="@{viewModel.passwordCheckErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                app:errorEnabled="true"
+                android:layout_marginTop="@dimen/button_vertical_margin"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
+                app:errorEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordLayout"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordCheckEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/et_pwd_again"
-                    android:maxLength="20"
+                    android:afterTextChanged="@{()->viewModel.onPasswordCheckChanged()}"
+                    android:hint="비밀번호 확인"
                     android:inputType="textPassword"
-                    android:hint="비밀번호 확인"/>
+                    android:text="@={viewModel.passwordCheck}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/nicknameLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:id="@+id/nickname_layout"
+                error="@{viewModel.nicknameErrorState.errorText}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                app:errorEnabled="true"
+                android:layout_marginTop="@dimen/button_vertical_margin"
                 app:counterEnabled="true"
-                app:counterMaxLength="10">
+                app:counterMaxLength="10"
+                app:errorEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/passwordCheckLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nicknameEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/et_nickname"
-                    android:maxLength="20"
+                    android:afterTextChanged="@{()->viewModel.onNicknameChanged()}"
+                    android:hint="닉네임"
                     android:inputType="text"
-                    android:hint="닉네임"/>
+                    android:maxLength="20"
+                    android:text="@={viewModel.nickname}" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <Button
-                android:id="@+id/btn_register"
+                android:id="@+id/registerButton"
+                style="@style/Theme.VocaEngPlus.Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="15dp"
+                android:layout_marginTop="@dimen/title_body_margin"
                 android:text="가입하기"
-                android:fontFamily="@font/bold_font"
-                android:padding="0dp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/nicknameLayout" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </ScrollView>
-
-
-</LinearLayout>
+</layout>

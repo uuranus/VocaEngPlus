@@ -14,9 +14,9 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.storage.StorageReference
-import com.vocaengplus.vocaengplus.ui.util.Validation
 import com.vocaengplus.vocaengplus.databinding.ActivityProfileBinding
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.ui.util.Validation
 
 @Suppress("DEPRECATION")
 class ProfileActivity : AppCompatActivity() {
@@ -42,7 +42,7 @@ class ProfileActivity : AppCompatActivity() {
         firebaseAuth=initialization.getFBauth()
         firebaseUser=initialization.getFBuser()
         storageref=initialization.getStorageref()
-        validation= Validation()
+        validation= Validation
 
         binding.apply{
             storageref.child(firebaseUser.photoUrl.toString()).downloadUrl.addOnSuccessListener {

@@ -11,10 +11,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.vocaengplus.vocaengplus.adapter.ReviewAdapter
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.databinding.ActivityReviewBinding
 import com.vocaengplus.vocaengplus.databinding.ReviewhelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.model.data.Voca
 
 class ReviewActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView

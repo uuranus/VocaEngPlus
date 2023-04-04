@@ -1,93 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
-    tools:context=".ui.login.LoginActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/loginImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:src="@drawable/login_illust"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <EditText
-        android:id="@+id/emailEditText"
+        <variable
+            name="viewModel"
+            type="com.vocaengplus.vocaengplus.ui.login.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:ems="10"
-        android:hint="이메일(아이디)"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/loginImageView" />
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_horizontal_margin"
+        tools:context=".ui.login.LoginActivity">
 
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+        <ImageView
+            android:id="@+id/loginImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/login_illust"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/findPasswordTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="비밀번호를 잊으셨나요?"
-        android:textColor="@color/bluegray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailEditText"
+            error="@{viewModel.idErrorText}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            app:errorEnabled="true"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/loginImageView">
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="로그인"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/findPasswordTextView" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:afterTextChanged="@{() -> viewModel.onIdChanged()}"
+                android:background="@android:color/transparent"
+                android:hint="이메일(아이디)"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.id}" />
 
-    <TextView
-        android:id="@+id/registerTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:text="회원가입"
-        app:layout_constraintEnd_toStartOf="@id/guestButton"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guestButton" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/gray"
-        android:orientation="vertical"
-        android:layout_marginTop="3dp"
-        app:layout_constraintBottom_toBottomOf="@id/guestButton"
-        app:layout_constraintEnd_toStartOf="@id/guestButton"
-        app:layout_constraintStart_toEndOf="@id/registerTextView"
-        app:layout_constraintTop_toTopOf="@id/guestButton" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordEditText"
+            error="@{viewModel.passwordErrorText}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@id/emailEditText">
 
-    <TextView
-        android:id="@+id/guestButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="게스트 입장"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/registerTextView"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:afterTextChanged="@{() -> viewModel.onPasswordChanged()}"
+                android:background="@android:color/transparent"
+                android:hint="비밀번호"
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/findPasswordTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="비밀번호를 잊으셨나요?"
+            android:textColor="@color/bluegray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:text="로그인"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/findPasswordTextView" />
+
+        <TextView
+            android:id="@+id/registerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="회원가입"
+            app:layout_constraintEnd_toStartOf="@id/guestButton"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guestButton" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/gray"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/guestButton"
+            app:layout_constraintEnd_toStartOf="@id/guestButton"
+            app:layout_constraintStart_toEndOf="@id/registerTextView"
+            app:layout_constraintTop_toTopOf="@id/guestButton" />
+
+        <TextView
+            android:id="@+id/guestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="게스트 입장"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/registerTextView"
+            app:layout_constraintTop_toBottomOf="@id/loginButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

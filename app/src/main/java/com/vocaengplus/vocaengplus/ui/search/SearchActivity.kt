@@ -1,16 +1,15 @@
 package com.vocaengplus.vocaengplus.ui.search
 
 import android.os.Bundle
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.ui.util.Validation
 import com.vocaengplus.vocaengplus.databinding.NaveraddwordBinding
 import com.vocaengplus.vocaengplus.databinding.NaverhelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.ui.util.Validation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,7 +42,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun init(){
-        validation= Validation()
+        validation= Validation
 
         val source=findViewById<TextView>(R.id.sourceTextView)
         val target=findViewById<TextView>(R.id.targetTextView)

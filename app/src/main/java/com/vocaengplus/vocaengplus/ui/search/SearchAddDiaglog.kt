@@ -12,8 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.model.data.Voca
 
 class SearchAddDiaglog(v: View) :DialogFragment() {
     private val v=v

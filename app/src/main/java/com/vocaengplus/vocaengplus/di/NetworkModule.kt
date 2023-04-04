@@ -1,14 +1,17 @@
 package com.vocaengplus.vocaengplus.di
 
+import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.StorageService
-import com.vocaengplus.vocaengplus.network.VocaEngPlusService
-import com.vocaengplus.vocaengplus.ui.util.VOCAENGPLUS_BASE_URL
+import com.vocaengplus.vocaengplus.network.auth.AuthService
+import com.vocaengplus.vocaengplus.ui.util.DATABASE_BASE_URL
+import com.vocaengplus.vocaengplus.ui.util.STORAGE_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -17,12 +20,10 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class VocaEngPlusRetrofit
+    annotation class StorageRetrofit
 
     @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class StorageRetrofit
+    annotation class DatabaseRetrofit
 
     @Provides
     @Singleton
@@ -30,18 +31,32 @@ object NetworkModule {
         return OkHttpClient.Builder().build()
     }
 
+    @DatabaseRetrofit
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideDatabaseRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(VOCAENGPLUS_BASE_URL)
+            .client(okHttpClient)
+            .baseUrl(DATABASE_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @StorageRetrofit
+    @Provides
+    @Singleton
+    fun provideStorageRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .client(okHttpClient)
+            .baseUrl(STORAGE_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun providesVocaEngPlusService(@VocaEngPlusRetrofit retrofit: Retrofit): VocaEngPlusService {
-        return retrofit.create(VocaEngPlusService::class.java)
+    fun providesDatabaseService(@DatabaseRetrofit retrofit: Retrofit): DatabaseService {
+        return retrofit.create(DatabaseService::class.java)
     }
 
     @Provides
@@ -49,5 +64,9 @@ object NetworkModule {
     fun providesStorageService(@StorageRetrofit retrofit: Retrofit): StorageService {
         return retrofit.create(StorageService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun providesAuthService() = AuthService
 
 }

@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.databinding.FragmentTestBinding
+import com.vocaengplus.vocaengplus.model.data.Voca
 import java.util.*
-import kotlin.collections.ArrayList
 
 class TestFragment(val category:String, val data: ArrayList<Voca>, val type:String) : Fragment() {
     var binding: FragmentTestBinding?=null

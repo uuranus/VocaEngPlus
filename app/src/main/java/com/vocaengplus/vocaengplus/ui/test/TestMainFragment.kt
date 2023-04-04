@@ -13,12 +13,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.databinding.FragmentTestMainBinding
 import com.vocaengplus.vocaengplus.databinding.TesthelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
+import com.vocaengplus.vocaengplus.model.data.Voca
 import java.util.*
-import kotlin.collections.ArrayList
 
 class TestMainFragment : Fragment() {
 

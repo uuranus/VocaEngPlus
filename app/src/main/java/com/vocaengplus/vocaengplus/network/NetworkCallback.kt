@@ -1,6 +1,6 @@
 package com.vocaengplus.vocaengplus.network
 
-interface NetworkCallback {
-    fun <T> onDataLoaded(data:T)
-    fun <T> onDataFailed(exception:T)
+interface  NetworkCallback<T> {
+    fun onDataLoaded(data:T)
+    fun onDataFailed(exception:T)
 }
