@@ -26,5 +26,5 @@ data class WordDTO(
     @SerializedName("word") val word: String,
     @SerializedName("meaning") val meaning: String,
     @SerializedName("checked") val checked: Boolean,
-    @SerializedName("wordList") val wordList: String
+    @SerializedName("wordListName") val wordListName: String
 )

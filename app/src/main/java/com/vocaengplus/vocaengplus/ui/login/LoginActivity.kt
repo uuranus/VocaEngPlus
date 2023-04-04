@@ -38,13 +38,6 @@ class LoginActivity : AppCompatActivity() {
         init()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (intent.hasExtra("nickname")) {
-            nickname = intent.getStringExtra("nickname").toString()
-        }
-    }
-
     private fun init() {
 
         binding.apply {
@@ -229,7 +222,7 @@ class LoginActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     isLoginSucceed.collectLatest {
-                        println("logined $it")
+                        println("isLogined $it")
                         if (it) {
                             val intent =
                                 Intent(this@LoginActivity, MainActivity::class.java)

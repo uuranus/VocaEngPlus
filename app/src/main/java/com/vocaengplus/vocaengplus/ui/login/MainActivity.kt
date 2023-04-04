@@ -40,15 +40,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if(FirebaseAuth.getInstance().currentUser==null){
-            val intent=Intent(this@MainActivity, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        else{
-            init()
-            initDrawer()
-        }
+//        if(FirebaseAuth.getInstance().currentUser==null){
+//            val intent=Intent(this@MainActivity, LoginActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//        else{
+//            init()
+//            initDrawer()
+//        }
 
 
     }
@@ -203,15 +203,6 @@ class MainActivity : AppCompatActivity() {
                 initDrawer()
             }
         }
-    }
-
-    override fun onResume() {
-        if(!FirebaseAuth.getInstance().currentUser!!.isAnonymous&&!FirebaseAuth.getInstance().currentUser!!.isEmailVerified){
-            val intent = Intent(this@MainActivity, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-        super.onResume()
     }
 
     //계정 삭제 알림창

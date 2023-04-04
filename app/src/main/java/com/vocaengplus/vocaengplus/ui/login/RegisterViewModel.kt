@@ -36,6 +36,9 @@ class RegisterViewModel @Inject constructor(
     private val _toastMessage = MutableStateFlow("")
     val toastMessage: StateFlow<String> get() = _toastMessage
 
+    private val _isAllSuccess = MutableStateFlow(false)
+    val isAllSuccess: StateFlow<Boolean> get() = _isAllSuccess
+
     fun onEmailChanged() {
         val emailValue = email.value
 
@@ -103,11 +106,9 @@ class RegisterViewModel @Inject constructor(
             _nicknameErrorState.value.isSuccess.not()
         ) return
 
-
         viewModelScope.launch {
             val registerResult = repository.requestRegister(email.value, password.value)
 
-            println("register $registerResult")
             if (registerResult.isSuccess) {
                 registerResult.getOrNull()?.let {
                     val newUserData = UserData(
@@ -117,7 +118,11 @@ class RegisterViewModel @Inject constructor(
                         false
                     )
                     val result = repository.requestMakeNewUserData(newUserData)
-                    println("result $result")
+                    if (result.isSuccess) {
+                        _isAllSuccess.value = true
+                    } else {
+                        _toastMessage.value = registerResult.exceptionOrNull()?.message ?: ""
+                    }
                 }
 
             } else {

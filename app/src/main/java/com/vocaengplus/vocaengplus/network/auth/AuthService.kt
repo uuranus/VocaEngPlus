@@ -17,7 +17,8 @@ object AuthService {
     private val random = Random(System.currentTimeMillis())
     private val default = arrayOf("default1.png", "default2.png", "default3.png")
 
-    fun getCurrentUID(): String {
+     fun getCurrentUID(): String {
+        println("currentUser ${firebaseAuth.currentUser?.uid}")
         return firebaseAuth.currentUser?.uid.orEmpty()
     }
 

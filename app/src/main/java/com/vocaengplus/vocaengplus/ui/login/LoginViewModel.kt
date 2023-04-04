@@ -20,10 +20,8 @@ class LoginViewModel @Inject constructor(
     val password = MutableStateFlow("")
 
     private val _isIdValid = MutableStateFlow(false)
-    val isIdValid: StateFlow<Boolean> get() = _isIdValid
 
     private val _isPasswordValid = MutableStateFlow(false)
-    val isPasswordValid: StateFlow<Boolean> get() = _isPasswordValid
 
     private val _isLoginSucceed = MutableStateFlow(false)
     val isLoginSucceed: StateFlow<Boolean> get() = _isLoginSucceed
@@ -81,27 +79,15 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             val result = repository.requestLogin(idValue, passwordValue)
             if (result.isSuccess) {
-                println("result ${result.getOrNull()}")
-                val userAuth = result.getOrNull()
-                if (userAuth != null) {
-                    val userData = UserData(
-                        userAuth.name,
-                        userAuth.uid,
-                        System.currentTimeMillis(),
-                        false
-                    )
-                    val newDataSucceed = repository.requestMakeNewUserData(userData)
-                    println("newDataSucceed $newDataSucceed")
-                    _snackBarMessage.value = "로그인에 성공했습니다"
-                } else {
-                    _snackBarMessage.value = "로그인에 실패했습니다"
-                }
-
+                _isLoginSucceed.value = true
+                _snackBarMessage.value = "로그인에 성공했습니다"
             } else {
+                _isLoginSucceed.value = false
                 _snackBarMessage.value = "이메일 또는 비밀번호가 일치하지 않습니다"
             }
         }
     }
+
 
     fun loginAsGuest() {
         viewModelScope.launch {
