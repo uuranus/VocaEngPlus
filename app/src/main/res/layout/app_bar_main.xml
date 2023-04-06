@@ -8,25 +8,25 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.VocaEngPlus.PopupOverlay">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:popupTheme="@style/Theme.VocaEngPlus.PopupOverlay" >
+            android:theme="@style/ThemeOverlay.VocaEngPlus.AppBar">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
                 android:layout_gravity="center"
-                android:src="@drawable/main_icon"
+                android:layout_margin="5dp"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY"/>
-        </androidx.appcompat.widget.Toolbar>
+                android:scaleType="fitXY"
+                android:src="@drawable/main_icon"
+                android:contentDescription="로고 아이콘" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
