@@ -12,7 +12,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.ActivityLoginBinding
 import com.vocaengplus.vocaengplus.model.data.UserAccount
-import com.vocaengplus.vocaengplus.network.auth.AuthService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

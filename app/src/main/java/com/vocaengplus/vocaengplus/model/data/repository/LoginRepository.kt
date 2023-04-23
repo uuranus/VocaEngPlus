@@ -6,7 +6,6 @@ import com.vocaengplus.vocaengplus.model.data.newData.UserData
 import com.vocaengplus.vocaengplus.model.data.newData.toUserDataDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService
-import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
 import com.vocaengplus.vocaengplus.ui.util.WORDLIST
 import com.vocaengplus.vocaengplus.ui.util.makeDefaultWordList
 import javax.inject.Inject

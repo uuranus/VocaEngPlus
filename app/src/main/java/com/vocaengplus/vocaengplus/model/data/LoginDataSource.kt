@@ -1,7 +1,6 @@
 package com.vocaengplus.vocaengplus.model.data
 
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.network.dto.PostDTO

@@ -1,7 +1,6 @@
 package com.vocaengplus.vocaengplus.network
 
 import com.vocaengplus.vocaengplus.model.data.newData.UserData
-import com.vocaengplus.vocaengplus.model.data.newData.UserWordList
 import com.vocaengplus.vocaengplus.network.dto.PostDTO
 import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO

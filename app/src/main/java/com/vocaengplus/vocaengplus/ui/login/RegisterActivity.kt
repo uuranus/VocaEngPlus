@@ -1,7 +1,5 @@
 package com.vocaengplus.vocaengplus.ui.login
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -9,18 +7,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.database.DatabaseReference
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.ActivityRegisterBinding
-import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.ui.util.Validation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.*
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {

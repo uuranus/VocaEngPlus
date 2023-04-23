@@ -10,22 +10,16 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.vocaengplus.vocaengplus.*
 import com.vocaengplus.vocaengplus.databinding.ActivityMainBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.ui.community.CommunityActivity
 import com.vocaengplus.vocaengplus.ui.myWord.MyWordActivity
-import com.vocaengplus.vocaengplus.ui.profile.ProfileActivity
 import com.vocaengplus.vocaengplus.ui.review.ReviewActivity
 import com.vocaengplus.vocaengplus.ui.search.SearchActivity
 import com.vocaengplus.vocaengplus.ui.setting.SettingActivity
@@ -38,8 +32,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     val initialization = Initialization
 
-    private lateinit var drawerLayout: DrawerLayout
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,39 +40,70 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        lifecycleScope.launch{
+        lifecycleScope.launch {
 
             val idToken = AuthService.getCurrentUserIdToken()
             println("token ${idToken}")
         }
 
-        binding.run{
-            setSupportActionBar(
-                appBarMain.toolbar)
-                supportActionBar?.also{
-                    it.title = ""
+        setSupportActionBar(binding.appBarMain.toolbar)
 
-                it.setDisplayHomeAsUpEnabled(true)
-                it.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
-//                it.setHomeAsUpIndicator()
+        supportActionBar?.let {
+            it.title = ""
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+        }
+
+        initialization.setDatabase()
+        initialization.setCurrentUser()
+        initDrawer()
+
+        binding.appBarMain.contentMain.run {
+            wordImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, WordActivity::class.java)
+                startActivity(intent)
+            }
+
+            testImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, TestActivity::class.java)
+                startActivity(intent)
+            }
+
+            reviewImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, ReviewActivity::class.java)
+                startActivity(intent)
+            }
+
+            myWordImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, MyWordActivity::class.java)
+                startActivity(intent)
+            }
+
+            searchImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, SearchActivity::class.java)
+                startActivity(intent)
+            }
+
+            statisticsImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, StatisticsActivity::class.java)
+                startActivity(intent)
+            }
+
+            communityImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, CommunityActivity::class.java)
+                startActivity(intent)
+            }
+
+            settingImageView.setOnClickListener {
+                val intent = Intent(this@MainActivity, SettingActivity::class.java)
+                startActivityForResult(intent, 600)
             }
         }
-//        if(FirebaseAuth.getInstance().currentUser==null){
-//            val intent=Intent(this@MainActivity, LoginActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//        else{
-//            init()
-//            initDrawer()
-//        }
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START)
+            binding.drawerLayout.openDrawer(GravityCompat.START)
             return true
         }
 
@@ -87,52 +111,49 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initDrawer() {
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        binding.navView.setNavigationItemSelectedListener {
+            binding.drawerLayout.closeDrawers()
 
-        val actionbar = supportActionBar!!
+            when (it.itemId) {
+                R.id.nav_profile -> {
+//                    if (!initialization.getFBuser().isAnonymous) {
+//                        Toast.makeText(this, "계정", Toast.LENGTH_SHORT).show()
+//                        val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+//                        startActivityForResult(intent, 700)
+//                    } else { //계정 연결 화면으로 이동
+//                        val intent = Intent(this@MainActivity, RegisterActivity::class.java)
+//                        startActivity(intent)
+//                    }
 
-
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.navView)
-        navView.setNavigationItemSelectedListener {
-            drawerLayout.closeDrawers()
-            val id = it.itemId
-
-            if (id == R.id.nav_profile) {
-                if (!initialization.getFBuser().isAnonymous) {
-                    Toast.makeText(this, "계정", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@MainActivity, ProfileActivity::class.java)
-                    startActivityForResult(intent, 700)
-                } else { //계정 연결 화면으로 이동
-                    val intent = Intent(this@MainActivity, RegisterActivity::class.java)
-                    startActivity(intent)
                 }
+                R.id.nav_pwchange -> {
+//                    if (!initialization.getFBuser().isAnonymous) {
+//                        initialization.getFBauth()
+//                            .sendPasswordResetEmail(initialization.getFBuser().email.toString())
+//                            .addOnCompleteListener {
+//                                if (it.isSuccessful) {
+//                                    Toast.makeText(this, "비밀번호 재설정 이메일을 보냈습니다.", Toast.LENGTH_SHORT)
+//                                        .show()
+//                                }
+//                            }
+//                    }
 
-            } else if (id == R.id.nav_pwchange) {
-                if (!initialization.getFBuser().isAnonymous) {
-                    initialization.getFBauth()
-                        .sendPasswordResetEmail(initialization.getFBuser().email.toString())
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                Toast.makeText(this, "비밀번호 재설정 이메일을 보냈습니다.", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                        }
                 }
-
-            } else if (id == R.id.nav_quit) {
-                AlertDelete()
-            } else if (id == R.id.nav_logout) {
-                AlertLogout()
-            } else if (id == R.id.nav_contact) {
-                SendEmailToDev()
+                R.id.nav_quit -> {
+                    AlertDelete()
+                }
+                R.id.nav_logout -> {
+                    AlertLogout()
+                }
+                R.id.nav_contact -> {
+                    SendEmailToDev()
+                }
+                else -> {}
             }
-
             return@setNavigationItemSelectedListener false
         }
 
-        val nav_header = navView.getHeaderView(0)
+        val nav_header = binding.navView.getHeaderView(0)
         val profile_img = nav_header.findViewById<ImageView>(R.id.profile_img)
         val nickname = nav_header.findViewById<TextView>(R.id.nav_nickname)
         val emailID = nav_header.findViewById<TextView>(R.id.nav_emailID)
@@ -154,55 +175,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 emailID.text = firebaseUser.email.toString()
             }
-        }
-
-    }
-
-    private fun init() {
-        initialization.setDatabase()
-        initialization.setCurrentUser()
-
-
-        val wordbtn = findViewById<ImageView>(R.id.wordImageView)
-        val testbtn = findViewById<ImageView>(R.id.testImageView)
-        val reviewbtn = findViewById<ImageView>(R.id.reviewImageView)
-        val mywordbtn = findViewById<ImageView>(R.id.myWordImageView)
-        val naverbtn = findViewById<ImageView>(R.id.searchImageView)
-        val statisticsbtn = findViewById<ImageView>(R.id.statisticsImageView)
-        val communitybtn = findViewById<ImageView>(R.id.communityImageView)
-        val settingbtn = findViewById<ImageView>(R.id.settingImageView)
-
-        wordbtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, WordActivity::class.java)
-            startActivity(intent)
-        }
-        testbtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, TestActivity::class.java)
-            startActivity(intent)
-        }
-        reviewbtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, ReviewActivity::class.java)
-            startActivity(intent)
-        }
-        mywordbtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, MyWordActivity::class.java)
-            startActivity(intent)
-        }
-        naverbtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, SearchActivity::class.java)
-            startActivity(intent)
-        }
-        statisticsbtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, StatisticsActivity::class.java)
-            startActivity(intent)
-        }
-        communitybtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, CommunityActivity::class.java)
-            startActivity(intent)
-        }
-        settingbtn.setOnClickListener {
-            val intent = Intent(this@MainActivity, SettingActivity::class.java)
-            startActivityForResult(intent, 600)
         }
 
     }
@@ -243,7 +215,7 @@ class MainActivity : AppCompatActivity() {
                         finish()
                     } else { //로그인한 지 너무 오래됐다면
                         val snackbar = Snackbar.make(
-                            drawerLayout,
+                            binding.drawerLayout,
                             "로그인한 지 오래되었습니다.\n다시 로그인해주세요",
                             Snackbar.LENGTH_INDEFINITE
                         )
