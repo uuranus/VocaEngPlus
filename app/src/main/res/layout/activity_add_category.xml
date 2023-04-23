@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        style="@style/TextAppearance.VocaEngplus.Title"
+        style="@style/TextAppearance.VocaEngPlus.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/categoryNameTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_title_margin"
@@ -30,7 +30,7 @@
 
     <EditText
         android:id="@+id/categoryNameEditText"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/writerTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
@@ -53,7 +53,7 @@
 
     <TextView
         android:id="@+id/addDateTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
@@ -63,7 +63,7 @@
 
     <TextView
         android:id="@+id/descriptionTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
@@ -73,7 +73,7 @@
 
     <EditText
         android:id="@+id/descriptionEditText"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
@@ -85,7 +85,7 @@
 
     <TextView
         android:id="@+id/wordListTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"

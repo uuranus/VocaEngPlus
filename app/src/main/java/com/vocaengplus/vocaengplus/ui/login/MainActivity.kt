@@ -12,12 +12,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
+import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.vocaengplus.vocaengplus.*
+import com.vocaengplus.vocaengplus.databinding.ActivityMainBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.ui.community.CommunityActivity
@@ -29,17 +32,38 @@ import com.vocaengplus.vocaengplus.ui.setting.SettingActivity
 import com.vocaengplus.vocaengplus.ui.statistics.StatisticsActivity
 import com.vocaengplus.vocaengplus.ui.test.TestActivity
 import com.vocaengplus.vocaengplus.ui.wordList.WordActivity
+import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
     val initialization = Initialization
 
     private lateinit var drawerLayout: DrawerLayout
+    private lateinit var binding:ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        lifecycleScope.launch{
+
+            val idToken = AuthService.getCurrentUserIdToken()
+            println("token ${idToken}")
+        }
+
+        binding.run{
+            setSupportActionBar(
+                appBarMain.toolbar)
+                supportActionBar?.also{
+                    it.title = ""
+
+                it.setDisplayHomeAsUpEnabled(true)
+                it.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+//                it.setHomeAsUpIndicator()
+            }
+        }
 //        if(FirebaseAuth.getInstance().currentUser==null){
 //            val intent=Intent(this@MainActivity, LoginActivity::class.java)
 //            startActivity(intent)
@@ -67,9 +91,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val actionbar = supportActionBar!!
-        actionbar.setDisplayShowTitleEnabled(false)
-        actionbar.setDisplayHomeAsUpEnabled(true)
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
+
 
         drawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.navView)

@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        style="@style/TextAppearance.VocaEngplus.Title"
+        style="@style/TextAppearance.VocaEngPlus.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="단어장 제목"
@@ -29,7 +29,7 @@
 
     <TextView
         android:id="@+id/writerTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/uploadDateTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/profileImageView"
@@ -62,7 +62,7 @@
 
     <TextView
         android:id="@+id/descriptionTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
@@ -86,7 +86,7 @@
 
     <TextView
         android:id="@+id/likeTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/text_horizontal_margin"
@@ -109,7 +109,7 @@
 
     <TextView
         android:id="@+id/downloadTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"

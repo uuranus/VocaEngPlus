@@ -27,6 +27,10 @@ class MainTitleView(context: Context, attrs: AttributeSet) : ConstraintLayout(co
                 numberText = getString(R.styleable.MainTitleView_numberText).toString()
                 titleText = getString(R.styleable.MainTitleView_titleText).toString()
 
+                elevation=10f
+                clipToPadding=false
+                setBackgroundResource(R.drawable.main_title_background)
+
                 binding?.run {
                     titleNumberTextView.text = numberText
                     titleTextView.text = titleText

@@ -54,7 +54,7 @@ interface DatabaseService {
     /**
      * WordList
      */
-    @GET("/${DB_ROOT}/WordList/{uid}/.json")
+    @GET("/${DB_ROOT}/WordList/{uid}.json")
     suspend fun getWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,

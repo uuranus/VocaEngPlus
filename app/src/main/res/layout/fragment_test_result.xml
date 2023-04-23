@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/resultTextView"
-        style="@style/TextAppearance.VocaEngplus.Title"
+        style="@style/TextAppearance.VocaEngPlus.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="테스트 결과"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/totalCountTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_body_margin"
@@ -29,7 +29,7 @@
 
     <TextView
         android:id="@+id/correctCountTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         app:layout_constraintWidth_percent="0.5"
         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/wrongCountTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="틀린 개수 : "

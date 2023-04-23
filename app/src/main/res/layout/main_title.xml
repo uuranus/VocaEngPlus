@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/main_title_background"
-    android:elevation="10dp">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/startGuideLine"
@@ -44,37 +42,38 @@
         android:id="@+id/titleNumberBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
         android:background="@drawable/main_title_background"
         android:backgroundTint="#FF7FA0F5"
-        app:layout_constraintBottom_toBottomOf="@id/titleNumberTextView"
-        app:layout_constraintEnd_toEndOf="@id/titleNumberTextView"
-        app:layout_constraintStart_toStartOf="@id/titleNumberTextView"
-        app:layout_constraintTop_toTopOf="@id/titleNumberTextView" />
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toStartOf="@id/titleTextView"
+        app:layout_constraintStart_toStartOf="@id/startGuideLine"
+        app:layout_constraintBottom_toBottomOf="@id/titleTextView"
+        app:layout_constraintTop_toTopOf="@id/titleTextView" />
 
     <TextView
         android:id="@+id/titleNumberTextView"
-        android:layout_width="0dp"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toStartOf="@id/startGuideLine"
-        app:layout_constraintTop_toTopOf="@id/titleTextView"
+        app:layout_constraintStart_toStartOf="@id/titleNumberBackground"
+        app:layout_constraintEnd_toEndOf="@id/titleNumberBackground"
+        app:layout_constraintBottom_toBottomOf="@id/titleNumberBackground"
+        app:layout_constraintTop_toTopOf="@id/titleNumberBackground"
         tools:text="1" />
 
     <TextView
         android:id="@+id/titleTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="5dp"
         app:layout_constraintBottom_toTopOf="@id/bottomGuideLine"
         app:layout_constraintEnd_toEndOf="@id/endGuideLine"
-        app:layout_constraintStart_toEndOf="@id/titleNumberTextView"
+        app:layout_constraintStart_toEndOf="@id/titleNumberBackground"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="단어장" />
 

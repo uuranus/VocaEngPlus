@@ -36,7 +36,7 @@
 
     <TextView
         android:id="@+id/selectWordTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
@@ -49,7 +49,7 @@
 
     <TextView
         android:id="@+id/wordTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_body_margin"
@@ -70,7 +70,7 @@
 
     <TextView
         android:id="@+id/selectTypeTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_title_margin"
@@ -81,7 +81,7 @@
 
     <TextView
         android:id="@+id/typeTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_body_margin"
