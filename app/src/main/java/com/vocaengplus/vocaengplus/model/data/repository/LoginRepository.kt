@@ -57,8 +57,24 @@ class LoginRepository @Inject constructor(
         }
     }
 
+    suspend fun logOut(): Result<Boolean> {
+        return dataSource.logOut()
+    }
+
     suspend fun requestRegister(email: String, password: String): Result<UserAuth> {
         return dataSource.register(email, password)
+    }
+
+    suspend fun findPassword(email: String) {
+        dataSource.setNewPassword(email)
+    }
+
+    suspend fun quit(): Result<Boolean> {
+
+        val idToken = AuthService.getCurrentUserIdToken()
+        val uid = AuthService.getCurrentUID()
+
+        return dataSource.quit(uid, idToken)
     }
 
 }

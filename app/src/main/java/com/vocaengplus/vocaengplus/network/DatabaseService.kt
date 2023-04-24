@@ -50,6 +50,12 @@ interface DatabaseService {
         @Query("auth") token: String,
     ): Response<String>
 
+    @DELETE("/${DB_ROOT}/UserWordList/{uid}.json")
+    suspend fun deleteAllUserWordList(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+    ): Response<String>
+
     /**
      * WordList
      */

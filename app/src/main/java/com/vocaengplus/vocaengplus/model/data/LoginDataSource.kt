@@ -42,8 +42,31 @@ class LoginDataSource @Inject constructor(
         return databaseService.putUserWordList(uid, wordListId, idToken, true)
     }
 
+    suspend fun logOut(): Result<Boolean> {
+        return authService.logOut()
+    }
+
     suspend fun register(email: String, password: String): Result<UserAuth> {
         return authService.register(email, password)
+    }
+
+    suspend fun quit(uid: String, token: String): Result<Boolean> {
+        //TODO 다 통과 할 때까지 무한루프도는데 5초 넘으면 fail 리턴해서 사용자가 재시도할 수 있게해줌
+
+        var result = databaseService.deleteUserData(uid, token)
+        if (result.isSuccessful.not()) return Result.failure(Exception())
+        result = databaseService.deleteAllUserWordList(uid, token)
+
+        if (result.isSuccessful.not()) return Result.failure(Exception())
+        //storage 추가하면 프로필 사진도 삭제
+        val lastResult = authService.quit()
+        if (lastResult.isSuccess) return Result.success(true)
+
+        return Result.failure(Exception())
+    }
+
+    suspend fun setNewPassword(email: String) {
+        return authService.setNewPassword(email)
     }
 
 }
