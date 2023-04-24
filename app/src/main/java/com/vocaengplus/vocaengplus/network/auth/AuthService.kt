@@ -25,10 +25,12 @@ object AuthService {
 
     fun getCurrentUserInfo(): UserAuth? {
         return firebaseAuth.currentUser?.let {
+            val email = if (it.email.isNullOrEmpty()) "GUEST" else it.email ?: "GUEST"
+            val nickname = if (it.displayName.isNullOrEmpty()) "보카잉" else it.displayName ?: "보카잉"
             UserAuth(
                 it.uid,
-                it.email ?: "GUEST",
-                it.displayName ?: "익명",
+                email,
+                nickname,
                 it.photoUrl
             )
         }
@@ -50,7 +52,6 @@ object AuthService {
         var result = Result.success(UserAuth("", "", "", null))
         runBlocking {
             result = loginWithEmailAndPassword(email, password)
-            println("serviceeeee $result")
         }
 
         return result

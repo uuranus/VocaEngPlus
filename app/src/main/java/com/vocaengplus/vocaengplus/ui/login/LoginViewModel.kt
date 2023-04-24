@@ -109,6 +109,8 @@ class LoginViewModel @Inject constructor(
                     println("newDataSucceed $newDataSucceed")
                     println("!!!!!!!! ${_isLoginSucceed.value}")
 
+                    _isLoginSucceed.value = true
+                    _snackBarMessage.value = "환영합니다"
                 } else {
                     _isLoginSucceed.value = false
                     _snackBarMessage.value = "게스트 로그인에 실패했습니다"

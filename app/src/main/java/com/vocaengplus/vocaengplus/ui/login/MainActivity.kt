@@ -27,12 +27,12 @@ import com.vocaengplus.vocaengplus.ui.setting.SettingActivity
 import com.vocaengplus.vocaengplus.ui.statistics.StatisticsActivity
 import com.vocaengplus.vocaengplus.ui.test.TestActivity
 import com.vocaengplus.vocaengplus.ui.wordList.WordActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    val initialization = Initialization
-
     private lateinit var binding: ActivityMainBinding
     private val viewModel: LoginViewModel by viewModels()
 
@@ -86,20 +86,21 @@ class MainActivity : AppCompatActivity() {
             val idToken = AuthService.getCurrentUserIdToken()
             println("token $idToken")
 
-            viewModel.run {
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    snackBarMessage.collectLatest {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.snackBarMessage.collectLatest {
+                    if (it.isNotEmpty()) {
                         Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
                     }
                 }
-
-                repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    isUserInValid.collectLatest {
-                        if (it) {
-                            val intent = Intent(this@MainActivity, RoutingActivity::class.java)
-                            startActivity(intent)
-                            finish()
-                        }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.isUserInValid.collectLatest {
+                    if (it) {
+                        val intent = Intent(this@MainActivity, RoutingActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
                 }
             }
@@ -113,8 +114,6 @@ class MainActivity : AppCompatActivity() {
             it.setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         }
 
-        initialization.setDatabase()
-        initialization.setCurrentUser()
         initDrawer()
 
         binding.appBarMain.contentMain.run {
@@ -174,6 +173,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             userInfo?.let { user ->
+                println("user $user")
                 user.photoUrl?.let {
                     headerImageView.setImageUrl(it)
                 }
@@ -207,9 +207,7 @@ class MainActivity : AppCompatActivity() {
                     val email =
                         binding.navView.getHeaderView(0)
                             .findViewById<TextView>(R.id.emailTextView)
-                    lifecycleScope.launch {
-                        viewModel.changePassword(email.text.toString())
-                    }
+                    viewModel.changePassword(email.text.toString())
                 }
                 R.id.nav_quit -> {
                     quitAlertDialog.show()
@@ -235,7 +233,7 @@ class MainActivity : AppCompatActivity() {
             Intent.EXTRA_TEXT, String.format(
                 "문의 시, 아래 내용을 함께 보내주시면 큰 도움이 됩니다.\n**********\n " +
                         " 사용자 ID: %s\n 앱 버전 : %s\n 기기 : %s\n 안드로이드 OS 버전 : %d(%s)\n ",
-                initialization.firebaseUser.uid,
+                AuthService.getCurrentUID(),
                 BuildConfig.VERSION_NAME,
                 Build.DEVICE,
                 Build.VERSION.SDK_INT,
