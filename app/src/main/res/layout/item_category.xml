@@ -6,7 +6,7 @@
 
     <TextView
         android:id="@+id/titleTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="수능"
@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/writerTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/downloadDateTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
@@ -38,7 +38,7 @@
 
     <TextView
         android:id="@+id/descriptionTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"

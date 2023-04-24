@@ -1,7 +1,6 @@
 package com.vocaengplus.vocaengplus.network
 
 import com.vocaengplus.vocaengplus.model.data.newData.UserData
-import com.vocaengplus.vocaengplus.model.data.newData.UserWordList
 import com.vocaengplus.vocaengplus.network.dto.PostDTO
 import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
@@ -51,10 +50,16 @@ interface DatabaseService {
         @Query("auth") token: String,
     ): Response<String>
 
+    @DELETE("/${DB_ROOT}/UserWordList/{uid}.json")
+    suspend fun deleteAllUserWordList(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+    ): Response<String>
+
     /**
      * WordList
      */
-    @GET("/${DB_ROOT}/WordList/{uid}/.json")
+    @GET("/${DB_ROOT}/WordList/{uid}.json")
     suspend fun getWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,

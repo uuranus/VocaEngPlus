@@ -32,7 +32,7 @@
 
     <TextView
         android:id="@+id/infoTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/title_body_margin"
@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/sourceTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="한국어"
@@ -72,7 +72,7 @@
 
     <TextView
         android:id="@+id/targetTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="영어"
@@ -83,7 +83,7 @@
 
     <EditText
         android:id="@+id/inputWordEditText"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/text_horizontal_margin"
@@ -105,7 +105,7 @@
 
     <TextView
         android:id="@+id/searchResultTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"

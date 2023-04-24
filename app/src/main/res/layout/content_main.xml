@@ -1,289 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:clipToPadding="false"
+    android:padding="@dimen/activity_horizontal_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_main">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuidLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuidLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/thirdGuidLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/middleGuidLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/wordTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/middleGuidLine"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:numberText="1"
+        app:titleText="단어장" />
+
+    <ImageView
+        android:id="@+id/wordImageView"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon1"
+        app:layout_constraintBottom_toBottomOf="@id/firstGuidLine"
+        app:layout_constraintEnd_toEndOf="@id/wordTitleView"
+        app:layout_constraintStart_toStartOf="@id/wordTitleView"
+        app:layout_constraintTop_toBottomOf="@id/wordTitleView" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/testTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/middleGuidLine"
+        app:layout_constraintTop_toTopOf="@id/wordTitleView"
+        app:numberText="2"
+        app:titleText="테스트" />
 
-            <!--            <ImageView-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="0dp"-->
-            <!--                android:layout_gravity="top|center_horizontal"-->
-            <!--                android:layout_weight="0.4"-->
-            <!--                android:adjustViewBounds="true"-->
-            <!--                android:scaleType="fitXY"-->
-            <!--                android:src="@drawable/title1" />-->
-
-            <com.vocaengplus.vocaengplus.view.MainTitleView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:padding="5dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:clipToPadding="false"
-                app:numberText="1"
-                app:titleText="단어장" />
-
-            <ImageView
-                android:id="@+id/wordbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title2" />
-
-            <ImageView
-                android:id="@+id/testbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon2" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/testImageView"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon2"
+        app:layout_constraintBottom_toBottomOf="@id/firstGuidLine"
+        app:layout_constraintEnd_toEndOf="@id/testTitleView"
+        app:layout_constraintStart_toStartOf="@id/testTitleView"
+        app:layout_constraintTop_toBottomOf="@id/testTitleView" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/reviewTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@id/middleGuidLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/firstGuidLine"
+        app:numberText="3"
+        app:titleText="오답노트" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title3" />
-
-            <ImageView
-                android:id="@+id/reviewbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon3" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title4" />
-
-            <ImageView
-                android:id="@+id/mywordbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon4" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/reviewImageView"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon3"
+        app:layout_constraintBottom_toBottomOf="@id/secondGuidLine"
+        app:layout_constraintEnd_toEndOf="@id/reviewTitleView"
+        app:layout_constraintStart_toStartOf="@id/reviewTitleView"
+        app:layout_constraintTop_toBottomOf="@id/reviewTitleView" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/myWordTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/middleGuidLine"
+        app:layout_constraintTop_toTopOf="@id/reviewTitleView"
+        app:numberText="4"
+        app:titleText="즐겨찾기" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title5" />
-
-            <ImageView
-                android:id="@+id/naverbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon5" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title6" />
-
-            <ImageView
-                android:id="@+id/statisticsbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:src="@drawable/icon6" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/myWordImageView"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon4"
+        app:layout_constraintBottom_toBottomOf="@id/secondGuidLine"
+        app:layout_constraintEnd_toEndOf="@id/myWordTitleView"
+        app:layout_constraintStart_toStartOf="@id/myWordTitleView"
+        app:layout_constraintTop_toBottomOf="@id/myWordTitleView" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/searchTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@id/middleGuidLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/secondGuidLine"
+        app:numberText="5"
+        app:titleText="검색" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title7" />
+    <ImageView
+        android:id="@+id/searchImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon5"
+        app:layout_constraintBottom_toBottomOf="@id/thirdGuidLine"
+        app:layout_constraintEnd_toEndOf="@id/searchTitleView"
+        app:layout_constraintStart_toStartOf="@id/searchTitleView"
+        app:layout_constraintTop_toBottomOf="@id/searchTitleView" />
 
-            <ImageView
-                android:id="@+id/communitybtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon7" />
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/statisticsTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/middleGuidLine"
+        app:layout_constraintTop_toTopOf="@id/searchTitleView"
+        app:numberText="6"
+        app:titleText="통계" />
 
-        </LinearLayout>
+    <ImageView
+        android:id="@+id/statisticsImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/icon6"
+        app:layout_constraintBottom_toBottomOf="@id/thirdGuidLine"
+        app:layout_constraintEnd_toEndOf="@id/statisticsTitleView"
+        app:layout_constraintStart_toStartOf="@id/statisticsTitleView"
+        app:layout_constraintTop_toBottomOf="@id/statisticsTitleView" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/communityTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="@id/middleGuidLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/thirdGuidLine"
+        app:numberText="7"
+        app:titleText="커뮤니티" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_weight="0.4"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/title8" />
+    <ImageView
+        android:id="@+id/communityImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/communityTitleView"
+        app:layout_constraintStart_toStartOf="@id/communityTitleView"
+        app:layout_constraintTop_toBottomOf="@id/communityTitleView" />
 
-            <ImageView
-                android:id="@+id/settingbtn"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:adjustViewBounds="true"
-                android:src="@drawable/icon8" />
+    <com.vocaengplus.vocaengplus.view.MainTitleView
+        android:id="@+id/settingTitleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/middleGuidLine"
+        app:layout_constraintTop_toTopOf="@id/communityTitleView"
+        app:numberText="8"
+        app:titleText="설정" />
 
+    <ImageView
+        android:id="@+id/settingImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/icon8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/settingTitleView"
+        app:layout_constraintStart_toStartOf="@id/settingTitleView"
+        app:layout_constraintTop_toBottomOf="@id/settingTitleView" />
 
-        </LinearLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

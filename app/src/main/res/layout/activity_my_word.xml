@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/wordTextView"
-        style="@style/TextAppearance.VocaEngplus.Body.Title"
+        style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="단어장"
@@ -42,7 +42,7 @@
 
     <TextView
         android:id="@+id/emptyRecyclerTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="단어장이 비어있습니다"

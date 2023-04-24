@@ -6,7 +6,6 @@ import com.vocaengplus.vocaengplus.model.data.newData.UserData
 import com.vocaengplus.vocaengplus.model.data.newData.toUserDataDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService
-import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
 import com.vocaengplus.vocaengplus.ui.util.WORDLIST
 import com.vocaengplus.vocaengplus.ui.util.makeDefaultWordList
 import javax.inject.Inject
@@ -58,8 +57,24 @@ class LoginRepository @Inject constructor(
         }
     }
 
+    suspend fun logOut(): Result<Boolean> {
+        return dataSource.logOut()
+    }
+
     suspend fun requestRegister(email: String, password: String): Result<UserAuth> {
         return dataSource.register(email, password)
+    }
+
+    suspend fun findPassword(email: String) {
+        dataSource.setNewPassword(email)
+    }
+
+    suspend fun quit(): Result<Boolean> {
+
+        val idToken = AuthService.getCurrentUserIdToken()
+        val uid = AuthService.getCurrentUID()
+
+        return dataSource.quit(uid, idToken)
     }
 
 }

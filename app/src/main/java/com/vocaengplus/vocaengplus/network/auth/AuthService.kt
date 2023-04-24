@@ -8,6 +8,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.tasks.asDeferred
 import kotlinx.coroutines.tasks.await
 import kotlin.random.Random
 
@@ -17,17 +18,19 @@ object AuthService {
     private val random = Random(System.currentTimeMillis())
     private val default = arrayOf("default1.png", "default2.png", "default3.png")
 
-     fun getCurrentUID(): String {
+    fun getCurrentUID(): String {
         println("currentUser ${firebaseAuth.currentUser?.uid}")
         return firebaseAuth.currentUser?.uid.orEmpty()
     }
 
     fun getCurrentUserInfo(): UserAuth? {
         return firebaseAuth.currentUser?.let {
+            val email = if (it.email.isNullOrEmpty()) "GUEST" else it.email ?: "GUEST"
+            val nickname = if (it.displayName.isNullOrEmpty()) "보카잉" else it.displayName ?: "보카잉"
             UserAuth(
                 it.uid,
-                it.email ?: "GUEST",
-                it.displayName ?: "익명",
+                email,
+                nickname,
                 it.photoUrl
             )
         }
@@ -44,11 +47,11 @@ object AuthService {
         } ?: return ""
     }
 
+    //login
     suspend fun login(email: String, password: String): Result<UserAuth> {
         var result = Result.success(UserAuth("", "", "", null))
         runBlocking {
             result = loginWithEmailAndPassword(email, password)
-            println("serviceeeee $result")
         }
 
         return result
@@ -61,12 +64,13 @@ object AuthService {
         loginWithCredential(credential, callback)
     }
 
-    fun logOut() {
-        firebaseAuth.signOut()
-    }
-
-    fun quit() {
-        firebaseAuth.currentUser?.delete()
+    suspend fun logOut(): Result<Boolean> {
+        return try {
+            firebaseAuth.signOut() //여기서 await 못하면 예외처리도 안 될텐데
+            Result.success(true)
+        } catch (e: Exception) {
+            Result.failure(Exception())
+        }
     }
 
     private suspend fun loginWithEmailAndPassword(
@@ -124,7 +128,7 @@ object AuthService {
         }
     }
 
-
+    //register
     suspend fun register(email: String, password: String): Result<UserAuth> {
         return try {
             val authResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
@@ -135,6 +139,21 @@ object AuthService {
 
         } catch (e: FirebaseException) {
             Result.failure(Exception("로그인에 실패하였습니다"))
+        }
+    }
+
+    suspend fun setNewPassword(email: String) {
+        firebaseAuth
+            .sendPasswordResetEmail(email).await()
+    }
+
+    suspend fun quit(): Result<Boolean> {
+        return try {
+            firebaseAuth.currentUser?.delete()?.await()
+            Result.success(true)
+        } catch (e: java.lang.Exception) {
+            //TODO 로그인한 지 너무 오래됐거나 유효하지 않은 사용자 로그인하는 것 오류 처리해줘야함
+            Result.failure(Exception())
         }
     }
 }

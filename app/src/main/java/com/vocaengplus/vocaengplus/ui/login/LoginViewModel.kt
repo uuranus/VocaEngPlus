@@ -35,6 +35,9 @@ class LoginViewModel @Inject constructor(
     private val _snackBarMessage = MutableStateFlow("")
     val snackBarMessage: StateFlow<String> get() = _snackBarMessage
 
+    private val _isUserInValid = MutableStateFlow(false)
+    val isUserInValid: StateFlow<Boolean> get() = _isUserInValid
+
     fun onIdChanged() {
 
         val idValue = id.value
@@ -106,6 +109,8 @@ class LoginViewModel @Inject constructor(
                     println("newDataSucceed $newDataSucceed")
                     println("!!!!!!!! ${_isLoginSucceed.value}")
 
+                    _isLoginSucceed.value = true
+                    _snackBarMessage.value = "환영합니다"
                 } else {
                     _isLoginSucceed.value = false
                     _snackBarMessage.value = "게스트 로그인에 실패했습니다"
@@ -117,8 +122,39 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun findPassword() {
+    fun changePassword(email: String) {
+        viewModelScope.launch {
+             repository.findPassword(email)
+            _snackBarMessage.value = "비밀번호 재설정 이메일을 보냈습니다"
+        }
+    }
 
+    fun logOut(){
+        viewModelScope.launch {
+            val result = repository.logOut()
+            if(result.isSuccess){
+                _snackBarMessage.value = "로그아웃되었습니다"
+                _isUserInValid.value = true
+            }
+            else{
+                _snackBarMessage.value = "로그아웃에 실패했습니다"
+                _isUserInValid.value = false
+            }
+        }
+    }
+
+    fun quit(){
+        viewModelScope.launch {
+            val result = repository.quit()
+            if(result.isSuccess){
+                _snackBarMessage.value = "다음에 또 만나요!"
+                _isUserInValid.value = true
+            }
+            else{
+                _snackBarMessage.value = "계정 삭제에 실패했습니다."
+                _isUserInValid.value = false
+            }
+        }
     }
 
 }

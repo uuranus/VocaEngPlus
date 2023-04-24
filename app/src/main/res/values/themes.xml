@@ -24,12 +24,12 @@
         <item name="android:windowFullscreen">false</item>
     </style>
 
-    <style name="Theme.VocaEngPlus.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.VocaEngPlus.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="ThemeOverlay.VocaEngPlus.AppBar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
 
     <style name="Theme.VocaEngPlus.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/colorPrimary</item>
+<!--        <item name="windowSplashScreenBackground">@color/colorPrimary</item>-->
         <item name="postSplashScreenTheme">@style/Theme.VocaEngPlus</item>
     </style>
 

@@ -8,7 +8,7 @@
 
     <EditText
         android:id="@+id/searchCategoryEditText"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/text_horizontal_margin"

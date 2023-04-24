@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -29,7 +29,7 @@
                 android:text="좋아요 한 수" />
 
             <TextView
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -38,7 +38,7 @@
                 android:text="좋아요 받은 수" />
 
             <TextView
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -47,7 +47,7 @@
                 android:text="올린 단어장 수" />
 
             <TextView
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -62,7 +62,7 @@
 
             <TextView
                 android:id="@+id/communitymylike"
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_horizontal_margin"
@@ -72,7 +72,7 @@
 
             <TextView
                 android:id="@+id/communitymyliked"
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -83,7 +83,7 @@
 
             <TextView
                 android:id="@+id/communitymyupload"
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -94,7 +94,7 @@
 
             <TextView
                 android:id="@+id/communitymydownloaded"
-                style="@style/TextAppearance.VocaEngplus.Body.Small"
+                style="@style/TextAppearance.VocaEngPlus.Body.Small"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/text_horizontal_margin"
@@ -109,7 +109,7 @@
 
     <TextView
         android:id="@+id/emptyRecyclerTextView"
-        style="@style/TextAppearance.VocaEngplus.Body"
+        style="@style/TextAppearance.VocaEngPlus.Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="올릴 단어장이 없습니다"

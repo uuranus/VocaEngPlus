@@ -13,19 +13,19 @@
         <item name="android:fontFamily">@font/notosanskr_bold</item>
     </style>
 
-    <style name="TextAppearance.VocaEngplus.Title" parent="TextAppearance.VocaEngPlus.Bold">
+    <style name="TextAppearance.VocaEngPlus.Title" parent="TextAppearance.VocaEngPlus.Bold">
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="TextAppearance.VocaEngplus.Body" parent="TextAppearance.VocaEngPlus">
+    <style name="TextAppearance.VocaEngPlus.Body" parent="TextAppearance.VocaEngPlus">
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextAppearance.VocaEngplus.Body.Title" parent="TextAppearance.VocaEngPlus.Bold">
+    <style name="TextAppearance.VocaEngPlus.Body.Title" parent="TextAppearance.VocaEngPlus.Bold">
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="TextAppearance.VocaEngplus.Body.Small">
+    <style name="TextAppearance.VocaEngPlus.Body.Small">
         <item name="android:textSize">12sp</item>
     </style>
 

@@ -24,7 +24,7 @@
 
             <TextView
                 android:id="@+id/engWordTextView"
-                style="@style/TextAppearance.VocaEngplus.Body"
+                style="@style/TextAppearance.VocaEngPlus.Body"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{item.word}"
@@ -51,7 +51,7 @@
 
         <TextView
             android:id="@+id/meanWordTextView"
-            style="@style/TextAppearance.VocaEngplus.Body"
+            style="@style/TextAppearance.VocaEngPlus.Body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{item.meaning}"
