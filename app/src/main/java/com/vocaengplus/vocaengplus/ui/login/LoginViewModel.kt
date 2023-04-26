@@ -66,7 +66,7 @@ class LoginViewModel @Inject constructor(
 
         if (Validation.isValidatePassword(passwordValue).not()) {
             _isPasswordValid.value = false
-            _passwordErrorText.value = "비밀번호는 영문자,숫자,특수문자(!@#\$%^*/ 중에서) 각각 1개 이상 포함 8~20자이어야 합니다"
+            _passwordErrorText.value = "비밀번호는 6자리 이상이어야 합니다."
         } else {
             _isPasswordValid.value = true
             _passwordErrorText.value = ""

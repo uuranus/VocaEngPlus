@@ -14,10 +14,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
-import com.vocaengplus.vocaengplus.*
+import com.vocaengplus.vocaengplus.BuildConfig
+import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.adapter.bindingAdapter.setImageUrl
 import com.vocaengplus.vocaengplus.databinding.ActivityMainBinding
-import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.ui.community.CommunityActivity
 import com.vocaengplus.vocaengplus.ui.myWord.MyWordActivity

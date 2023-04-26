@@ -23,7 +23,7 @@ interface DatabaseService {
     suspend fun putUserData(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-        @Body data: UserDataDTO
+        @Body data: UserDataDTO,
     ): Response<UserDataDTO>
 
     @DELETE("/${DB_ROOT}/UserData/{uid}.json")
@@ -40,7 +40,7 @@ interface DatabaseService {
         @Path("uid") uid: String,
         @Path("wordListId") wordListId: String,
         @Query("auth") token: String,
-        @Body data: Boolean
+        @Body data: Boolean,
     ): Response<Boolean>
 
     @DELETE("/${DB_ROOT}/UserWordList/{uid}/{wordListId}.json")
@@ -59,24 +59,33 @@ interface DatabaseService {
     /**
      * WordList
      */
-    @GET("/${DB_ROOT}/WordList/{uid}.json")
+    @GET("/${DB_ROOT}/WordList/{uid}/{wordListUid}.json")
     suspend fun getWordList(
         @Path("uid") uid: String,
+        @Path("wordListUid") wordListUid: String,
         @Query("auth") token: String,
-    ): Response<List<WordListDTO>>
+    ): Response<WordListDTO>
+
+    @PUT("/${DB_ROOT}/WordList/{uid}/{wordListUid}.json")
+    suspend fun putWordList(
+        @Path("uid") uid: String,
+        @Path("wordListUid") wordListUid: String,
+        @Query("auth") token: String,
+        @Body data: WordListDTO,
+    ): Response<WordListDTO>
 
     @POST("/${DB_ROOT}/WordList/{uid}.json")
     suspend fun postWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-        @Body data: WordListDTO
+        @Body data: WordListDTO,
     ): Response<PostDTO>
 
     @DELETE("/${DB_ROOT}/WordList/{uid}.json")
     suspend fun deleteWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-        @Body data: WordListDTO
+        @Body data: WordListDTO,
     ): Response<String>
 
     /**
