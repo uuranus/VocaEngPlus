@@ -45,6 +45,7 @@
             android:layout_marginStart="@dimen/text_horizontal_margin"
             android:ems="10"
             android:inputType="text"
+            android:text="@={vm.newWordListName}"
             app:layout_constraintBottom_toBottomOf="@id/categoryNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/categoryNameTextView"
@@ -87,6 +88,7 @@
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
             android:padding="0dp"
+            android:text="@={vm.newWordListDescription}"
             app:layout_constraintBottom_toBottomOf="@id/descriptionTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/descriptionTextView"
@@ -116,6 +118,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wordListRecyclerView"
+            submitData="@{vm.newWordLists}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/text_vertical_margin"

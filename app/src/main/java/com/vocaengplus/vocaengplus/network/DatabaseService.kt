@@ -68,7 +68,7 @@ interface DatabaseService {
     suspend fun getWordLists(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-    ): Response<Any>
+    ): Response<List<WordListDTO>>
 
     @GET("/WordList/{uid}/{wordListUid}.json")
     suspend fun getWordList(

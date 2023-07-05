@@ -7,12 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
-import com.vocaengplus.vocaengplus.adapter.SettingAdapter
+import com.vocaengplus.vocaengplus.adapter.SettingListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivitySettingBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.ui.util.Validation
@@ -34,7 +33,7 @@ class SettingActivity : AppCompatActivity() {
 
     lateinit var date: String
 
-    lateinit var settingAdapter: SettingAdapter
+    lateinit var settingAdapter: SettingListAdapter
     private val settingViewModel: SettingViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +50,7 @@ class SettingActivity : AppCompatActivity() {
         validation = Validation
         date = initialization.getdate()
 
-        settingAdapter = SettingAdapter()
+        settingAdapter = SettingListAdapter()
 
 //        initRecyclerView()
 

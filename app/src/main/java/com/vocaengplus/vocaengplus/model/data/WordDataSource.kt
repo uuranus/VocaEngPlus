@@ -49,13 +49,10 @@ class WordDataSource @Inject constructor(
         uid: String,
         idToken: String,
     ): Result<List<WordList>> {
-        println("datasource")
         val networkResponse = databaseService.getWordLists(uid, idToken)
-        println("newtorkresponse $networkResponse")
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                Result.success(emptyList())
-                //                Result.success(it.map{it2 -> it2.toWordList()})
+                Result.success(it.map { it2 -> it2.toWordList() })
             } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())

@@ -41,8 +41,6 @@ class WordRepository @Inject constructor(
     }
 
     suspend fun getWordLists(): Result<List<WordList>> {
-
-        println("repository")
         val idToken = AuthService.getCurrentUserIdToken()
         val uid = AuthService.getCurrentUID()
 

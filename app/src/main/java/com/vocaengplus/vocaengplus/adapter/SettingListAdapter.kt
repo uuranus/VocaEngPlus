@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.databinding.ItemCategoryBinding
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
 
-class SettingAdapter : ListAdapter<WordList, SettingAdapter.ViewHolder>(diffUtil) {
+class SettingListAdapter : ListAdapter<WordList, SettingListAdapter.ViewHolder>(diffUtil) {
     interface OnItemClickListener {
         fun OnDeleteClick(holder: ViewHolder, position: Int)
         fun OnEditClick(holder: ViewHolder, position: Int)
