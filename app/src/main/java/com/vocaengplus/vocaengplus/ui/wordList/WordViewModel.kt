@@ -38,7 +38,7 @@ class WordViewModel @Inject constructor(
         )
     )
 
-    private val _selectedWordListIndex = MutableStateFlow(-1)
+    private val _selectedWordListIndex = MutableStateFlow(0)
     val selectedWordListIndex: StateFlow<Int> get() = _selectedWordListIndex
 
     private val _wordListNames: MutableStateFlow<List<String>> =
@@ -68,10 +68,8 @@ class WordViewModel @Inject constructor(
 
     private suspend fun getWordListNames() {
         val names = repository.getWordListNames()
-        println("names response ${names.getOrNull()}")
         if (names.isSuccess) {
             names.getOrNull()?.let {
-                println("names ${it.joinToString()}")
                 _wordListNames.value = it
             }
         } else {
@@ -93,7 +91,7 @@ class WordViewModel @Inject constructor(
     }
 
     private fun getWordListUidByIndex(): String {
-        if (_selectedWordListIndex.value == -1) return ""
+        if (_wordListNames.value.isEmpty()) return ""
         _selectedWordListIndex.value =
             _selectedWordListIndex.value.coerceAtMost(_wordListNames.value.size)
         return _wordListNames.value[_selectedWordListIndex.value]
