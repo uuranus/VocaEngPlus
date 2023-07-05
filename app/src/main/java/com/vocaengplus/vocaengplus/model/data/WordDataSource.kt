@@ -1,7 +1,9 @@
 package com.vocaengplus.vocaengplus.model.data
 
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.DatabaseService
+import com.vocaengplus.vocaengplus.network.dto.WordListDTO
 import com.vocaengplus.vocaengplus.network.dto.toWordList
 import javax.inject.Inject
 
@@ -52,7 +54,23 @@ class WordDataSource @Inject constructor(
         val networkResponse = databaseService.getWordLists(uid, idToken)
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                Result.success(it.map { it2 -> it2.toWordList() })
+                Result.success(it.values.map { it2 -> it2.toWordList() })
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    suspend fun addNewWordList(
+        newWordList: WordList,
+        uid: String,
+        idToken: String,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.postWordList(uid, idToken, newWordList.toWordListDto())
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(true)
             } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())

@@ -43,8 +43,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/text_horizontal_margin"
-            android:ems="10"
             android:inputType="text"
+            android:maxLines="1"
             android:text="@={vm.newWordListName}"
             app:layout_constraintBottom_toBottomOf="@id/categoryNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,9 +57,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_vertical_margin"
-            android:text="작성자  "
+            android:text="작성자"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/categoryNameEditText" />
+            app:layout_constraintTop_toBottomOf="@id/categoryNameEditText"
+            tools:text="작성자 " />
+
+        <TextView
+            android:id="@+id/writerDataTextView"
+            style="@style/TextAppearance.VocaEngPlus.Body.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{vm.writeName}"
+            app:layout_constraintBottom_toBottomOf="@id/writerTextView"
+            app:layout_constraintEnd_toEndOf="@id/categoryNameEditText"
+            app:layout_constraintStart_toStartOf="@id/categoryNameEditText"
+            app:layout_constraintTop_toTopOf="@id/writerTextView"
+            tools:text="보카잉" />
 
         <TextView
             android:id="@+id/addDateTextView"
@@ -67,9 +80,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_vertical_margin"
-            android:text="추가 날짜  "
+            android:text="추가 날짜"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/writerTextView" />
+
+        <TextView
+            android:id="@+id/addDateDataTextView"
+            style="@style/TextAppearance.VocaEngPlus.Body.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{vm.addDate}"
+            app:layout_constraintBottom_toBottomOf="@id/addDateTextView"
+            app:layout_constraintEnd_toEndOf="@id/categoryNameEditText"
+            app:layout_constraintStart_toStartOf="@id/categoryNameEditText"
+            app:layout_constraintTop_toTopOf="@id/addDateTextView"
+            tools:text="2023-07-01" />
 
         <TextView
             android:id="@+id/descriptionTextView"
@@ -87,11 +112,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:padding="0dp"
             android:text="@={vm.newWordListDescription}"
             app:layout_constraintBottom_toBottomOf="@id/descriptionTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/descriptionTextView"
+            app:layout_constraintEnd_toEndOf="@id/categoryNameEditText"
+            app:layout_constraintStart_toStartOf="@id/categoryNameEditText"
             app:layout_constraintTop_toTopOf="@id/descriptionTextView" />
 
         <TextView
@@ -136,11 +160,11 @@
             android:layout_height="wrap_content"
             android:text="취소"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/okButton"
+            app:layout_constraintEnd_toStartOf="@id/addWordListButton"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/okButton"
+            android:id="@+id/addWordListButton"
             style="@style/Theme.VocaEngPlus.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

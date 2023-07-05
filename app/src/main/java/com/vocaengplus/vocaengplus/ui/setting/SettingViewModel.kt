@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.repository.UserRepository
 import com.vocaengplus.vocaengplus.model.data.repository.WordRepository
 import com.vocaengplus.vocaengplus.ui.util.Validation
+import com.vocaengplus.vocaengplus.ui.util.getToday
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingViewModel @Inject constructor(
     private val repository: WordRepository,
+    private val userRepository: UserRepository,
 ) : ViewModel() {
 
     private val _snackBarMessage = MutableStateFlow<String>("")
@@ -25,10 +28,27 @@ class SettingViewModel @Inject constructor(
 
     val newWordListName = MutableStateFlow("")
 
+    private val _writerName = MutableStateFlow("")
+    val writeName: StateFlow<String> get() = _writerName
+
+    private val _addDate = MutableStateFlow("")
+    val addDate: StateFlow<String> get() = _addDate
+
     val newWordListDescription = MutableStateFlow("")
 
     private val _newWordLists = MutableStateFlow<MutableList<Word>>(mutableListOf())
     val newWordLists: StateFlow<MutableList<Word>> get() = _newWordLists
+
+    private val _isSavedSuccess = MutableStateFlow(false)
+    val isSavedSuccess: StateFlow<Boolean> get() = _isSavedSuccess
+
+    fun getNewCategoryWriterAndDate() {
+        viewModelScope.launch {
+            val name = userRepository.getUserName()
+            _writerName.value = name
+        }
+        _addDate.value = getToday()
+    }
 
     fun getAllWordLists() {
         viewModelScope.launch {
@@ -57,6 +77,10 @@ class SettingViewModel @Inject constructor(
         }
     }
 
+    fun removeNewWord(position: Int) {
+        _newWordLists.value.removeAt(position)
+    }
+
     fun addNewWordList() {
         if (newWordListDescription.value.isEmpty()) {
             _snackBarMessage.value = "단어장 이름을 입력해주세요"
@@ -80,7 +104,12 @@ class SettingViewModel @Inject constructor(
                 newWordListDescription.value,
                 _newWordLists.value.map { it.copy(wordListName = newWordListName.value) }
             )
-//            repository.addNewWordList()
+            val addNewWordListResponse = repository.addNewWordList(newWordList)
+            if (addNewWordListResponse.isSuccess) {
+                _isSavedSuccess.value = true
+            } else {
+                _snackBarMessage.value = "단어장을 추가하는데 실패했습니다"
+            }
         }
     }
 }

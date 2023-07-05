@@ -46,4 +46,19 @@ class WordRepository @Inject constructor(
 
         return dataSource.getWordLists(uid, idToken)
     }
+
+    suspend fun addNewWordList(newWordList: WordList): Result<Boolean> {
+        val idToken = AuthService.getCurrentUserIdToken()
+        val uid = AuthService.getCurrentUID()
+        val userName = AuthService.getCurrentUserInfo()?.name ?: ""
+
+        return dataSource.addNewWordList(
+            newWordList.copy(
+                wordListWriter = userName,
+                wordListWriterToken = uid
+            ),
+            uid,
+            idToken
+        )
+    }
 }
