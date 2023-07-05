@@ -1,72 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:backgroundTint="@color/white"
-    android:padding="@dimen/activity_horizontal_margin"
-    tools:context=".ui.wordList.WordActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageButton
-        android:id="@+id/helpButton"
-        android:layout_width="@dimen/icon_button_size"
-        android:layout_height="@dimen/icon_button_size"
-        android:layout_marginEnd="@dimen/button_horizontal_margin"
-        android:adjustViewBounds="true"
-        android:background="@drawable/gradation"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_question"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@id/addVocaButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white"
-        android:contentDescription="단어장 도움말 버튼" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.vocaengplus.vocaengplus.ui.wordList.WordViewModel" />
+    </data>
 
-    <ImageButton
-        android:id="@+id/addVocaButton"
-        android:layout_width="@dimen/icon_button_size"
-        android:layout_height="@dimen/icon_button_size"
-        android:adjustViewBounds="true"
-        android:background="@drawable/gradation"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_plus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white"
-        android:contentDescription="단어 추가하기 버튼" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
+        android:padding="@dimen/activity_horizontal_margin"
+        tools:context=".ui.wordList.WordActivity">
 
-    <TextView
-        android:id="@+id/wordTextView"
-        style="@style/TextAppearance.VocaEngPlus.Body.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="단어장"
-        app:layout_constraintBottom_toBottomOf="@id/helpButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/helpButton" />
+        <ImageButton
+            android:id="@+id/helpButton"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:layout_marginEnd="@dimen/button_horizontal_margin"
+            android:adjustViewBounds="true"
+            android:background="@drawable/gradation"
+            android:contentDescription="단어장 도움말 버튼"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_question"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/addVocaButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
-    <Spinner
-        android:id="@+id/wordSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/text_horizontal_margin"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="@id/helpButton"
-        app:layout_constraintEnd_toStartOf="@id/helpButton"
-        app:layout_constraintStart_toEndOf="@id/wordTextView"
-        app:layout_constraintTop_toTopOf="@id/helpButton" />
+        <ImageButton
+            android:id="@+id/addVocaButton"
+            android:layout_width="@dimen/icon_button_size"
+            android:layout_height="@dimen/icon_button_size"
+            android:adjustViewBounds="true"
+            android:background="@drawable/gradation"
+            android:contentDescription="단어 추가하기 버튼"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_plus"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/wordRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/title_body_margin"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/helpButton"
-        tools:listitem="@layout/item_word" />
+        <TextView
+            android:id="@+id/wordTextView"
+            style="@style/TextAppearance.VocaEngPlus.Body.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="단어장"
+            app:layout_constraintBottom_toBottomOf="@id/helpButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/helpButton" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Spinner
+            android:id="@+id/wordSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/text_horizontal_margin"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="@id/helpButton"
+            app:layout_constraintEnd_toStartOf="@id/helpButton"
+            app:layout_constraintStart_toEndOf="@id/wordTextView"
+            app:layout_constraintTop_toTopOf="@id/helpButton" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wordRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/title_body_margin"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/helpButton"
+            tools:listitem="@layout/item_word" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

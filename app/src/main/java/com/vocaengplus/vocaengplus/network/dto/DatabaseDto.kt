@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
 
-data class UserDataDTO(
+data class UserDTO(
     @SerializedName("nickname") val nickname: String,
     @SerializedName("uid") val uid: String,
     @SerializedName("lastLogin") val lastLogin: Long,

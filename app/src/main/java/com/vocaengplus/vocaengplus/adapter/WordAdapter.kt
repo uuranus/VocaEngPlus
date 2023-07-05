@@ -8,15 +8,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.databinding.ItemWordBinding
 import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.model.data.newData.Word
 import javax.inject.Inject
 
 interface WordAdapterListener {
-    fun onStartClick(voca: Voca)
-    fun onItemLongClick(voca: Voca)
+    fun onStartClick(word: Word)
+    fun onItemLongClick(word: Word)
 }
 
 class WordAdapter @Inject constructor(private val listener: WordAdapterListener) :
-    ListAdapter<Voca, WordAdapter.WordViewHolder>(diffUtil) {
+    ListAdapter<Word, WordAdapter.WordViewHolder>(diffUtil) {
 
     inner class WordViewHolder(val binding: ItemWordBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -35,8 +36,8 @@ class WordAdapter @Inject constructor(private val listener: WordAdapterListener)
             }
         }
 
-        fun bind(voca: Voca) {
-            binding.item = voca
+        fun bind(word: Word) {
+            binding.item = word
         }
     }
 
@@ -50,12 +51,12 @@ class WordAdapter @Inject constructor(private val listener: WordAdapterListener)
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<Voca>() {
-            override fun areItemsTheSame(oldItem: Voca, newItem: Voca): Boolean {
+        val diffUtil = object : DiffUtil.ItemCallback<Word>() {
+            override fun areItemsTheSame(oldItem: Word, newItem: Word): Boolean {
                 return oldItem.word == newItem.word
             }
 
-            override fun areContentsTheSame(oldItem: Voca, newItem: Voca): Boolean {
+            override fun areContentsTheSame(oldItem: Word, newItem: Word): Boolean {
                 return oldItem == newItem
             }
 

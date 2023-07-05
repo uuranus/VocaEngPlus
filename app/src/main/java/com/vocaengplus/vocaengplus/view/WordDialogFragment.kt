@@ -7,6 +7,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.vocaengplus.vocaengplus.databinding.ItemWordBinding
 import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.model.data.newData.Word
 
 interface WordDialogListener {
     fun onDialogPositiveClick(dialog: WordDialogFragment, voca: Voca)
@@ -33,7 +34,7 @@ class WordDialogFragment(private val listener: WordDialogListener) : DialogFragm
         return super.onCreateDialog(savedInstanceState)
     }
 
-    fun showWordDialog(manager: FragmentManager, tag: String) {
+    fun showDialog(manager: FragmentManager, tag: String) {
         wordItemBinding.run {
             engWordTextView.text = ""
             meanWordTextView.text = ""
@@ -41,8 +42,8 @@ class WordDialogFragment(private val listener: WordDialogListener) : DialogFragm
         show(manager, tag)
     }
 
-    fun showWordDialog(voca: Voca, manager: FragmentManager, tag: String) {
-        wordItemBinding.item = voca
+    fun showDialog(word: Word, manager: FragmentManager, tag: String) {
+        wordItemBinding.item = word
         show(manager, tag)
     }
 }

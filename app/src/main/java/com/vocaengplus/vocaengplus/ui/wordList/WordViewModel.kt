@@ -3,7 +3,10 @@ package com.vocaengplus.vocaengplus.ui.wordList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.model.data.newData.Word
+import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import com.vocaengplus.vocaengplus.model.data.repository.WordRepository
+import com.vocaengplus.vocaengplus.network.dto.WordListDTO
 import com.vocaengplus.vocaengplus.ui.util.Validation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,11 +19,85 @@ class WordViewModel @Inject constructor(
     private val repository: WordRepository,
 ) : ViewModel() {
 
-    private val _wordList: MutableStateFlow<List<Voca>> = MutableStateFlow(emptyList())
-    val wordList: StateFlow<List<Voca>> get() = _wordList
+    private val _wordsData = mutableListOf<WordList>(
+        WordList(
+            "토익 영단어", "", "uid", System.currentTimeMillis(),
+            "토익 필수 영단어",
+            listOf(
+                Word("agreement", "계약서", false, "토익 영단어"),
+                Word("beverage", "음료", false, "토익 영단어"),
+                Word("carve", "조각하다", false, "토익 영단어"),
+                Word("clear off", "치우다", false, "토익 영단어"),
+                Word("gather", "모이다", false, "토익 영단어"),
+                Word("lift", "들다", false, "토익 영단어"),
+                Word("neighborhood", "동네", false, "토익 영단어"),
+                Word("or so", "정도,쯤", false, "토익 영단어"),
+                Word("remove", "벗다", false, "토익 영단어"),
+                Word("shine", "비추다", false, "토익 영단어"),
+            )
+        )
+    )
+
+    private val _selectedWordListIndex = MutableStateFlow(-1)
+    val selectedWordListIndex: StateFlow<Int> get() = _selectedWordListIndex
+
+    private val _wordListNames: MutableStateFlow<List<String>> =
+        MutableStateFlow(emptyList())
+    val wordListNames: StateFlow<List<String>> get() = _wordListNames
+
+    private val _currentWordList: MutableStateFlow<WordList> =
+        MutableStateFlow(WordList())
+    val currentWordList: StateFlow<WordList> get() = _currentWordList
 
     private val _snackBarMessage = MutableStateFlow("")
     val snackBarMessage: StateFlow<String> get() = _snackBarMessage
+
+    fun selectWordList(index: Int) {
+        viewModelScope.launch {
+            _selectedWordListIndex.value = index
+            getWordListNames()
+        }
+    }
+
+    fun getData() {
+        viewModelScope.launch {
+            getWordListNames()
+            getWordList()
+        }
+    }
+
+    private suspend fun getWordListNames() {
+        val names = repository.getWordListNames()
+        println("names response ${names.getOrNull()}")
+        if (names.isSuccess) {
+            names.getOrNull()?.let {
+                println("names ${it.joinToString()}")
+                _wordListNames.value = it
+            }
+        } else {
+            _snackBarMessage.value = "단어를 불러오는데 실패했습니다"
+        }
+    }
+
+    private suspend fun getWordList() {
+        val wordListUid = getWordListUidByIndex()
+        if (wordListUid.isEmpty()) return
+        val currentWordList = repository.getWordList(wordListUid)
+        if (currentWordList.isSuccess) {
+            currentWordList.getOrNull()?.let {
+                _currentWordList.value = it
+            }
+        } else {
+            _snackBarMessage.value = "단어장이 비었습니다"
+        }
+    }
+
+    private fun getWordListUidByIndex(): String {
+        if (_selectedWordListIndex.value == -1) return ""
+        _selectedWordListIndex.value =
+            _selectedWordListIndex.value.coerceAtMost(_wordListNames.value.size)
+        return _wordListNames.value[_selectedWordListIndex.value]
+    }
 
     fun addNewVoca(word: String, meaning: String) {
         if (word.isEmpty() || meaning.isEmpty()) {
@@ -42,7 +119,7 @@ class WordViewModel @Inject constructor(
         }
     }
 
-    fun setMyWord(voca: Voca, isSelected: Int) {
+    fun setMyWord(word: Word, isSelected: Boolean) {
 //        repository.setMyWord(voca.copy(checked = isSelected))
     }
 
@@ -59,14 +136,6 @@ class WordViewModel @Inject constructor(
             viewModelScope.launch {
                 repository.saveEditedVoca(voca)
 //                    repository.setLog()
-            }
-        }
-
-        fun getData() {
-
-            viewModelScope.launch {
-                val wordListUid = ""
-                repository.getWordList(wordListUid)
             }
         }
     }

@@ -24,11 +24,18 @@ class WordRepository @Inject constructor(
         dataSource.saveEditedVoca(voca)
     }
 
+    suspend fun getWordListNames():Result<List<String>> {
+        val idToken = AuthService.getCurrentUserIdToken()
+        val uid = AuthService.getCurrentUID()
+
+        return dataSource.getWordListNames(uid, idToken)
+    }
+
     suspend fun getWordList(wordListUid: String): Result<WordList> {
         val idToken = AuthService.getCurrentUserIdToken()
         val uid = AuthService.getCurrentUID()
 
-        val result = dataSource.getWordListData(wordListUid, uid, idToken)
+        val result = dataSource.getWordList(wordListUid, uid, idToken)
         return if (result.isSuccess) {
             result.getOrNull()?.let {
                 Result.success(it.toWordList())

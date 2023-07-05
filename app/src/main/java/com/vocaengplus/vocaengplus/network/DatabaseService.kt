@@ -1,10 +1,9 @@
 package com.vocaengplus.vocaengplus.network
 
-import com.vocaengplus.vocaengplus.model.data.newData.UserData
+import com.vocaengplus.vocaengplus.model.data.newData.User
 import com.vocaengplus.vocaengplus.network.dto.PostDTO
-import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
+import com.vocaengplus.vocaengplus.network.dto.UserDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
-import com.vocaengplus.vocaengplus.ui.util.DB_ROOT
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -13,20 +12,20 @@ interface DatabaseService {
     /**
      * UserData
      */
-    @GET("/${DB_ROOT}/UserData/{uid}.json")
+    @GET("/UserData/{uid}.json")
     suspend fun getUserData(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-    ): Response<UserData>
+    ): Response<User>
 
-    @PUT("/${DB_ROOT}/UserData/{uid}.json")
+    @PUT("/UserData/{uid}.json")
     suspend fun putUserData(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-        @Body data: UserDataDTO,
-    ): Response<UserDataDTO>
+        @Body data: UserDTO,
+    ): Response<UserDTO>
 
-    @DELETE("/${DB_ROOT}/UserData/{uid}.json")
+    @DELETE("/UserData/{uid}.json")
     suspend fun deleteUserData(
         @Path("uid") uid: String,
         @Query("auth") token: String,
@@ -35,7 +34,13 @@ interface DatabaseService {
     /**
      * UserWordList
      */
-    @PUT("/${DB_ROOT}/UserWordList/{uid}/{wordListId}.json")
+    @GET("/UserWordList/{uid}.json")
+    suspend fun getUserWordList(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+    ): Response<Map<String,Any>>
+
+    @PUT("/UserWordList/{uid}/{wordListId}.json")
     suspend fun putUserWordList(
         @Path("uid") uid: String,
         @Path("wordListId") wordListId: String,
@@ -43,14 +48,14 @@ interface DatabaseService {
         @Body data: Boolean,
     ): Response<Boolean>
 
-    @DELETE("/${DB_ROOT}/UserWordList/{uid}/{wordListId}.json")
+    @DELETE("/UserWordList/{uid}/{wordListId}.json")
     suspend fun deleteUserWordList(
         @Path("uid") uid: String,
         @Path("wordListId") wordListId: String,
         @Query("auth") token: String,
     ): Response<String>
 
-    @DELETE("/${DB_ROOT}/UserWordList/{uid}.json")
+    @DELETE("/UserWordList/{uid}.json")
     suspend fun deleteAllUserWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,
@@ -59,14 +64,14 @@ interface DatabaseService {
     /**
      * WordList
      */
-    @GET("/${DB_ROOT}/WordList/{uid}/{wordListUid}.json")
+    @GET("/WordList/{uid}/{wordListUid}.json")
     suspend fun getWordList(
         @Path("uid") uid: String,
         @Path("wordListUid") wordListUid: String,
         @Query("auth") token: String,
     ): Response<WordListDTO>
 
-    @PUT("/${DB_ROOT}/WordList/{uid}/{wordListUid}.json")
+    @PUT("/WordList/{uid}/{wordListUid}.json")
     suspend fun putWordList(
         @Path("uid") uid: String,
         @Path("wordListUid") wordListUid: String,
@@ -74,14 +79,14 @@ interface DatabaseService {
         @Body data: WordListDTO,
     ): Response<WordListDTO>
 
-    @POST("/${DB_ROOT}/WordList/{uid}.json")
+    @POST("/WordList/{uid}.json")
     suspend fun postWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,
         @Body data: WordListDTO,
     ): Response<PostDTO>
 
-    @DELETE("/${DB_ROOT}/WordList/{uid}.json")
+    @DELETE("/WordList/{uid}.json")
     suspend fun deleteWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,

@@ -1,17 +1,17 @@
 package com.vocaengplus.vocaengplus.model.data.newData
 
-import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
+import com.vocaengplus.vocaengplus.network.dto.UserDTO
 
 
-data class UserData(
+data class User(
     val nickname: String,
     val uid: String,
     val lastLogin: Long,
-    val isGuest: Boolean
+    val isGuest: Boolean,
 )
 
-fun UserData.toUserDataDto(): UserDataDTO {
-    return UserDataDTO(
+fun User.toUserDto(): UserDTO {
+    return UserDTO(
         nickname = nickname,
         uid = uid,
         lastLogin = lastLogin,
