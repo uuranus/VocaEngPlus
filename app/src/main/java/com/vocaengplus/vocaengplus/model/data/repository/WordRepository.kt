@@ -4,13 +4,11 @@ import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.model.data.WordDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import com.vocaengplus.vocaengplus.network.auth.AuthService
-import com.vocaengplus.vocaengplus.network.dto.toWordList
 import javax.inject.Inject
 
 class WordRepository @Inject constructor(
     private val dataSource: WordDataSource,
 ) {
-
     suspend fun saveNewWord(voca: Voca) {
         val idToken = AuthService.getCurrentUserIdToken()
 
@@ -24,7 +22,7 @@ class WordRepository @Inject constructor(
         dataSource.saveEditedVoca(voca)
     }
 
-    suspend fun getWordListNames():Result<List<String>> {
+    suspend fun getWordListNames(): Result<List<String>> {
         val idToken = AuthService.getCurrentUserIdToken()
         val uid = AuthService.getCurrentUID()
 
@@ -35,17 +33,19 @@ class WordRepository @Inject constructor(
         val idToken = AuthService.getCurrentUserIdToken()
         val uid = AuthService.getCurrentUID()
 
-        val result = dataSource.getWordList(wordListUid, uid, idToken)
-        return if (result.isSuccess) {
-            result.getOrNull()?.let {
-                Result.success(it.toWordList())
-            } ?: Result.failure(Exception())
-        } else {
-            Result.failure(Exception())
-        }
+        return dataSource.getWordList(wordListUid, uid, idToken)
     }
 
     suspend fun setMyWord(voca: Voca): Result<Voca> {
         return Result.failure(Exception())
+    }
+
+    suspend fun getWordLists(): Result<List<WordList>> {
+
+        println("repository")
+        val idToken = AuthService.getCurrentUserIdToken()
+        val uid = AuthService.getCurrentUID()
+
+        return dataSource.getWordLists(uid, idToken)
     }
 }

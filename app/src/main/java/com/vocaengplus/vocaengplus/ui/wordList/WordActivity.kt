@@ -10,21 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.adapter.WordAdapter
 import com.vocaengplus.vocaengplus.adapter.WordAdapterListener
 import com.vocaengplus.vocaengplus.databinding.ActivityWordBinding
 import com.vocaengplus.vocaengplus.databinding.AddvocaBinding
 import com.vocaengplus.vocaengplus.databinding.WordhelpBinding
-import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.ui.util.Validation
 import com.vocaengplus.vocaengplus.view.WordDialogFragment
 import com.vocaengplus.vocaengplus.view.WordDialogListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,6 +80,9 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
 
         binding.run {
 
+            vm = wordViewModel
+            lifecycleOwner = this@WordActivity
+
             helpButton.setOnClickListener {
                 helpAlertDialog.show()
             }
@@ -142,6 +139,7 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
         super.onStop()
         //최근 단어장 저장
     }
+
     override fun onBackPressed() {
         setResult(isSelected)
         finish()

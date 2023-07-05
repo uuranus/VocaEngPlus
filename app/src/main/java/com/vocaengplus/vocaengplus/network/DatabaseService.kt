@@ -38,7 +38,7 @@ interface DatabaseService {
     suspend fun getUserWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-    ): Response<Map<String,Any>>
+    ): Response<Map<String, Any>>
 
     @PUT("/UserWordList/{uid}/{wordListId}.json")
     suspend fun putUserWordList(
@@ -64,6 +64,12 @@ interface DatabaseService {
     /**
      * WordList
      */
+    @GET("/WordList/{uid}.json")
+    suspend fun getWordLists(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+    ): Response<Any>
+
     @GET("/WordList/{uid}/{wordListUid}.json")
     suspend fun getWordList(
         @Path("uid") uid: String,

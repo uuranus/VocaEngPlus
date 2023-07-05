@@ -1,13 +1,13 @@
 package com.vocaengplus.vocaengplus.model.data
 
+import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import com.vocaengplus.vocaengplus.network.DatabaseService
-import com.vocaengplus.vocaengplus.network.dto.WordListDTO
+import com.vocaengplus.vocaengplus.network.dto.toWordList
 import javax.inject.Inject
 
 class WordDataSource @Inject constructor(
     private val databaseService: DatabaseService,
 ) {
-
     suspend fun saveNewWord(voca: Voca): Result<Voca> {
         return Result.failure(Exception())
     }
@@ -20,9 +20,9 @@ class WordDataSource @Inject constructor(
         uid: String,
         idToken: String,
     ): Result<List<String>> {
-        val response = databaseService.getUserWordList(uid, idToken)
-        return if (response.isSuccessful) {
-            response.body()?.let {
+        val networkResponse = databaseService.getUserWordList(uid, idToken)
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
                 Result.success(it.keys.toList())
             } ?: Result.failure(Exception())
         } else {
@@ -34,10 +34,29 @@ class WordDataSource @Inject constructor(
         wordListUid: String,
         uid: String,
         idToken: String,
-    ): Result<WordListDTO> {
-        val response = databaseService.getWordList(uid, wordListUid, idToken)
-        return if (response.isSuccessful) {
-            Result.success(response.body() ?: WordListDTO("", "", "", 0, "", emptyList()))
+    ): Result<WordList> {
+        val networkResponse = databaseService.getWordList(uid, wordListUid, idToken)
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(it.toWordList())
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    suspend fun getWordLists(
+        uid: String,
+        idToken: String,
+    ): Result<List<WordList>> {
+        println("datasource")
+        val networkResponse = databaseService.getWordLists(uid, idToken)
+        println("newtorkresponse $networkResponse")
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(emptyList())
+                //                Result.success(it.map{it2 -> it2.toWordList()})
+            } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())
         }

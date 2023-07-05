@@ -11,7 +11,8 @@ import com.vocaengplus.vocaengplus.model.data.CommunityWriter
 import com.vocaengplus.vocaengplus.model.data.UserAccount
 import com.vocaengplus.vocaengplus.model.data.Voca
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 object Initialization { //singleton
     lateinit var  databaseref:DatabaseReference

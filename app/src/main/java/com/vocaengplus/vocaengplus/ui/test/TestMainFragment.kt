@@ -17,7 +17,7 @@ import com.vocaengplus.vocaengplus.databinding.FragmentTestMainBinding
 import com.vocaengplus.vocaengplus.databinding.TesthelpBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.model.data.Voca
-import java.util.*
+import java.util.Random
 
 class TestMainFragment : Fragment() {
 

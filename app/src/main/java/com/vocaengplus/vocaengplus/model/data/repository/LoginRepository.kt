@@ -1,8 +1,8 @@
 package com.vocaengplus.vocaengplus.model.data.repository
 
 import com.vocaengplus.vocaengplus.model.data.LoginDataSource
-import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.model.data.newData.User
+import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.model.data.newData.toUserDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService

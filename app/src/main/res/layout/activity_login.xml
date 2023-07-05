@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="com.vocaengplus.vocaengplus.ui.login.LoginViewModel" />
     </data>
 
@@ -28,7 +28,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailEditText"
-            error="@{viewModel.idErrorText}"
+            error="@{vm.idErrorText}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
@@ -39,17 +39,17 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:afterTextChanged="@{() -> viewModel.onIdChanged()}"
+                android:afterTextChanged="@{() -> vm.onIdChanged()}"
                 android:background="@android:color/transparent"
                 android:hint="이메일(아이디)"
                 android:inputType="textEmailAddress"
-                android:text="@={viewModel.id}" />
+                android:text="@={vm.id}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordEditText"
-            error="@{viewModel.passwordErrorText}"
+            error="@{vm.passwordErrorText}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hintEnabled="false"
@@ -58,11 +58,11 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:afterTextChanged="@{() -> viewModel.onPasswordChanged()}"
+                android:afterTextChanged="@{() -> vm.onPasswordChanged()}"
                 android:background="@android:color/transparent"
                 android:hint="비밀번호"
                 android:inputType="textPassword"
-                android:text="@={viewModel.password}" />
+                android:text="@={vm.password}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
