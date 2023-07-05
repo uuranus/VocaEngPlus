@@ -8,7 +8,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.tasks.asDeferred
 import kotlinx.coroutines.tasks.await
 import kotlin.random.Random
 

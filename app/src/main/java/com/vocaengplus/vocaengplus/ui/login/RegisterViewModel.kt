@@ -2,7 +2,7 @@ package com.vocaengplus.vocaengplus.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vocaengplus.vocaengplus.model.data.newData.UserData
+import com.vocaengplus.vocaengplus.model.data.newData.User
 import com.vocaengplus.vocaengplus.model.data.repository.LoginRepository
 import com.vocaengplus.vocaengplus.ui.util.Validation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -111,7 +111,7 @@ class RegisterViewModel @Inject constructor(
 
             if (registerResult.isSuccess) {
                 registerResult.getOrNull()?.let {
-                    val newUserData = UserData(
+                    val newUserData = User(
                         it.name,
                         it.uid,
                         System.currentTimeMillis(),

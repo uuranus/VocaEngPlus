@@ -4,7 +4,7 @@ import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.network.dto.PostDTO
-import com.vocaengplus.vocaengplus.network.dto.UserDataDTO
+import com.vocaengplus.vocaengplus.network.dto.UserDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
 import retrofit2.Response
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class LoginDataSource @Inject constructor(
         return authService.loginAsGuest()
     }
 
-    suspend fun makeNewUserData(idToken: String, userData: UserDataDTO): Response<UserDataDTO> {
+    suspend fun makeNewUserData(idToken: String, userData: UserDTO): Response<UserDTO> {
         return databaseService.putUserData(userData.uid, idToken, userData)
     }
 

@@ -4,19 +4,19 @@ import com.vocaengplus.vocaengplus.network.dto.WordDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
 
 data class WordList(
-    val wordListName: String,
-    val wordListWriter: String,
-    val wordListWriterToken: String,
-    val downLoadDate: Long,
-    val description: String,
-    val words: List<Word>
+    val wordListName: String = "",
+    val wordListWriter: String = "",
+    val wordListWriterToken: String = "",
+    val downLoadDate: Long = 0L,
+    val description: String = "",
+    val words: List<Word> = emptyList(),
 )
 
 data class Word(
     val word: String,
     val meaning: String,
     val checked: Boolean,
-    val wordListName: String
+    val wordListName: String,
 )
 
 fun WordList.toWordListDto(): WordListDTO {

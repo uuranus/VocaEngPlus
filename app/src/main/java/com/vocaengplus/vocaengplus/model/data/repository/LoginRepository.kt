@@ -2,8 +2,8 @@ package com.vocaengplus.vocaengplus.model.data.repository
 
 import com.vocaengplus.vocaengplus.model.data.LoginDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
-import com.vocaengplus.vocaengplus.model.data.newData.UserData
-import com.vocaengplus.vocaengplus.model.data.newData.toUserDataDto
+import com.vocaengplus.vocaengplus.model.data.newData.User
+import com.vocaengplus.vocaengplus.model.data.newData.toUserDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.ui.util.WORDLIST
@@ -11,7 +11,7 @@ import com.vocaengplus.vocaengplus.ui.util.makeDefaultWordList
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(
-    private val dataSource: LoginDataSource
+    private val dataSource: LoginDataSource,
 ) {
 
     suspend fun requestLogin(email: String, password: String): Result<UserAuth> {
@@ -22,13 +22,13 @@ class LoginRepository @Inject constructor(
         return dataSource.loginAsGuest()
     }
 
-    suspend fun requestMakeNewUserData(userData: UserData): Result<Boolean> {
+    suspend fun requestMakeNewUserData(userData: User): Result<Boolean> {
         val idToken = AuthService.getCurrentUserIdToken()
 
         println("token ${idToken}")
         if (idToken.isEmpty()) return Result.failure(Exception("로그인이 되어있지 않습니다"))
 
-        val userDataResponse = dataSource.makeNewUserData(idToken, userData.toUserDataDto())
+        val userDataResponse = dataSource.makeNewUserData(idToken, userData.toUserDto())
         var wordDataResponse = true
         for (type in WORDLIST.values()) {
             val wordListId = dataSource.makeDefaultWordList(

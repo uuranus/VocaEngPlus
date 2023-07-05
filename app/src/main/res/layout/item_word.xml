@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
-            type="com.vocaengplus.vocaengplus.model.data.Voca" />
+            type="com.vocaengplus.vocaengplus.model.data.newData.Word" />
     </data>
 
     <LinearLayout

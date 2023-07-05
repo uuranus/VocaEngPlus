@@ -2,7 +2,7 @@ package com.vocaengplus.vocaengplus.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vocaengplus.vocaengplus.model.data.newData.UserData
+import com.vocaengplus.vocaengplus.model.data.newData.User
 import com.vocaengplus.vocaengplus.model.data.repository.LoginRepository
 import com.vocaengplus.vocaengplus.ui.util.Validation
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -66,7 +66,7 @@ class LoginViewModel @Inject constructor(
 
         if (Validation.isValidatePassword(passwordValue).not()) {
             _isPasswordValid.value = false
-            _passwordErrorText.value = "비밀번호는 영문자,숫자,특수문자(!@#\$%^*/ 중에서) 각각 1개 이상 포함 8~20자이어야 합니다"
+            _passwordErrorText.value = "비밀번호는 6자리 이상이어야 합니다."
         } else {
             _isPasswordValid.value = true
             _passwordErrorText.value = ""
@@ -99,7 +99,7 @@ class LoginViewModel @Inject constructor(
             if (result.isSuccess) {
                 val userAuth = result.getOrNull()
                 if (userAuth != null) {
-                    val userData = UserData(
+                    val userData = User(
                         userAuth.name,
                         userAuth.uid,
                         System.currentTimeMillis(),

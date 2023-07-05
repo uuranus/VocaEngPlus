@@ -33,10 +33,14 @@ object Initialization { //singleton
     }
 
     fun getDBref():DatabaseReference{
+        setDatabase()
+        setCurrentUser()
         return databaseref
     }
 
     fun getFBauth():FirebaseAuth{
+        setDatabase()
+        setCurrentUser()
         return firebaseAuth
     }
 
