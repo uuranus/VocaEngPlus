@@ -12,18 +12,17 @@ import com.vocaengplus.vocaengplus.model.data.newData.Word
 class AddCategoryListAdapter : ListAdapter<Word, AddCategoryListAdapter.ViewHolder>(diffUtil) {
 
     interface OnItemClickListener {
-        fun OnDeleteClick(holder: ViewHolder, view: View, position: Int)
+        fun onDeleteClick(position: Int)
     }
 
     var itemClickListener: OnItemClickListener? = null
-
 
     inner class ViewHolder(val binding: ItemSettingWordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.deleteword.setOnClickListener {
-                itemClickListener?.OnDeleteClick(this, it, adapterPosition)
+                itemClickListener?.onDeleteClick(adapterPosition)
             }
         }
 

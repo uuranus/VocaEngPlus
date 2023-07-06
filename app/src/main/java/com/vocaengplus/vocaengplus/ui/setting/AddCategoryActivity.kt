@@ -52,8 +52,6 @@ class AddCategoryActivity : AppCompatActivity() {
                 val meaning = dlgBinding.editaddmeaning.text.toString()
 
                 settingViewModel.addNewWord(word, meaning)
-//
-
             }
             .setNegativeButton("취소") { _, _ ->
             }
@@ -72,11 +70,7 @@ class AddCategoryActivity : AppCompatActivity() {
 
         addCategoryAdapter = AddCategoryListAdapter().apply {
             itemClickListener = object : AddCategoryListAdapter.OnItemClickListener {
-                override fun OnDeleteClick(
-                    holder: AddCategoryListAdapter.ViewHolder,
-                    view: View,
-                    position: Int,
-                ) {
+                override fun onDeleteClick(position: Int) {
                     settingViewModel.removeNewWord(position)
                 }
             }

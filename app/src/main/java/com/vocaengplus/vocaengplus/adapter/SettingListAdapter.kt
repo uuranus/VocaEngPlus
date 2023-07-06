@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.databinding.ItemCategoryBinding
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.ui.util.toDateString
 
 class SettingListAdapter : ListAdapter<WordList, SettingListAdapter.ViewHolder>(diffUtil) {
     interface OnItemClickListener {
@@ -33,7 +34,7 @@ class SettingListAdapter : ListAdapter<WordList, SettingListAdapter.ViewHolder>(
             binding.run {
                 titleTextView.text = data.wordListName
                 writerTextView.text = "작성자 : ${data.wordListWriter}"
-                downloadDateTextView.text = "다운로드 날짜 : ${data.downLoadDate}"
+                downloadDateTextView.text = "다운로드 날짜 : ${data.downLoadDate.toDateString()}"
                 descriptionTextView.text = "내용 : ${data.description}"
             }
 

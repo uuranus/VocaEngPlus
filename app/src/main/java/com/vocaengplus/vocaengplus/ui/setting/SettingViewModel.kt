@@ -78,7 +78,8 @@ class SettingViewModel @Inject constructor(
     }
 
     fun removeNewWord(position: Int) {
-        _newWordLists.value.removeAt(position)
+        _newWordLists.value =
+            _newWordLists.value.filterIndexed { index, word -> index != position }.toMutableList()
     }
 
     fun addNewWordList() {
