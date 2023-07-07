@@ -1,7 +1,9 @@
 package com.vocaengplus.vocaengplus.model.data
 
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.newData.WordListUidName
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
+import com.vocaengplus.vocaengplus.model.data.newData.toWordListUidName
 import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
 import com.vocaengplus.vocaengplus.network.dto.toWordList
@@ -21,11 +23,11 @@ class WordDataSource @Inject constructor(
     suspend fun getWordListNames(
         uid: String,
         idToken: String,
-    ): Result<List<String>> {
+    ): Result<List<WordListUidName>> {
         val networkResponse = databaseService.getUserWordList(uid, idToken)
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                Result.success(it.keys.toList())
+                Result.success(it.entries.map { it2 -> it2.toWordListUidName() })
             } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())
@@ -68,6 +70,27 @@ class WordDataSource @Inject constructor(
     ): Result<Boolean> {
         val networkResponse =
             databaseService.postWordList(uid, idToken, newWordList.toWordListDto())
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                if (addNewUserWordList(uid, idToken, it.name, newWordList.wordListName).isSuccess) {
+                    Result.success(true)
+                } else {
+                    Result.failure(Exception())
+                }
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    private suspend fun addNewUserWordList(
+        uid: String,
+        idToken: String,
+        wordListUid: String,
+        wordListName: String,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.putUserWordList(uid, wordListUid, idToken, wordListName)
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
                 Result.success(true)

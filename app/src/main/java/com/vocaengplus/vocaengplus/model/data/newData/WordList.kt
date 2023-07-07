@@ -19,6 +19,11 @@ data class Word(
     val wordListName: String,
 )
 
+data class WordListUidName(
+    val uid: String,
+    val name: String,
+)
+
 fun WordList.toWordListDto(): WordListDTO {
     return WordListDTO(
         wordListName,
@@ -37,4 +42,8 @@ fun Word.toWordDto(): WordDTO {
         checked,
         wordListName
     )
+}
+
+fun Map.Entry<String, String>.toWordListUidName(): WordListUidName {
+    return WordListUidName(key, value)
 }

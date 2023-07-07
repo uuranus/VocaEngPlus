@@ -44,6 +44,10 @@ class WordViewModel @Inject constructor(
         MutableStateFlow(emptyList())
     val wordListNames: StateFlow<List<String>> get() = _wordListNames
 
+    private val _wordListUids: MutableStateFlow<List<String>> =
+        MutableStateFlow(emptyList())
+    val wordListUids: StateFlow<List<String>> get() = _wordListUids
+
     private val _currentWordList: MutableStateFlow<WordList> =
         MutableStateFlow(WordList())
     val currentWordList: StateFlow<WordList> get() = _currentWordList
@@ -67,9 +71,11 @@ class WordViewModel @Inject constructor(
 
     private suspend fun getWordListNames() {
         val names = repository.getWordListNames()
+
         if (names.isSuccess) {
             names.getOrNull()?.let {
-                _wordListNames.value = it
+                _wordListNames.value = it.map { it2 -> it2.name }
+                _wordListUids.value = it.map { it2 -> it2.uid }
             }
         } else {
             _snackBarMessage.value = "단어를 불러오는데 실패했습니다"
@@ -79,6 +85,7 @@ class WordViewModel @Inject constructor(
     private suspend fun getWordList() {
         val wordListUid = getWordListUidByIndex()
         if (wordListUid.isEmpty()) return
+
         val currentWordList = repository.getWordList(wordListUid)
         if (currentWordList.isSuccess) {
             currentWordList.getOrNull()?.let {
@@ -90,10 +97,10 @@ class WordViewModel @Inject constructor(
     }
 
     private fun getWordListUidByIndex(): String {
-        if (_wordListNames.value.isEmpty()) return ""
+        if (_wordListUids.value.isEmpty()) return ""
         _selectedWordListIndex.value =
-            _selectedWordListIndex.value.coerceAtMost(_wordListNames.value.size)
-        return _wordListNames.value[_selectedWordListIndex.value]
+            _selectedWordListIndex.value.coerceAtMost(_wordListUids.value.size)
+        return _wordListUids.value[_selectedWordListIndex.value]
     }
 
     fun addNewVoca(word: String, meaning: String) {

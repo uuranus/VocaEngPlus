@@ -3,6 +3,7 @@ package com.vocaengplus.vocaengplus.model.data.repository
 import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.model.data.WordDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.newData.WordListUidName
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import javax.inject.Inject
 
@@ -22,7 +23,7 @@ class WordRepository @Inject constructor(
         dataSource.saveEditedVoca(voca)
     }
 
-    suspend fun getWordListNames(): Result<List<String>> {
+    suspend fun getWordListNames(): Result<List<WordListUidName>> {
         val idToken = AuthService.getCurrentUserIdToken()
         val uid = AuthService.getCurrentUID()
 

@@ -38,14 +38,14 @@ interface DatabaseService {
     suspend fun getUserWordList(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-    ): Response<Map<String, Any>>
+    ): Response<Map<String, String>>
 
     @PUT("/UserWordList/{uid}/{wordListId}.json")
     suspend fun putUserWordList(
         @Path("uid") uid: String,
         @Path("wordListId") wordListId: String,
         @Query("auth") token: String,
-        @Body data: Boolean,
+        @Body data: String,
     ): Response<Boolean>
 
     @DELETE("/UserWordList/{uid}/{wordListId}.json")

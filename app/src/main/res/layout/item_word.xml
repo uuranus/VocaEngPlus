@@ -57,7 +57,9 @@
             android:layout_height="wrap_content"
             android:text="@{item.meaning}"
             android:textColor="@color/bluegray"
-            tools:text="보카잉플러스" />
+            android:visibility="gone"
+            tools:text="보카잉플러스"
+            tools:visibility="visible" />
 
     </LinearLayout>
 </layout>

@@ -31,16 +31,19 @@ class LoginRepository @Inject constructor(
         val userDataResponse = dataSource.makeNewUserData(idToken, userData.toUserDto())
         var wordDataResponse = true
         for (type in WORDLIST.values()) {
+            val defaultWordList =
+                makeDefaultWordList(type, userData.nickname, userData.uid).toWordListDto()
             val wordListId = dataSource.makeDefaultWordList(
                 idToken, userData.uid,
-                makeDefaultWordList(type, userData.nickname, userData.uid).toWordListDto()
+                defaultWordList
             )
             if (wordListId.isSuccessful) {
                 wordListId.body()?.let {
                     val userWordListResponse = dataSource.makeUserWordList(
                         idToken,
                         userData.uid,
-                        it.name
+                        it.name,
+                        defaultWordList.wordListName
                     )
 
                     if (userWordListResponse.isSuccessful.not()) {

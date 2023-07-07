@@ -137,12 +137,7 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
 
     override fun onStop() {
         super.onStop()
-        //최근 단어장 저장
-    }
-
-    override fun onBackPressed() {
-        setResult(isSelected)
-        finish()
+        //TODO 최근 단어장 저장
     }
 
     override fun onDialogPositiveClick(dialog: WordDialogFragment, voca: Voca) {

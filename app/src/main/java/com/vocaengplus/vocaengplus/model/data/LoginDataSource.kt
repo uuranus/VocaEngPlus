@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class LoginDataSource @Inject constructor(
     private val authService: AuthService,
-    private val databaseService: DatabaseService
+    private val databaseService: DatabaseService,
 ) {
 
     suspend fun login(email: String, password: String): Result<UserAuth> {
@@ -29,7 +29,7 @@ class LoginDataSource @Inject constructor(
     suspend fun makeDefaultWordList(
         idToken: String,
         uid: String,
-        data: WordListDTO
+        data: WordListDTO,
     ): Response<PostDTO> {
         return databaseService.postWordList(uid, idToken, data)
     }
@@ -37,9 +37,10 @@ class LoginDataSource @Inject constructor(
     suspend fun makeUserWordList(
         idToken: String,
         uid: String,
-        wordListId: String
+        wordListId: String,
+        wordListName: String,
     ): Response<Boolean> {
-        return databaseService.putUserWordList(uid, wordListId, idToken, true)
+        return databaseService.putUserWordList(uid, wordListId, idToken, wordListName)
     }
 
     suspend fun logOut(): Result<Boolean> {
