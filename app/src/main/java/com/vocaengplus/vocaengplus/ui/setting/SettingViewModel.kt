@@ -113,4 +113,30 @@ class SettingViewModel @Inject constructor(
             }
         }
     }
+
+    fun editWordList(newName: String, newDescription: String) {
+        if (!(Validation.checkInput(arrayOf(newName)))) {
+            _snackBarMessage.value = "단어장 이름을 입력해주세요"
+            return
+        }
+
+        if (!(Validation.isValidateCategoryName(newName))) {
+            _snackBarMessage.value = "단어장 이름은 1~20글자여야 합니다.(.#$[] 제외)"
+            return
+        }
+
+        if (!(Validation.checkInput(arrayOf(newDescription)))) {
+            _snackBarMessage.value = "단어장 내용을 입력해주세요"
+            return
+        }
+
+        if (newDescription.length > 40) {
+            _snackBarMessage.value = "단어장 내용은 1~40자 이내여야 합니다"
+            return
+        }
+
+        viewModelScope.launch {
+            repository.editWordList(newName, newDescription)
+        }
+    }
 }

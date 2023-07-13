@@ -1,48 +1,75 @@
 package com.vocaengplus.vocaengplus.model.data
 
+import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
-import com.vocaengplus.vocaengplus.model.data.newData.WordListUidName
+import com.vocaengplus.vocaengplus.model.data.newData.toWordDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
-import com.vocaengplus.vocaengplus.model.data.newData.toWordListUidName
 import com.vocaengplus.vocaengplus.network.DatabaseService
+import com.vocaengplus.vocaengplus.network.dto.RequestUser
+import com.vocaengplus.vocaengplus.network.dto.WordDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
+import com.vocaengplus.vocaengplus.network.dto.toWord
 import com.vocaengplus.vocaengplus.network.dto.toWordList
 import javax.inject.Inject
 
 class WordDataSource @Inject constructor(
     private val databaseService: DatabaseService,
 ) {
-    suspend fun saveNewWord(voca: Voca): Result<Voca> {
-        return Result.failure(Exception())
-    }
 
-    suspend fun saveEditedVoca(voca: Voca): Result<Voca> {
-        return Result.failure(Exception())
-    }
-
-    suspend fun getWordListNames(
-        uid: String,
-        idToken: String,
-    ): Result<List<WordListUidName>> {
-        val networkResponse = databaseService.getUserWordList(uid, idToken)
+    suspend fun addWord(
+        requestUser: RequestUser,
+        wordListUid: String,
+        words: List<Word>,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.putWords(
+                requestUser.uid,
+                wordListUid,
+                requestUser.idToken,
+                words.map { it.toWordDto() })
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                Result.success(it.entries.map { it2 -> it2.toWordListUidName() })
+                Result.success(true)
             } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())
         }
     }
 
-    suspend fun getWordList(
+    suspend fun editWord(
+        requestUser: RequestUser,
         wordListUid: String,
-        uid: String,
-        idToken: String,
-    ): Result<WordList> {
-        val networkResponse = databaseService.getWordList(uid, wordListUid, idToken)
+        words: List<Word>,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.putWords(
+                requestUser.uid,
+                wordListUid,
+                requestUser.idToken,
+                words.map { it.toWordDto() })
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                Result.success(it.toWordList())
+                Result.success(true)
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    suspend fun deleteWord(
+        requestUser: RequestUser,
+        wordListUid: String,
+        words: List<Word>,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.putWords(
+                requestUser.uid,
+                wordListUid,
+                requestUser.idToken,
+                words.map { it.toWordDto() })
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(true)
             } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())
@@ -50,29 +77,52 @@ class WordDataSource @Inject constructor(
     }
 
     suspend fun getWordLists(
-        uid: String,
-        idToken: String,
+        requestUser: RequestUser,
     ): Result<List<WordList>> {
-        val networkResponse = databaseService.getWordLists(uid, idToken)
+        val networkResponse = databaseService.getWordLists(requestUser.uid, requestUser.idToken)
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                Result.success(it.values.map { it2 -> it2.toWordList() })
+                Result.success(it.entries.map { it2 -> it2.toWordList() })
             } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())
         }
     }
 
-    suspend fun addNewWordList(
-        newWordList: WordList,
-        uid: String,
-        idToken: String,
-    ): Result<Boolean> {
+    suspend fun getWordList(
+        requestUser: RequestUser,
+        wordListUid: String,
+    ): Result<WordList> {
         val networkResponse =
-            databaseService.postWordList(uid, idToken, newWordList.toWordListDto())
+            databaseService.getWordList(requestUser.uid, wordListUid, requestUser.idToken)
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                if (addNewUserWordList(uid, idToken, it.name, newWordList.wordListName).isSuccess) {
+                Result.success(it.toWordList(wordListUid))
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    suspend fun addWordList(
+        requestUser: RequestUser,
+        newWordList: WordList,
+        newWords: List<Word>,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.postWordList(
+                requestUser.uid,
+                requestUser.idToken,
+                newWordList.toWordListDto()
+            )
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                if (addWords(
+                        requestUser,
+                        it.name,
+                        newWords
+                    ).isSuccess
+                ) {
                     Result.success(true)
                 } else {
                     Result.failure(Exception())
@@ -83,14 +133,83 @@ class WordDataSource @Inject constructor(
         }
     }
 
-    private suspend fun addNewUserWordList(
-        uid: String,
-        idToken: String,
+    suspend fun editWordList(
+        requestUser: RequestUser,
+        wordList: WordList,
+    ): Result<WordList> {
+        val networkResponse =
+            databaseService.putWordList(
+                requestUser.uid,
+                wordList.wordListUid,
+                requestUser.idToken,
+                wordList.toWordListDto()
+            )
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(it.toWordList(wordList.wordListUid))
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    suspend fun deleteWordList(
+        requestUser: RequestUser,
         wordListUid: String,
-        wordListName: String,
     ): Result<Boolean> {
         val networkResponse =
-            databaseService.putUserWordList(uid, wordListUid, idToken, wordListName)
+            databaseService.deleteWordList(requestUser.uid, wordListUid, requestUser.idToken)
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(true)
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    suspend fun getWords(requestUser: RequestUser, wordListUid: String): Result<List<Word>> {
+        val networkResponse =
+            databaseService.getWords(requestUser.uid, wordListUid, requestUser.idToken)
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(it.values.map { it2 -> it2.toWord() })
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    private suspend fun addWords(
+        requestUser: RequestUser,
+        wordListUid: String,
+        words: List<Word>,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.putWords(
+                requestUser.uid,
+                wordListUid,
+                requestUser.idToken,
+                words.map { it.toWordDto() })
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(true)
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
+    private suspend fun deleteWords(
+        requestUser: RequestUser,
+        wordListUid: String,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.deleteWords(
+                requestUser.uid,
+                wordListUid,
+                requestUser.idToken
+            )
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
                 Result.success(true)

@@ -2,7 +2,6 @@ package com.vocaengplus.vocaengplus.model.data.newData
 
 import com.vocaengplus.vocaengplus.network.dto.UserDTO
 
-
 data class User(
     val nickname: String,
     val uid: String,
