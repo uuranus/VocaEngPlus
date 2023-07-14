@@ -2,17 +2,43 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/titleTextView"
         style="@style/TextAppearance.VocaEngPlus.Body.Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="수능"
+        tools:text="수능"
+        app:layout_constraintBottom_toBottomOf="@id/editButton"
+        app:layout_constraintEnd_toStartOf="@id/editButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/editButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:layout_marginEnd="@dimen/button_horizontal_margin"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_edit"
+        app:layout_constraintBottom_toBottomOf="@id/titleTextView"
+        app:layout_constraintEnd_toStartOf="@id/deleteButton"
+        app:layout_constraintTop_toTopOf="@id/titleTextView" />
+
+    <ImageButton
+        android:id="@+id/deleteButton"
+        android:layout_width="@dimen/icon_button_size"
+        android:layout_height="@dimen/icon_button_size"
+        android:adjustViewBounds="true"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_trash"
+        app:layout_constraintBottom_toBottomOf="@id/editButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@id/editButton" />
 
     <TextView
         android:id="@+id/writerTextView"
@@ -20,7 +46,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
-        android:text="작성자 : "
+        tools:text="작성자 : "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTextView" />
@@ -31,7 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/text_vertical_margin"
-        android:text="다운로드 날짜 : "
+        tools:text="다운로드 날짜 : "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/writerTextView" />
@@ -44,34 +70,18 @@
         android:layout_marginTop="@dimen/text_vertical_margin"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="내용 :"
+        tools:text="내용 :"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/downloadDateTextView" />
 
-    <ImageButton
-        android:id="@+id/editButton"
-        android:layout_width="@dimen/icon_button_size"
-        android:layout_height="@dimen/icon_button_size"
-        android:layout_marginEnd="@dimen/button_horizontal_margin"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_edit"
-        app:layout_constraintBottom_toBottomOf="@id/deleteButton"
-        app:layout_constraintEnd_toStartOf="@id/deleteButton"
-        app:layout_constraintTop_toTopOf="@id/deleteButton" />
-
-    <ImageButton
-        android:id="@+id/deleteButton"
-        android:layout_width="@dimen/icon_button_size"
-        android:layout_height="@dimen/icon_button_size"
-        android:layout_marginTop="@dimen/text_vertical_margin"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_trash"
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginVertical="10dp"
+        android:backgroundTint="@color/bluegray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/descriptionTextView" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

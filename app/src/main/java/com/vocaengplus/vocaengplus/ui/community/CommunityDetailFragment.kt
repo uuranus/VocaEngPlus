@@ -9,12 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.MutableData
+import com.google.firebase.database.Transaction
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.adapter.CommunityDetailAdapter
 import com.vocaengplus.vocaengplus.databinding.FragmentCommunityDetailBinding
 import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.model.data.*
+import com.vocaengplus.vocaengplus.model.data.Category
+import com.vocaengplus.vocaengplus.model.data.CommunityCategory
+import com.vocaengplus.vocaengplus.model.data.CommunityForLikeDownload
+import com.vocaengplus.vocaengplus.model.data.CommunityWriter
+import com.vocaengplus.vocaengplus.model.data.Voca
 
 class CommunityDetailFragment(val data: CommunityCategory) : Fragment() {
     var binding: FragmentCommunityDetailBinding? = null

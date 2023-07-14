@@ -10,21 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.adapter.WordAdapter
 import com.vocaengplus.vocaengplus.adapter.WordAdapterListener
+import com.vocaengplus.vocaengplus.adapter.WordListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityWordBinding
-import com.vocaengplus.vocaengplus.databinding.AddvocaBinding
 import com.vocaengplus.vocaengplus.databinding.WordhelpBinding
-import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.ui.util.Validation
 import com.vocaengplus.vocaengplus.view.WordDialogFragment
 import com.vocaengplus.vocaengplus.view.WordDialogListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,10 +24,10 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class WordActivity : AppCompatActivity(), WordDialogListener {
+class WordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWordBinding
     private val wordViewModel: WordViewModel by viewModels()
-    private lateinit var adapter: WordAdapter
+    private lateinit var adapter: WordListAdapter
 
     private val helpAlertDialog: AlertDialog by lazy {
         val dlgBinding = WordhelpBinding.inflate(layoutInflater)
@@ -45,25 +37,29 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
             }
             .create()
     }
-    private val addVocaAlertDialog: AlertDialog by lazy {
-        val dlgBinding = AddvocaBinding.inflate(layoutInflater)
-        AlertDialog.Builder(this)
-            .setView(dlgBinding.root)
-            .setPositiveButton("추가") { _, _ ->
-                val word = dlgBinding.editaddword.text.toString()
-                val meaning = dlgBinding.editaddmeaning.text.toString()
+    private val addWordAlertDialog: WordDialogFragment =
+        WordDialogFragment(object : WordDialogListener {
+            override fun onDialogPositiveClick(dialog: WordDialogFragment, word: Word) {
+                wordViewModel.addWord(word)
+            }
 
-                wordViewModel.addNewVoca(word, meaning)
+            override fun onDialogNegativeClick(dialog: WordDialogFragment) {
+            }
+
+        })
+
+    private val editWordAlertDialog: WordDialogFragment =
+        WordDialogFragment(object : WordDialogListener {
+            override fun onDialogPositiveClick(dialog: WordDialogFragment, word: Word) {
+                wordViewModel.editWord(word)
+            }
+
+            override fun onDialogNegativeClick(dialog: WordDialogFragment) {
 
             }
-            .setNegativeButton("취소") { _, _ ->
-            }
-            .create()
-    }
 
-    private val editVocaAlertDialog: WordDialogFragment = WordDialogFragment(this)
+        })
 
-    var isSelected = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWordBinding.inflate(layoutInflater)
@@ -74,24 +70,32 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
     }
 
     private fun init() {
-        adapter = WordAdapter(object : WordAdapterListener {
-            override fun onStartClick(word: Word) {
-                wordViewModel.setMyWord(word, word.checked)
-            }
+        adapter = WordListAdapter().apply {
+            object : WordAdapterListener {
 
-            override fun onItemLongClick(word: Word) {
-                editVocaAlertDialog.showDialog(supportFragmentManager, "WordDialogFragment")
+                override fun onStarClick(word: Word, position: Int) {
+                    wordViewModel.setMyWord(position)
+                }
+
+                override fun onItemLongClick(word: Word, position: Int) {
+                    wordViewModel.selectWord(position)
+                    editWordAlertDialog.setOldWord(word)
+                    editWordAlertDialog.showDialog(supportFragmentManager)
+                }
             }
-        })
+        }
 
         binding.run {
+
+            vm = wordViewModel
+            lifecycleOwner = this@WordActivity
 
             helpButton.setOnClickListener {
                 helpAlertDialog.show()
             }
 
             addVocaButton.setOnClickListener {
-                addVocaAlertDialog.show()
+                addWordAlertDialog.showDialog(supportFragmentManager)
             }
 
             binding.wordSpinner.onItemSelectedListener =
@@ -105,8 +109,7 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
                         wordViewModel.selectWordList(position)
                     }
 
-                    override fun onNothingSelected(parent: AdapterView<*>?) {
-                    }
+                    override fun onNothingSelected(parent: AdapterView<*>?) = Unit
 
                 }
 
@@ -116,12 +119,12 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                wordViewModel.wordListNames.collectLatest {
+                wordViewModel.wordLists.collectLatest {
                     binding.wordSpinner.adapter =
                         ArrayAdapter(
                             this@WordActivity,
                             R.layout.support_simple_spinner_dropdown_item,
-                            it
+                            it.map { it2 -> it2.wordListName }
                         )
                 }
             }
@@ -140,19 +143,6 @@ class WordActivity : AppCompatActivity(), WordDialogListener {
 
     override fun onStop() {
         super.onStop()
-        //최근 단어장 저장
+        //TODO 최근 단어장 저장
     }
-    override fun onBackPressed() {
-        setResult(isSelected)
-        finish()
-    }
-
-    override fun onDialogPositiveClick(dialog: WordDialogFragment, voca: Voca) {
-        wordViewModel.editVoca(voca)
-    }
-
-    override fun onDialogNegativeClick(dialog: WordDialogFragment) {
-        dialog.dismiss()
-    }
-
 }

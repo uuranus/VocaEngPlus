@@ -1,5 +1,6 @@
 package com.vocaengplus.vocaengplus.di
 
+import com.vocaengplus.vocaengplus.model.data.repository.UserRepository
 import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.StorageService
 import com.vocaengplus.vocaengplus.network.auth.AuthService
@@ -69,4 +70,7 @@ object NetworkModule {
     @Singleton
     fun providesAuthService() = AuthService
 
+    @Provides
+    @Singleton
+    fun provideUserRepository() = UserRepository()
 }

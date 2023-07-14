@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="viewModel"
+            name="vm"
             type="com.vocaengplus.vocaengplus.ui.wordList.WordViewModel" />
     </data>
 
@@ -67,6 +68,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/wordRecyclerView"
+            submitData="@{vm.currentWords}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/title_body_margin"

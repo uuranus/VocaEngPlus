@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.vocaengplus.vocaengplus.databinding.FragmentTestBinding
 import com.vocaengplus.vocaengplus.model.data.Voca
-import java.util.*
+import java.util.Random
 
 class TestFragment(val category:String, val data: ArrayList<Voca>, val type:String) : Fragment() {
     var binding: FragmentTestBinding?=null

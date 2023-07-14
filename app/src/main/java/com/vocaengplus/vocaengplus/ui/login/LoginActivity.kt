@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.run {
             lifecycleOwner = this@LoginActivity
-            viewModel = loginViewModel
+            vm = loginViewModel
         }
 
         init()

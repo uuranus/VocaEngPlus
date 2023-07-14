@@ -95,7 +95,6 @@ class LoginViewModel @Inject constructor(
     fun loginAsGuest() {
         viewModelScope.launch {
             val result = repository.requestGuestLogin()
-            println("resulttt $result")
             if (result.isSuccess) {
                 val userAuth = result.getOrNull()
                 if (userAuth != null) {
@@ -106,8 +105,6 @@ class LoginViewModel @Inject constructor(
                         true
                     )
                     val newDataSucceed = repository.requestMakeNewUserData(userData)
-                    println("newDataSucceed $newDataSucceed")
-                    println("!!!!!!!! ${_isLoginSucceed.value}")
 
                     _isLoginSucceed.value = true
                     _snackBarMessage.value = "환영합니다"

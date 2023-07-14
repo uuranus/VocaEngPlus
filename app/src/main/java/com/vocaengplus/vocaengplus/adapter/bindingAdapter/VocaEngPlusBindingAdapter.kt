@@ -25,7 +25,6 @@ fun ImageView.setImageUrl(url: Uri?) {
 
 @BindingAdapter("submitData")
 fun <T> submitData(view: RecyclerView, data: List<T>?) {
-    println("submitData $data")
     data ?: return
 
     val adapter = view.adapter as ListAdapter<T, RecyclerView.ViewHolder?>

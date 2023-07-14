@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.databinding.ItemWordBinding
-import com.vocaengplus.vocaengplus.model.data.Voca
 import com.vocaengplus.vocaengplus.model.data.newData.Word
-import javax.inject.Inject
 
 interface WordAdapterListener {
-    fun onStartClick(word: Word)
-    fun onItemLongClick(word: Word)
+    fun onStarClick(word: Word, position: Int)
+    fun onItemLongClick(word: Word, position: Int)
 }
 
-class WordAdapter @Inject constructor(private val listener: WordAdapterListener) :
-    ListAdapter<Word, WordAdapter.WordViewHolder>(diffUtil) {
+class WordListAdapter() :
+    ListAdapter<Word, WordListAdapter.WordViewHolder>(diffUtil) {
+
+    var itemClickListener: WordAdapterListener? = null
 
     inner class WordViewHolder(val binding: ItemWordBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -27,11 +27,14 @@ class WordAdapter @Inject constructor(private val listener: WordAdapterListener)
                     meanWordTextView.isVisible = meanWordTextView.isVisible.not()
                 }
                 engWordTextView.setOnLongClickListener {
-                    listener.onItemLongClick(currentList[adapterPosition])
+                    itemClickListener?.onItemLongClick(
+                        currentList[adapterPosition],
+                        adapterPosition
+                    )
                     return@setOnLongClickListener false
                 }
                 starImageView.setOnClickListener {
-                    listener.onStartClick(currentList[adapterPosition])
+                    itemClickListener?.onStarClick(currentList[adapterPosition], adapterPosition)
                 }
             }
         }
