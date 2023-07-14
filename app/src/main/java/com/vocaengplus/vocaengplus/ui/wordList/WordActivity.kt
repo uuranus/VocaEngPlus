@@ -15,7 +15,7 @@ import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.adapter.WordAdapterListener
 import com.vocaengplus.vocaengplus.adapter.WordListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityWordBinding
-import com.vocaengplus.vocaengplus.databinding.WordhelpBinding
+import com.vocaengplus.vocaengplus.databinding.HelpWordBinding
 import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.view.WordDialogFragment
 import com.vocaengplus.vocaengplus.view.WordDialogListener
@@ -30,13 +30,35 @@ class WordActivity : AppCompatActivity() {
     private lateinit var adapter: WordListAdapter
 
     private val helpAlertDialog: AlertDialog by lazy {
-        val dlgBinding = WordhelpBinding.inflate(layoutInflater)
+        val dlgBinding = HelpWordBinding.inflate(layoutInflater)
         AlertDialog.Builder(this)
             .setView(dlgBinding.root)
             .setNeutralButton("확인") { _, _ ->
             }
             .create()
     }
+
+    private val editOrDeleteAlertDialog: AlertDialog by lazy {
+        val items = arrayOf("수정", "삭제")
+        AlertDialog.Builder(this)
+            .setItems(items) { _, which ->
+                when (which) {
+                    0 -> {
+                        val selectWord = wordViewModel.getSelectedWord()
+                        editWordAlertDialog.showDialog(supportFragmentManager, selectWord)
+                    }
+
+                    1 -> {
+                        val selectWord = wordViewModel.getSelectedWord()
+                        wordViewModel.deleteWord(selectWord)
+                    }
+
+                    else -> {}
+                }
+            }
+            .create()
+    }
+
     private val addWordAlertDialog: WordDialogFragment =
         WordDialogFragment(object : WordDialogListener {
             override fun onDialogPositiveClick(dialog: WordDialogFragment, word: Word) {
@@ -45,7 +67,6 @@ class WordActivity : AppCompatActivity() {
 
             override fun onDialogNegativeClick(dialog: WordDialogFragment) {
             }
-
         })
 
     private val editWordAlertDialog: WordDialogFragment =
@@ -57,7 +78,6 @@ class WordActivity : AppCompatActivity() {
             override fun onDialogNegativeClick(dialog: WordDialogFragment) {
 
             }
-
         })
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,16 +91,14 @@ class WordActivity : AppCompatActivity() {
 
     private fun init() {
         adapter = WordListAdapter().apply {
-            object : WordAdapterListener {
-
+            itemClickListener = object : WordAdapterListener {
                 override fun onStarClick(word: Word, position: Int) {
                     wordViewModel.setMyWord(position)
                 }
 
                 override fun onItemLongClick(word: Word, position: Int) {
                     wordViewModel.selectWord(position)
-                    editWordAlertDialog.setOldWord(word)
-                    editWordAlertDialog.showDialog(supportFragmentManager)
+                    editOrDeleteAlertDialog.show()
                 }
             }
         }
