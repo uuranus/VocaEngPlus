@@ -17,8 +17,10 @@ interface WordDialogListener {
 class WordDialogFragment(private val listener: WordDialogListener) : DialogFragment() {
 
     private lateinit var dialogWordBinding: DialogWordBinding
+    private var oldWord: Word? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        println("oncreateDialog")
         activity?.let {
             val inflater = requireActivity().layoutInflater
             dialogWordBinding = DialogWordBinding.inflate(inflater)
@@ -47,17 +49,25 @@ class WordDialogFragment(private val listener: WordDialogListener) : DialogFragm
             wordEditText.text.clear()
             meaningEditText.text.clear()
         }
-    }
-
-    fun setOldWord(word: Word) {
-        dialogWordBinding.run {
-            wordEditText.setText(word.word)
-            meaningEditText.setText(word.meaning)
-        }
+        oldWord = null
     }
 
     fun showDialog(manager: FragmentManager) {
         show(manager, tag)
     }
 
+    fun showDialog(manager: FragmentManager, oldWord: Word) {
+        show(manager, tag)
+        this.oldWord = oldWord
+    }
+
+    override fun onStart() {
+        super.onStart()
+        oldWord?.let {
+            dialogWordBinding.run {
+                wordEditText.setText(it.word)
+                meaningEditText.setText(it.meaning)
+            }
+        }
+    }
 }

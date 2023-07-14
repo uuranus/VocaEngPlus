@@ -174,7 +174,7 @@ class WordDataSource @Inject constructor(
             databaseService.getWords(requestUser.uid, wordListUid, requestUser.idToken)
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
-                Result.success(it.values.map { it2 -> it2.toWord() })
+                Result.success(it.map { it2 -> it2.toWord() })
             } ?: Result.failure(Exception())
         } else {
             Result.failure(Exception())

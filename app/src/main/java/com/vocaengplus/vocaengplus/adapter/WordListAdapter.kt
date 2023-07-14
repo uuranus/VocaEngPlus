@@ -23,9 +23,6 @@ class WordListAdapter() :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.run {
-                engWordTextView.setOnClickListener {
-                    meanWordTextView.isVisible = meanWordTextView.isVisible.not()
-                }
                 engWordTextView.setOnLongClickListener {
                     itemClickListener?.onItemLongClick(
                         currentList[adapterPosition],
@@ -33,6 +30,10 @@ class WordListAdapter() :
                     )
                     return@setOnLongClickListener false
                 }
+                engWordTextView.setOnClickListener {
+                    meanWordTextView.isVisible = meanWordTextView.isVisible.not()
+                }
+
                 starImageView.setOnClickListener {
                     itemClickListener?.onStarClick(currentList[adapterPosition], adapterPosition)
                 }

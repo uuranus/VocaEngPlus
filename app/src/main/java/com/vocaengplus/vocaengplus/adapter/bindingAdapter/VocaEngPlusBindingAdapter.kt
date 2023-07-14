@@ -1,6 +1,7 @@
 package com.vocaengplus.vocaengplus.adapter.bindingAdapter
 
 import android.net.Uri
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter

@@ -84,7 +84,7 @@ interface DatabaseService {
         @Path("uid") uid: String,
         @Path("wordListUid") wordListUid: String,
         @Query("auth") token: String,
-    ): Response<Map<Int, WordDTO>>
+    ): Response<List<WordDTO>>
 
     @PUT("/WordList/{uid}/{wordListUid}/words.json")
     suspend fun putWords(

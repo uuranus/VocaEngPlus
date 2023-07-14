@@ -44,6 +44,10 @@ class WordViewModel @Inject constructor(
         _selectedWordIndex.value = index
     }
 
+    fun getSelectedWord(): Word {
+        return _currentWords.value[_selectedWordIndex.value]
+    }
+
     fun getData() {
         viewModelScope.launch {
             getWordLists()
@@ -87,7 +91,12 @@ class WordViewModel @Inject constructor(
         viewModelScope.launch {
             val wordLisUid = getWordListUidByIndex()
             val newWords = _currentWords.value.plus(word.copy(wordListUid = wordLisUid))
-            repository.addWord(wordLisUid, newWords)
+            val addWordResult = repository.addWord(wordLisUid, newWords)
+            if (addWordResult.isSuccess) {
+                _currentWords.value = newWords
+            } else {
+                _snackBarMessage.value = "단어 추가에 실패했습니다"
+            }
 //                    repository.setLog()
         }
     }
@@ -110,7 +119,7 @@ class WordViewModel @Inject constructor(
     fun setMyWord(position: Int) {
         val words = _currentWords.value.mapIndexed { index, word ->
             if (index == position) {
-                word.copy(checked = true)
+                word.copy(checked = word.checked.not())
             } else {
                 word
             }
@@ -122,7 +131,7 @@ class WordViewModel @Inject constructor(
             if (checkedResponse.isSuccess) {
                 _currentWords.value = words
             } else {
-                _snackBarMessage.value = "즐겨찾기 추가에 실패했습니다."
+                _snackBarMessage.value = "즐겨찾기 추가에 실패했습니다"
             }
         }
     }
@@ -138,7 +147,29 @@ class WordViewModel @Inject constructor(
             }
         }
         viewModelScope.launch {
-            repository.editWord(wordLisUid, words)
+            val editResult = repository.editWord(wordLisUid, words)
+            if (editResult.isSuccess) {
+                _currentWords.value = words
+            } else {
+                _snackBarMessage.value = "단어 수정에 실패했습니다"
+            }
+//                    repository.setLog()
+        }
+
+    }
+
+    fun deleteWord(word: Word) {
+        val wordLisUid = getWordListUidByIndex()
+        val words = _currentWords.value.filter {
+            it != word
+        }
+        viewModelScope.launch {
+            val deleteResult = repository.editWord(wordLisUid, words)
+            if (deleteResult.isSuccess) {
+                _currentWords.value = words
+            } else {
+                _snackBarMessage.value = "단어 삭제에 실패했습니다"
+            }
 //                    repository.setLog()
         }
 
