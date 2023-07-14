@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleTextView"
-            tools:listitem="@layout/item_category">
+            tools:listitem="@layout/item_word_list">
 
         </androidx.recyclerview.widget.RecyclerView>
 

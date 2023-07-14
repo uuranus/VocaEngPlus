@@ -23,6 +23,7 @@ fun Map.Entry<String, WordListDTO>.toWordList(): WordList {
         key,
         value.wordListName,
         value.writerUid,
+        "",
         value.downLoadDate,
         value.description,
     )
@@ -33,6 +34,7 @@ fun WordListDTO.toWordList(wordListUid: String): WordList {
         wordListUid,
         wordListName,
         writerUid,
+        "",
         downLoadDate,
         description
     )

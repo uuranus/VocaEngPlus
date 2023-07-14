@@ -9,40 +9,44 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.*
 import com.vocaengplus.vocaengplus.adapter.SettingListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivitySettingBinding
 import com.vocaengplus.vocaengplus.databinding.EditcategoryBinding
-import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.ui.util.Validation
+import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.util.*
 
 @AndroidEntryPoint
 class SettingActivity : AppCompatActivity() {
     lateinit var binding: ActivitySettingBinding
 
-    private val settingAdapter = SettingListAdapter()
-    private val settingViewModel: SettingViewModel by viewModels()
+    private val settingAdapter = SettingListAdapter().apply {
+        itemClickListener = object : SettingListAdapter.OnItemClickListener {
+            override fun onDeleteClick( position: Int) {
+                settingViewModel.selectWordList(position)
+                deleteWordListDialog.show()
+            }
 
-    private val editDlgView: EditcategoryBinding by lazy {
-        EditcategoryBinding.inflate(layoutInflater).apply {
-            editcategoryname.setText(holder.categoryname.text.toString())
-            editcategorydescription.setText(
-                holder.description.text.toString()
-                    .substring(5, holder.description.text.toString().length)
-            )
+            override fun onEditClick(position: Int) {
+                settingViewModel.selectWordList(position)
+                setOldWordList()
+                editWordListDialog.show()
+            }
+
         }
     }
-    private val editCategoryDialog: AlertDialog by lazy {
-        AlertDialog.Builder(this).setView(editDlgView.root)
+    private val settingViewModel: SettingViewModel by viewModels()
+
+    private val editDialogView: EditcategoryBinding by lazy {
+        EditcategoryBinding.inflate(layoutInflater)
+    }
+
+    private val editWordListDialog: AlertDialog by lazy {
+        AlertDialog.Builder(this).setView(editDialogView.root)
             .setPositiveButton("네") { _, _ ->
-                val newCategoryName = editDlgView.editcategoryname.text.toString()
-                val newDescription = editDlgView.editcategorydescription.text.toString()
+                val newCategoryName = editDialogView.editcategoryname.text.toString()
+                val newDescription = editDialogView.editcategorydescription.text.toString()
 
                 settingViewModel.editWordList(newCategoryName, newDescription)
             }
@@ -51,45 +55,10 @@ class SettingActivity : AppCompatActivity() {
             }.create()
     }
 
-    private val deleteCategoryDialog: AlertDialog by lazy {
+    private val deleteWordListDialog: AlertDialog by lazy {
         AlertDialog.Builder(this).setMessage("해당 단어장을 삭제하시겠습니까?")
             .setPositiveButton("네") { _, _ ->
-
-                databaseref.child("UserData")
-                    .child(uid.toString())
-                    .child("downloadData")
-                    .child(categoryname)
-                    .removeValue()
-
-                databaseref.child("UserData")
-                    .child(firebaseUser.uid.toString())
-                    .child("downloadNames")
-                    .child(categoryname)
-                    .removeValue()
-
-                databaseref.child("UserLog")
-                    .child(firebaseUser.uid.toString()).get().addOnSuccessListener {
-                        if (it.hasChild(date.substring(0, 7))) {
-                            var count = it.child(date.substring(0, 7))
-                                .child("AddDelete")
-                                .child("deleteCategory").value.toString().toInt()
-
-                            databaseref.child("UserLog")
-                                .child(firebaseUser.uid.toString())
-                                .child(date.substring(0, 7))
-                                .child("AddDelete")
-                                .child("deleteCategory").setValue(++count)
-
-                        } else {
-                            initialization.initData("deleteCategory")
-                        }
-                        Toast.makeText(
-                            this@SettingActivity,
-                            "$categoryname 단어장 삭제 완료",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        initRecyclerView()
-                    }
+                settingViewModel.deleteWordList()
             }
             .setNegativeButton("아니오") { _, _ ->
             }.create()
@@ -111,8 +80,8 @@ class SettingActivity : AppCompatActivity() {
         }
 
         binding.addCategoryButton.setOnClickListener {
-            val intent = Intent(this@SettingActivity, AddCategoryActivity::class.java)
-            startActivityForResult(intent, 100)
+            val intent = Intent(this@SettingActivity, AddWordListActivity::class.java)
+            startActivity(intent)
         }
 
         lifecycleScope.launch {
@@ -130,6 +99,14 @@ class SettingActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         settingViewModel.getAllWordLists()
+    }
+
+    private fun setOldWordList() {
+        val currentWordList = settingViewModel.getSelectedWordList()
+        editDialogView.run {
+            editcategoryname.setText(currentWordList.wordListName)
+            editcategorydescription.setText(currentWordList.description)
+        }
     }
 
 }

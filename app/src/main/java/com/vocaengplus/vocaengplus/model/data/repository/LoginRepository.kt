@@ -4,10 +4,12 @@ import com.vocaengplus.vocaengplus.model.data.LoginDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.User
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.model.data.newData.toUserDto
+import com.vocaengplus.vocaengplus.model.data.newData.toWordDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.ui.util.WORDLIST
 import com.vocaengplus.vocaengplus.ui.util.makeDefaultWordList
+import com.vocaengplus.vocaengplus.ui.util.makeDefaultWords
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(
@@ -33,20 +35,22 @@ class LoginRepository @Inject constructor(
         for (type in WORDLIST.values()) {
             val defaultWordList =
                 makeDefaultWordList(type, userData.nickname, userData.uid).toWordListDto()
+
             val wordListId = dataSource.makeDefaultWordList(
                 idToken, userData.uid,
                 defaultWordList
             )
             if (wordListId.isSuccessful) {
                 wordListId.body()?.let {
-                    val userWordListResponse = dataSource.makeUserWordList(
+                    val defaultWords = makeDefaultWords(type, it.name)
+                    val userWordListResponse = dataSource.makeDefaultWords(
                         idToken,
                         userData.uid,
                         it.name,
-                        defaultWordList.wordListName
+                        defaultWords.map { it.toWordDto() }
                     )
 
-                    if (userWordListResponse.isSuccessful.not()) {
+                    if (userWordListResponse.isSuccess.not()) {
                         wordDataResponse = false
                     }
                 }

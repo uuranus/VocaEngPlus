@@ -6,8 +6,6 @@ import com.vocaengplus.vocaengplus.model.data.newData.toWordDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.dto.RequestUser
-import com.vocaengplus.vocaengplus.network.dto.WordDTO
-import com.vocaengplus.vocaengplus.network.dto.WordListDTO
 import com.vocaengplus.vocaengplus.network.dto.toWord
 import com.vocaengplus.vocaengplus.network.dto.toWordList
 import javax.inject.Inject
@@ -113,14 +111,14 @@ class WordDataSource @Inject constructor(
             databaseService.postWordList(
                 requestUser.uid,
                 requestUser.idToken,
-                newWordList.toWordListDto()
+                newWordList.copy(writerUid = requestUser.uid).toWordListDto()
             )
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
                 if (addWords(
                         requestUser,
                         it.name,
-                        newWords
+                        newWords.map { it2 -> it2.copy(wordListUid = it.name) }
                     ).isSuccess
                 ) {
                     Result.success(true)
@@ -160,9 +158,12 @@ class WordDataSource @Inject constructor(
         val networkResponse =
             databaseService.deleteWordList(requestUser.uid, wordListUid, requestUser.idToken)
         return if (networkResponse.isSuccessful) {
-            networkResponse.body()?.let {
+            val deleteResponse = deleteWords(requestUser, wordListUid)
+            if (deleteResponse.isSuccess) {
                 Result.success(true)
-            } ?: Result.failure(Exception())
+            } else {
+                Result.failure(Exception())
+            }
         } else {
             Result.failure(Exception())
         }
@@ -211,9 +212,7 @@ class WordDataSource @Inject constructor(
                 requestUser.idToken
             )
         return if (networkResponse.isSuccessful) {
-            networkResponse.body()?.let {
-                Result.success(true)
-            } ?: Result.failure(Exception())
+            Result.success(true)
         } else {
             Result.failure(Exception())
         }

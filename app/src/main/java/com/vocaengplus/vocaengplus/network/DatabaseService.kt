@@ -5,7 +5,6 @@ import com.vocaengplus.vocaengplus.network.dto.PostDTO
 import com.vocaengplus.vocaengplus.network.dto.UserDTO
 import com.vocaengplus.vocaengplus.network.dto.WordDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
-import com.vocaengplus.vocaengplus.network.dto.WordsDTO
 import retrofit2.Response
 import retrofit2.http.*
 

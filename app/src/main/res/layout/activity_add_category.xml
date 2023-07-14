@@ -7,14 +7,14 @@
 
         <variable
             name="vm"
-            type="com.vocaengplus.vocaengplus.ui.setting.SettingViewModel" />
+            type="com.vocaengplus.vocaengplus.ui.setting.AddWordListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/activity_horizontal_margin"
-        tools:context=".ui.setting.AddCategoryActivity">
+        tools:context=".ui.setting.AddWordListActivity">
 
         <TextView
             android:id="@+id/titleTextView"

@@ -2,12 +2,9 @@ package com.vocaengplus.vocaengplus.ui.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
-import com.vocaengplus.vocaengplus.model.data.repository.UserRepository
 import com.vocaengplus.vocaengplus.model.data.repository.WordRepository
 import com.vocaengplus.vocaengplus.ui.util.Validation
-import com.vocaengplus.vocaengplus.ui.util.getToday
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class SettingViewModel @Inject constructor(
     private val repository: WordRepository,
-    private val userRepository: UserRepository,
 ) : ViewModel() {
 
     private val _snackBarMessage = MutableStateFlow<String>("")
@@ -26,29 +22,14 @@ class SettingViewModel @Inject constructor(
     private val _wordLists = MutableStateFlow<List<WordList>>(emptyList())
     val wordLists: StateFlow<List<WordList>> get() = _wordLists
 
-    val newWordListName = MutableStateFlow("")
+    private val _currentSelectedWordList = MutableStateFlow<Int>(0)
+    val currentSelectedWordList: StateFlow<Int> get() = _currentSelectedWordList
 
-    private val _writerName = MutableStateFlow("")
-    val writeName: StateFlow<String> get() = _writerName
-
-    private val _addDate = MutableStateFlow("")
-    val addDate: StateFlow<String> get() = _addDate
-
-    val newWordListDescription = MutableStateFlow("")
-
-    private val _newWordLists = MutableStateFlow<MutableList<Word>>(mutableListOf())
-    val newWordLists: StateFlow<MutableList<Word>> get() = _newWordLists
-
-    private val _isSavedSuccess = MutableStateFlow(false)
-    val isSavedSuccess: StateFlow<Boolean> get() = _isSavedSuccess
-
-    fun getNewCategoryWriterAndDate() {
-        viewModelScope.launch {
-            val name = userRepository.getUserName()
-            _writerName.value = name
-        }
-        _addDate.value = getToday()
+    fun selectWordList(position: Int) {
+        _currentSelectedWordList.value = position
     }
+
+    fun getSelectedWordList(): WordList = _wordLists.value[_currentSelectedWordList.value]
 
     fun getAllWordLists() {
         viewModelScope.launch {
@@ -63,80 +44,64 @@ class SettingViewModel @Inject constructor(
         }
     }
 
-    fun addNewWord(word: String, meaning: String) {
-        if (word.isEmpty() || meaning.isEmpty()) {
-            _snackBarMessage.value = "단어 추가 실패"
-        } else {
-            if (Validation.isValidateWord(word).not()) {
-                _snackBarMessage.value = "영단어 입력이 올바르지 않아 추가에 실패하였습니다."
-            } else if (Validation.isValidateMeaning(meaning).not()) {
-                _snackBarMessage.value = "뜻 입력이 올바르지 않아 추가에 실패하였습니다."
-            } else {
-                _newWordLists.value.add(Word(word, meaning, false, ""))
-            }
-        }
-    }
-
-    fun removeNewWord(position: Int) {
-        _newWordLists.value =
-            _newWordLists.value.filterIndexed { index, word -> index != position }.toMutableList()
-    }
-
-    fun addNewWordList() {
-        if (newWordListDescription.value.isEmpty()) {
-            _snackBarMessage.value = "단어장 이름을 입력해주세요"
-            return
-        }
-        if (newWordListName.value.isEmpty()) {
-            _snackBarMessage.value = "내용을 입력해주세요"
-            return
-        }
-        if (_newWordLists.value.isEmpty()) {
-            _snackBarMessage.value = "단어가 최소 한 개 이상 존재해야 합니다"
-            return
-        }
+    fun editWordList(newName: String, newDescription: String) {
+        if (isValidWordList(newName, newDescription).not()) return
 
         viewModelScope.launch {
-            val newWordList = WordList(
-                newWordListName.value,
-                "",
-                "",
-                System.currentTimeMillis(),
-                newWordListDescription.value,
-                _newWordLists.value.map { it.copy(wordListName = newWordListName.value) }
+            val wordList = _wordLists.value[_currentSelectedWordList.value].copy(
+                wordListName = newName,
+                description = newDescription,
             )
-            val addNewWordListResponse = repository.addNewWordList(newWordList)
-            if (addNewWordListResponse.isSuccess) {
-                _isSavedSuccess.value = true
+            val editResponse = repository.editWordList(wordList)
+            if (editResponse.isSuccess) {
+                _wordLists.value = _wordLists.value.mapIndexed { index, oldWordList ->
+                    if (index == _currentSelectedWordList.value) {
+                        wordList
+                    } else {
+                        oldWordList
+                    }
+                }
             } else {
-                _snackBarMessage.value = "단어장을 추가하는데 실패했습니다"
+                _snackBarMessage.value = "단어장 수정에 실패했습니다."
             }
         }
     }
 
-    fun editWordList(newName: String, newDescription: String) {
+    private fun isValidWordList(newName: String, newDescription: String): Boolean {
         if (!(Validation.checkInput(arrayOf(newName)))) {
             _snackBarMessage.value = "단어장 이름을 입력해주세요"
-            return
+            return false
         }
 
         if (!(Validation.isValidateCategoryName(newName))) {
             _snackBarMessage.value = "단어장 이름은 1~20글자여야 합니다.(.#$[] 제외)"
-            return
+            return false
         }
 
         if (!(Validation.checkInput(arrayOf(newDescription)))) {
             _snackBarMessage.value = "단어장 내용을 입력해주세요"
-            return
+            return false
         }
 
         if (newDescription.length > 40) {
             _snackBarMessage.value = "단어장 내용은 1~40자 이내여야 합니다"
-            return
+            return false
         }
+        return true
+    }
 
+    fun deleteWordList() {
         viewModelScope.launch {
-            repository.editWordList(newName, newDescription)
+            val deleteWordListUid = _wordLists.value[_currentSelectedWordList.value].wordListUid
+            val deleteResponse =
+                repository.deleteWordList(deleteWordListUid)
+            if (deleteResponse.isSuccess) {
+                _wordLists.value = _wordLists.value.filter {
+                    it.wordListUid != deleteWordListUid
+                }
+            } else {
+                _snackBarMessage.value = "단어장 삭제에 실패했습니다."
+            }
         }
     }
 }

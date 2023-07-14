@@ -18,7 +18,7 @@ class WordRepository @Inject constructor(
         return RequestUser(uid, idToken)
     }
 
-    suspend fun addNewWord(wordListUid: String, words: List<Word>): Result<Boolean> {
+    suspend fun addWord(wordListUid: String, words: List<Word>): Result<Boolean> {
         val requestUser = getRequestUser()
 
         return dataSource.addWord(requestUser, wordListUid, words)
@@ -75,6 +75,15 @@ class WordRepository @Inject constructor(
         val requestUser = getRequestUser()
 
         return dataSource.deleteWordList(
+            requestUser,
+            wordListUid
+        )
+    }
+
+    suspend fun getWords(wordListUid: String): Result<List<Word>> {
+        val requestUser = getRequestUser()
+
+        return dataSource.getWords(
             requestUser,
             wordListUid
         )
