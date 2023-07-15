@@ -88,4 +88,13 @@ class WordRepository @Inject constructor(
             wordListUid
         )
     }
+
+    suspend fun getMyWords(wordListUid: String): Result<List<Word>> {
+        val requestUser = getRequestUser()
+
+        return dataSource.getMyWords(
+            requestUser,
+            wordListUid
+        )
+    }
 }

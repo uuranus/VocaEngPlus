@@ -217,4 +217,16 @@ class WordDataSource @Inject constructor(
             Result.failure(Exception())
         }
     }
+
+    suspend fun getMyWords(requestUser: RequestUser, wordListUid: String): Result<List<Word>> {
+        val networkResponse =
+            databaseService.getWords(requestUser.uid, wordListUid, requestUser.idToken)
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(it.filter { it2 -> it2.checked }.map { it3 -> it3.toWord() })
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
 }

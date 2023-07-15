@@ -27,7 +27,18 @@ import kotlinx.coroutines.launch
 class WordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWordBinding
     private val wordViewModel: WordViewModel by viewModels()
-    private lateinit var adapter: WordListAdapter
+    private val adapter: WordListAdapter = WordListAdapter().apply {
+        itemClickListener = object : WordAdapterListener {
+            override fun onStarClick(word: Word, position: Int) {
+                wordViewModel.setMyWord(position)
+            }
+
+            override fun onItemLongClick(word: Word, position: Int) {
+                wordViewModel.selectWord(position)
+                editOrDeleteAlertDialog.show()
+            }
+        }
+    }
 
     private val helpAlertDialog: AlertDialog by lazy {
         val dlgBinding = HelpWordBinding.inflate(layoutInflater)
@@ -90,18 +101,6 @@ class WordActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        adapter = WordListAdapter().apply {
-            itemClickListener = object : WordAdapterListener {
-                override fun onStarClick(word: Word, position: Int) {
-                    wordViewModel.setMyWord(position)
-                }
-
-                override fun onItemLongClick(word: Word, position: Int) {
-                    wordViewModel.selectWord(position)
-                    editOrDeleteAlertDialog.show()
-                }
-            }
-        }
 
         binding.run {
 
