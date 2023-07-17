@@ -8,6 +8,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -26,7 +27,7 @@ class TestMainFragment : Fragment() {
 
     private var _binding: FragmentTestMainBinding? = null
     private val binding: FragmentTestMainBinding get() = _binding!!
-    private val testViewModel: TestViewModel by viewModels()
+    private val testViewModel: TestViewModel by activityViewModels()
     private val helpDialog: AlertDialog by lazy {
         val dlgBinding = TesthelpBinding.inflate(layoutInflater)
         AlertDialog.Builder(requireContext())
@@ -82,7 +83,7 @@ class TestMainFragment : Fragment() {
                 )
 
             testStartButton.setOnClickListener {
-                findNavController().navigate(R.id.action_testMainFragment_to_testFragment)
+                testViewModel.getWords()
             }
         }
 
@@ -95,6 +96,14 @@ class TestMainFragment : Fragment() {
                             R.layout.support_simple_spinner_dropdown_item,
                             it.map { it2 -> it2.wordListName }
                         )
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                testViewModel.moveToTest.collectLatest {
+                    if (it) findNavController().navigate(R.id.action_testMainFragment_to_testFragment)
                 }
             }
         }

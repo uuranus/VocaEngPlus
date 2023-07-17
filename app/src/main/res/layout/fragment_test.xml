@@ -34,6 +34,7 @@
             style="@style/TextAppearance.VocaEngPlus.Body.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{vm.currentTestWord.question}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,37 +53,37 @@
 
             <RadioButton
                 android:id="@+id/radioButton"
+                style="@style/TextAppearance.VocaEngPlus.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"
+                android:text="@{vm.currentTestWord.answers[0]}"
                 tools:text="보카잉플러스" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
+                style="@style/TextAppearance.VocaEngPlus.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_vertical_margin"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"
+                android:text="@{vm.currentTestWord.answers[1]}"
                 tools:text="보카잉플러스" />
 
             <RadioButton
                 android:id="@+id/radioButton3"
+                style="@style/TextAppearance.VocaEngPlus.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_vertical_margin"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"
+                android:text="@{vm.currentTestWord.answers[2]}"
                 tools:text="보카잉플러스" />
 
             <RadioButton
                 android:id="@+id/radioButton4"
+                style="@style/TextAppearance.VocaEngPlus.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/text_vertical_margin"
-                android:fontFamily="@font/main_font"
-                android:textColor="@color/black"
+                android:text="@{vm.currentTestWord.answers[3]}"
                 tools:text="보카잉플러스" />
 
         </RadioGroup>
