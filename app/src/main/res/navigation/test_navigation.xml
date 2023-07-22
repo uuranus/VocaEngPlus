@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/test_navigation"
+    app:startDestination="@id/testMainFragment">
+
+    <fragment
+        android:id="@+id/testMainFragment"
+        android:name="com.vocaengplus.vocaengplus.ui.test.TestMainFragment"
+        android:label="TestMainFragment"
+        tools:layout="@layout/fragment_test_main">
+        <action
+            android:id="@+id/action_testMainFragment_to_testFragment"
+            app:destination="@id/testFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.vocaengplus.vocaengplus.ui.test.TestFragment"
+        android:label="fragment_test"
+        tools:layout="@layout/fragment_test">
+        <action
+            android:id="@+id/action_testFragment_to_testResultFragment"
+            app:destination="@id/testResultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/testResultFragment"
+        android:name="com.vocaengplus.vocaengplus.ui.test.TestResultFragment"
+        android:label="fragment_test_result"
+        tools:layout="@layout/fragment_test_result">
+        <action
+            android:id="@+id/action_testResultFragment_to_testMainFragment"
+            app:destination="@id/testMainFragment"
+            app:popUpTo="@id/testMainFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

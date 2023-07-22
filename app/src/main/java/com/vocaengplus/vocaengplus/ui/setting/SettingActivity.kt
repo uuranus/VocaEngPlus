@@ -12,7 +12,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.vocaengplus.vocaengplus.adapter.SettingListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivitySettingBinding
 import com.vocaengplus.vocaengplus.databinding.EditcategoryBinding
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

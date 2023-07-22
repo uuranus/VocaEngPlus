@@ -1,7 +1,9 @@
 package com.vocaengplus.vocaengplus.network
 
+import com.vocaengplus.vocaengplus.model.data.newData.TestResultLog
 import com.vocaengplus.vocaengplus.model.data.newData.User
 import com.vocaengplus.vocaengplus.network.dto.PostDTO
+import com.vocaengplus.vocaengplus.network.dto.TestResultLogDTO
 import com.vocaengplus.vocaengplus.network.dto.UserDTO
 import com.vocaengplus.vocaengplus.network.dto.WordDTO
 import com.vocaengplus.vocaengplus.network.dto.WordListDTO
@@ -44,7 +46,7 @@ interface DatabaseService {
     @GET("/UserWordList/{uid}/{wordListUid}.json")
     suspend fun getWordList(
         @Path("uid") uid: String,
-        @Path("wordListId") wordListId: String,
+        @Path("wordListUid") wordListUid: String,
         @Query("auth") token: String,
     ): Response<WordListDTO>
 
@@ -104,7 +106,46 @@ interface DatabaseService {
     /**
      * UserLog
      */
+    @GET("/UserLog/{uid}/review.json")
+    suspend fun getReviewWords(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+    ): Response<Map<String,List<WordDTO>>>
 
+    @POST("/UserLog/{uid}/review.json")
+    suspend fun postReviewWords(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+        @Body data: List<WordDTO>,
+    ): Response<PostDTO>
+
+    @PUT("/UserLog/{uid}/review.json")
+    suspend fun deleteReviewWords(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+        @Body data: List<WordDTO>,
+    ): Response<List<WordDTO>>
+
+    @GET("/UserLog/{uid}/{yearMonth}.json")
+    suspend fun getTestLog(
+        @Path("uid") uid: String,
+        @Path("yearMonth") yearMonth: String,
+        @Query("auth") token: String,
+    ): Response<List<TestResultLogDTO>>
+
+    @POST("/UserLog/{uid}/{yearMonth}.json")
+    suspend fun postTestLog(
+        @Path("uid") uid: String,
+        @Path("yearMonth") yearMonth: String,
+        @Query("auth") token: String,
+        @Body data: TestResultLogDTO,
+    ): Response<PostDTO>
+
+    @DELETE("/UserLog/{uid}.json")
+    suspend fun deleteUserLogs(
+        @Path("uid") uid: String,
+        @Query("auth") token: String,
+    ): Response<String>
 
     /**
      * Community

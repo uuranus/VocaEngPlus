@@ -1,72 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.test.TestFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/testImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:src="@drawable/testing_illust"
-        app:layout_constraintBottom_toTopOf="@id/questionTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/questionTextView"
-        style="@style/TextAppearance.VocaEngPlus.Body.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
-        tools:text="VocaEngPlus" />
+        <variable
+            name="vm"
+            type="com.vocaengplus.vocaengplus.ui.test.TestViewModel" />
+    </data>
 
-    <RadioGroup
-        android:id="@+id/answerRadioGroup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/title_body_margin"
-        app:layout_constraintEnd_toEndOf="@id/testImageView"
-        app:layout_constraintStart_toStartOf="@id/testImageView"
-        app:layout_constraintTop_toBottomOf="@id/questionTextView">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.test.TestFragment">
 
-        <RadioButton
-            android:id="@+id/radioButton"
+        <ImageView
+            android:id="@+id/testImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/testing_illust"
+            app:layout_constraintBottom_toTopOf="@id/questionTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/questionTextView"
+            style="@style/TextAppearance.VocaEngPlus.Body.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/main_font"
-            tools:text="보카잉플러스"
-            android:textColor="@color/black" />
+            android:text="@{vm.currentTestWord.question}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            tools:text="VocaEngPlus" />
 
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/answerRadioGroup"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/main_font"
-            android:layout_marginTop="@dimen/text_vertical_margin"
-            tools:text="보카잉플러스"
-            android:textColor="@color/black" />
+            android:layout_marginTop="@dimen/title_body_margin"
+            app:layout_constraintEnd_toEndOf="@id/testImageView"
+            app:layout_constraintStart_toStartOf="@id/testImageView"
+            app:layout_constraintTop_toBottomOf="@id/questionTextView">
 
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/main_font"
-            android:layout_marginTop="@dimen/text_vertical_margin"
-            tools:text="보카잉플러스"
-            android:textColor="@color/black" />
+            <RadioButton
+                android:id="@+id/radioButton"
+                style="@style/TextAppearance.VocaEngPlus.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{vm.currentTestWord.answers[0]}"
+                tools:text="보카잉플러스" />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/radioButton2"
+                style="@style/TextAppearance.VocaEngPlus.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_vertical_margin"
+                android:text="@{vm.currentTestWord.answers[1]}"
+                tools:text="보카잉플러스" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <RadioButton
+                android:id="@+id/radioButton3"
+                style="@style/TextAppearance.VocaEngPlus.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_vertical_margin"
+                android:text="@{vm.currentTestWord.answers[2]}"
+                tools:text="보카잉플러스" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                style="@style/TextAppearance.VocaEngPlus.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_vertical_margin"
+                android:text="@{vm.currentTestWord.answers[3]}"
+                tools:text="보카잉플러스" />
+
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,192 +4,79 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.FragmentTestBinding
-import com.vocaengplus.vocaengplus.model.data.Voca
-import java.util.Random
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class TestFragment(val category:String, val data: ArrayList<Voca>, val type:String) : Fragment() {
-    var binding: FragmentTestBinding?=null
-    lateinit var resultdata:ArrayList<Voca>
-    val random= Random()
-    var index=0
-    var answer=0
-    var corcount=0
-    var wrongcount=0
+class TestFragment : Fragment() {
+    private var _binding: FragmentTestBinding? = null
+    private val binding: FragmentTestBinding get() = _binding!!
+
+    private val testViewModel: TestViewModel by activityViewModels()
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
-        // Inflate the layout for this fragment
-        binding= FragmentTestBinding.inflate(layoutInflater, container, false)
-        return binding!!.root
+        _binding = FragmentTestBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        resultdata=ArrayList<Voca>()
-        if(type=="영어 문제 - 한국어 답"){
-            initData("e")
-        }
-        else{
-            initData("k")
-        }
-    }
-
-    private fun initData(type:String) {
-        if(index==data.size){
-            (activity as TestActivity).replaceFragment(TestResultFragment(category,wrongcount,corcount,resultdata),"testresult")
-            return
+        binding.run {
+            vm = testViewModel
+            lifecycleOwner = this@TestFragment.viewLifecycleOwner
         }
 
-        binding!!.apply {
-            if(type=="e"){
-                questionTextView.text=data[index].word.toUpperCase()
-                when(random.nextInt(3)){
-                    0 ->{
-                        radioButton.text=data[index].meaning
-                        val str=getInCorrect(data[index].word,type)
-                        radioButton2.text=str[0]
-                        radioButton3.text=str[1]
-                        answer=0
-                    }
-                    1 ->{
-                        radioButton2.text=data[index].meaning
-                        val str=getInCorrect(data[index].word,type)
-                        radioButton.text=str[0]
-                        radioButton3.text=str[1]
-                        answer=1
-                    }
-                    2 ->{
-                        radioButton3.text=data[index].meaning
-                        val str=getInCorrect(data[index].word,type)
-                        radioButton.text=str[0]
-                        radioButton2.text=str[1]
-                        answer=2
-                    }
+        binding.run {
+            answerRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+                val pos = when (checkedId) {
+                    R.id.radioButton -> 0
+                    R.id.radioButton2 -> 1
+                    R.id.radioButton3 -> 2
+                    R.id.radioButton4 -> 3
+                    else -> -1
                 }
-            }
-            else{
-                questionTextView.text=data[index].meaning
-                when (random.nextInt(3)) {
-                    0 -> {
-                        radioButton.text = data[index].word
-                        val str = getInCorrect(data[index].meaning,type)
-                        radioButton2.text = str[0]
-                        radioButton3.text = str[1]
-                        answer = 0
-                    }
-                    1 -> {
-                        radioButton2.text = data[index].word
-                        val str = getInCorrect(data[index].meaning,type)
-                        radioButton.text = str[0]
-                        radioButton3.text = str[1]
-                        answer = 1
-                    }
-                    2 -> {
-                        radioButton3.text = data[index].word
-                        val str = getInCorrect(data[index].meaning,type)
-                        radioButton.text = str[0]
-                        radioButton2.text = str[1]
-                        answer = 2
-                    }
-                }
-            }
+                if (pos == -1) return@setOnCheckedChangeListener
 
-            radioButton.setOnClickListener {
-                if(answer==0){
-                    Toast.makeText(requireContext(),"정답입니다",Toast.LENGTH_SHORT).show()
-                    corcount++
-                    resultdata.add(Voca(data[index].category,data[index].word,data[index].meaning,1))
-
-                }
-                else{
-                    Toast.makeText(requireContext(),"틀렸습니다",Toast.LENGTH_SHORT).show()
-                    wrongcount++
-                    resultdata.add(Voca(data[index].category,data[index].word,data[index].meaning,0))
-
-                }
-                clearBtn()
-                ++index
-                initData(type)
-            }
-
-            radioButton2.setOnClickListener {
-                if(answer==1){
-                    Toast.makeText(requireContext(),"정답입니다",Toast.LENGTH_SHORT).show()
-                    corcount++
-                    resultdata.add(Voca(data[index].category,data[index].word,data[index].meaning,1))
-
-                }
-                else{
-                    Toast.makeText(requireContext(),"틀렸습니다",Toast.LENGTH_SHORT).show()
-                    wrongcount++
-                    resultdata.add(Voca(data[index].category,data[index].word,data[index].meaning,0))
-
-                }
-                clearBtn()
-                ++index
-                initData(type)
-            }
-            radioButton3.setOnClickListener {
-                if(answer==2){
-                    Toast.makeText(requireContext(),"정답입니다",Toast.LENGTH_SHORT).show()
-                    corcount++
-                    resultdata.add(Voca(data[index].category,data[index].word,data[index].meaning,1))
-
-                }
-                else{
-                    Toast.makeText(requireContext(),"틀렸습니다",Toast.LENGTH_SHORT).show()
-                    wrongcount++
-                    resultdata.add(Voca(data[index].category,data[index].word,data[index].meaning,0))
-
-                }
-                clearBtn()
-                ++index
-                initData(type)
+                testViewModel.checkMyAnswer(pos)
+                group.clearCheck()
             }
         }
-    }
 
-    fun getInCorrect(engkor:String,type:String):ArrayList<String>{
-        val str=ArrayList<String>()
-        if(type=="e"){
-            while(str.size!=2){
-                val tempdata=data.get(random.nextInt(data.size))
-                if(tempdata.word.equals(engkor)||tempdata.meaning in str){
-                    continue
-                }
-                else{
-                    str.add(tempdata.meaning)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                testViewModel.moveToResult.collectLatest {
+                    if (it) findNavController().navigate(R.id.action_testFragment_to_testResultFragment)
                 }
             }
         }
-        else{
-            while(str.size!=2){
-                val tempdata=data.get(random.nextInt(data.size))
-                if(tempdata.meaning.equals(engkor)||tempdata.word in str){
-                    continue
-                }
-                else{
-                    str.add(tempdata.word)
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                testViewModel.snackBarMessage.collectLatest {
+                    if (it.isNotEmpty()) {
+                        Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
-        return str
-    }
 
-    fun clearBtn(){
-        binding!!.radioButton.isChecked=false
-        binding!!.radioButton2.isChecked=false
-        binding!!.radioButton3.isChecked=false
+        testViewModel.getTest()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        binding=null
+        _binding = null
     }
 }

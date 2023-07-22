@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/title_body_margin"
-    android:orientation="horizontal">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/word"
-        style="@style/TextAppearance.VocaEngPlus.Body"
-        android:layout_width="0dp"
+    <data>
+
+        <variable
+            name="item"
+            type="com.vocaengplus.vocaengplus.model.data.newData.Word" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3"
-        android:ellipsize="end"
-        android:maxLines="1"
-        tools:text="VocaEngPlus" />
+        android:layout_marginBottom="@dimen/title_body_margin"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/category"
-        style="@style/TextAppearance.VocaEngPlus.Body"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:ems="8"
-        android:gravity="end"
-        android:maxLines="1"
-        tools:text="보카잉플러스 단어장" />
+        <TextView
+            android:id="@+id/word"
+            style="@style/TextAppearance.VocaEngPlus.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{item.word}"
+            tools:text="VocaEngPlus" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:id="@+id/meaning"/>
+        <ImageView
+            android:id="@+id/moreInfoImageView"
+            style="@style/TextAppearance.VocaEngPlus.Body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/rightarrow" />
 
-</LinearLayout>
+    </LinearLayout>
+</layout>
