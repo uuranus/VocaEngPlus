@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 
-
 private val calendar: Calendar = Calendar.getInstance()
 private val dateFormat: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
 
@@ -14,6 +13,14 @@ fun getToday(): String {
         calendar.get(Calendar.YEAR),
         calendar.get(Calendar.MONTH) + 1,
         calendar.get(Calendar.DATE)
+    )
+}
+
+suspend fun getTodayYearMonth(): String {
+    return String.format(
+        "%04d%02d",
+        calendar.get(Calendar.YEAR),
+        calendar.get(Calendar.MONTH) + 1,
     )
 }
 

@@ -1,74 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.test.TestResultFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/resultTextView"
-        style="@style/TextAppearance.VocaEngPlus.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="테스트 결과"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/totalCountTextView"
-        style="@style/TextAppearance.VocaEngPlus.Body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/title_body_margin"
-        android:text="총 개수 : "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/resultTextView" />
+        <variable
+            name="vm"
+            type="com.vocaengplus.vocaengplus.ui.test.TestViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/correctCountTextView"
-        style="@style/TextAppearance.VocaEngPlus.Body"
-        android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.5"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_vertical_margin"
-        android:text="맞은 개수 : "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/totalCountTextView" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.test.TestResultFragment">
 
-    <TextView
-        android:id="@+id/wrongCountTextView"
-        style="@style/TextAppearance.VocaEngPlus.Body"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="틀린 개수 : "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/correctCountTextView"
-        app:layout_constraintTop_toTopOf="@id/correctCountTextView"
-        app:layout_constraintWidth_percent="0.5" />
+        <TextView
+            android:id="@+id/resultTextView"
+            style="@style/TextAppearance.VocaEngPlus.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="테스트 결과"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/resultRecyclerView"
-        android:layout_width="0dp"
-        android:layout_marginTop="@dimen/title_body_margin"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/correctCountTextView"
-        app:layout_constraintBottom_toTopOf="@id/endTestButton"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_test_result"/>
+        <TextView
+            android:id="@+id/totalCountTextView"
+            style="@style/TextAppearance.VocaEngPlus.Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/title_body_margin"
+            android:text="@{@string/total_count_format(vm.testResults.size())}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/resultTextView"
+            tools:text="총 개수 : " />
 
-    <Button
-        android:id="@+id/endTestButton"
-        style="@style/Theme.VocaEngPlus.Button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="테스트 종료"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/correctCountTextView"
+            style="@style/TextAppearance.VocaEngPlus.Body"
+            correctData="@{vm.testResults}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_vertical_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/totalCountTextView"
+            app:layout_constraintWidth_percent="0.5"
+            tools:text="맞은 개수 : " />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/wrongCountTextView"
+            style="@style/TextAppearance.VocaEngPlus.Body"
+            inCorrectData="@{vm.testResults}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/correctCountTextView"
+            app:layout_constraintTop_toTopOf="@id/correctCountTextView"
+            app:layout_constraintWidth_percent="0.5"
+            tools:text="틀린 개수 : " />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/resultRecyclerView"
+            submitData="@{vm.testResults}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/title_body_margin"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/endTestButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/correctCountTextView"
+            tools:listitem="@layout/item_test_result" />
+
+        <Button
+            android:id="@+id/endTestButton"
+            style="@style/Theme.VocaEngPlus.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="테스트 종료"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

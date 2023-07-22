@@ -15,4 +15,6 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
 
+    <string name="total_count_format">총 개수 : %d개</string>
+
 </resources>

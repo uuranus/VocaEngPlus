@@ -1,6 +1,6 @@
 package com.vocaengplus.vocaengplus.model.data.repository
 
-import com.vocaengplus.vocaengplus.model.data.WordDataSource
+import com.vocaengplus.vocaengplus.model.data.dataSource.WordDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import com.vocaengplus.vocaengplus.network.auth.AuthService

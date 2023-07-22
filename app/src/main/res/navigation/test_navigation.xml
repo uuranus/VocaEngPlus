@@ -16,12 +16,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/testResultFragment"
-        android:name="com.vocaengplus.vocaengplus.ui.test.TestResultFragment"
-        android:label="fragment_test_result"
-        tools:layout="@layout/fragment_test_result" />
-
-    <fragment
         android:id="@+id/testFragment"
         android:name="com.vocaengplus.vocaengplus.ui.test.TestFragment"
         android:label="fragment_test"
@@ -29,5 +23,17 @@
         <action
             android:id="@+id/action_testFragment_to_testResultFragment"
             app:destination="@id/testResultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/testResultFragment"
+        android:name="com.vocaengplus.vocaengplus.ui.test.TestResultFragment"
+        android:label="fragment_test_result"
+        tools:layout="@layout/fragment_test_result">
+        <action
+            android:id="@+id/action_testResultFragment_to_testMainFragment"
+            app:destination="@id/testMainFragment"
+            app:popUpTo="@id/testMainFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

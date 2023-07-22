@@ -6,17 +6,21 @@ import com.vocaengplus.vocaengplus.model.data.newData.Test
 import com.vocaengplus.vocaengplus.model.data.newData.TestResult
 import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.newData.reverseAnswerQuestion
+import com.vocaengplus.vocaengplus.model.data.repository.LogRepository
 import com.vocaengplus.vocaengplus.model.data.repository.WordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.log
 
 
 @HiltViewModel
 class TestViewModel @Inject constructor(
-    private val repository: WordRepository,
+    private val wordRepository: WordRepository,
+    private val logRepository: LogRepository,
 ) : ViewModel() {
     private val _snackBarMessage = MutableStateFlow("")
     val snackBarMessage: StateFlow<String> get() = _snackBarMessage
@@ -48,6 +52,9 @@ class TestViewModel @Inject constructor(
     private val _moveToResult = MutableStateFlow(false)
     val moveToResult: StateFlow<Boolean> get() = _moveToResult
 
+    private val _isSavedSuccess = MutableStateFlow(false)
+    val isSavedSuccess: StateFlow<Boolean> get() = _isSavedSuccess
+
     fun selectWordList(index: Int) {
         _selectedWordListIndex.value = index
     }
@@ -63,7 +70,7 @@ class TestViewModel @Inject constructor(
     }
 
     private suspend fun getWordLists() {
-        val names = repository.getWordLists()
+        val names = wordRepository.getWordLists()
 
         if (names.isSuccess) {
             names.getOrNull()?.let {
@@ -78,7 +85,7 @@ class TestViewModel @Inject constructor(
         viewModelScope.launch {
             val wordListUid = getWordListUidByIndex()
 
-            val testWords = repository.getWords(wordListUid)
+            val testWords = wordRepository.getWords(wordListUid)
             if (testWords.isSuccess) {
                 testWords.getOrNull()?.let {
                     if (it.size < 4) {
@@ -162,5 +169,23 @@ class TestViewModel @Inject constructor(
         _snackBarMessage.value = ""
 
         getTest()
+    }
+
+    fun saveTestResult() {
+        viewModelScope.launch {
+            val results = if (_testTypesIndex.value == 0) {
+                _testResults.value
+            } else {
+                _testResults.value.map { it.reverseAnswerQuestion() }
+            }
+            val saveResult = logRepository.saveTestResult(_testWords.value[0].wordListUid, results)
+
+            if(saveResult.isSuccess){
+                _isSavedSuccess.value = true
+            }
+            else{
+                _snackBarMessage.value = "테스트 결과 저장에 실패했습니다"
+            }
+        }
     }
 }

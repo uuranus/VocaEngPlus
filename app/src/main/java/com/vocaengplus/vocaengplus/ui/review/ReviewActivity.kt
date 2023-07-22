@@ -2,92 +2,104 @@ package com.vocaengplus.vocaengplus.ui.review
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.vocaengplus.vocaengplus.adapter.ReviewAdapter
+import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.vocaengplus.vocaengplus.R
+import com.vocaengplus.vocaengplus.adapter.ReviewListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityReviewBinding
+import com.vocaengplus.vocaengplus.databinding.DialogWordListInfoBinding
 import com.vocaengplus.vocaengplus.databinding.ReviewhelpBinding
-import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.ui.util.toDateString
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ReviewActivity : AppCompatActivity() {
-    lateinit var recyclerView: RecyclerView
-    lateinit var adapter: ReviewAdapter
-    lateinit var data:ArrayList<Voca>
-    lateinit var binding: ActivityReviewBinding
-    lateinit var firebaseAuth: FirebaseAuth
-    lateinit var firebaseUser: FirebaseUser
-    lateinit var databaseReference: DatabaseReference
-    lateinit var uid:String
-    val initialization= Initialization
+    private lateinit var binding: ActivityReviewBinding
+    private val reviewViewModel: ReviewViewModel by viewModels()
+    private val reviewAdapter = ReviewListAdapter().apply {
+        itemClickListener = object : ReviewListAdapter.OnItemClickListener {
+            override fun onItemClick(
+                position: Int,
+            ) {
+                reviewViewModel.setBlackBox(position)
+                reviewViewModel.resetBlackBox()
+            }
+
+            override fun onArrowClick(position: Int) {
+                reviewViewModel.getWordListInfo(position)
+            }
+        }
+    }
+
+    private val helpDialog: AlertDialog by lazy {
+        val dlgBinding = ReviewhelpBinding.inflate(layoutInflater)
+        AlertDialog.Builder(this)
+            .setView(dlgBinding.root)
+            .setNeutralButton("확인", null)
+            .create()
+    }
+
+    private val wordListDialogView: DialogWordListInfoBinding by lazy {
+        DialogWordListInfoBinding.inflate(layoutInflater)
+    }
+    private val wordListInfoDialog: AlertDialog by lazy {
+        AlertDialog.Builder(this)
+            .setView(wordListDialogView.root)
+            .setNeutralButton("확인", null)
+            .create()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityReviewBinding.inflate(layoutInflater)
+        binding = ActivityReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         init()
+
+        reviewViewModel.getReviews()
     }
+
     private fun init() {
-        binding.engWordTextView.text="단어를 선택해주세요"
-        binding.meaningTextView.visibility= View.INVISIBLE
-        binding.blackBox.visibility= View.INVISIBLE
-
-        //단어 가져오기
-        initRecyclerView()
-
-        binding.helpbtn.setOnClickListener {
-            val dlgBinding= ReviewhelpBinding.inflate(layoutInflater)
-            val dlgbuilder= AlertDialog.Builder(this)
-            dlgbuilder.setView(dlgBinding.root)
-                    .setNeutralButton("확인",null)
-            val dlg=dlgbuilder.create()
-            dlg.show()
+        binding.run {
+            vm = reviewViewModel
+            lifecycleOwner = this@ReviewActivity
+            reviewRecyclerView.adapter = reviewAdapter
         }
 
-    }
+        binding.helpbutton.setOnClickListener {
+            helpDialog.show()
+        }
 
-    private fun initRecyclerView() {
-        firebaseAuth= initialization.getFBauth()
-        firebaseUser=initialization.getFBuser()
-        databaseReference= initialization.getDBref()
-        uid=initialization.getuid()
+        binding.blackBox.setOnClickListener {
+            reviewViewModel.showBlackBox()
+        }
 
-        recyclerView=binding.reviewRecyclerView
-        recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
-
-        val query=databaseReference.child("UserData").child(uid.toString()).child("downloadData")
-                .child("오답노트").child("words").orderByChild("word")
-
-        val option = FirebaseRecyclerOptions.Builder<Voca>()
-                .setQuery(query, Voca::class.java)
-                .build()
-
-        adapter = ReviewAdapter(option)
-        adapter.itemClickListener=object: ReviewAdapter.OnItemClickListener {
-
-            override fun OnItemClick(holder: ReviewAdapter.ViewHolder, view: View, position: Int) {
-                binding.engWordTextView.text=holder.word.text.toString().toUpperCase()
-                binding.meaningTextView.text=holder.meaning.text.toString()
-
-                binding.meaningTextView.visibility= View.INVISIBLE
-                binding.blackBox.visibility= View.VISIBLE
-
-                binding.blackBox.setOnClickListener {
-                    binding.blackBox.visibility= View.INVISIBLE
-                    binding.meaningTextView.visibility= View.VISIBLE
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                reviewViewModel.currentWordListInfo.collectLatest {
+                    if (it.wordListUid.isNotEmpty()) {
+                        setWordListInfo(it)
+                        wordListInfoDialog.show()
+                    }
                 }
             }
         }
-        recyclerView.adapter=adapter
+    }
 
-        adapter.startListening()
-
+    private fun setWordListInfo(wordList: WordList) {
+        wordListDialogView.run {
+            titleTextView.text = "제목: ${wordList.wordListName}"
+            downloadDateTextView.text = "다운로드 날짜 : ${wordList.downLoadDate.toDateString()}"
+            descriptionTextView.text = "내용 : ${wordList.description}"
+        }
     }
 
 }
