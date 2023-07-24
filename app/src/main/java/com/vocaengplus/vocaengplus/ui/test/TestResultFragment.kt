@@ -9,8 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.adapter.TestResultListAdapter
 import com.vocaengplus.vocaengplus.databinding.FragmentTestResultBinding
 import kotlinx.coroutines.flow.collectLatest

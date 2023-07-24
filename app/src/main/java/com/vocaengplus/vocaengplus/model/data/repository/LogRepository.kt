@@ -1,10 +1,8 @@
 package com.vocaengplus.vocaengplus.model.data.repository
 
 import com.vocaengplus.vocaengplus.model.data.dataSource.LogDataSource
-import com.vocaengplus.vocaengplus.model.data.dataSource.WordDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.TestResult
 import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import com.vocaengplus.vocaengplus.network.auth.AuthService
 import com.vocaengplus.vocaengplus.network.dto.RequestUser
 import javax.inject.Inject

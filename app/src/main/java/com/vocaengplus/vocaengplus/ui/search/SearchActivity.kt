@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.vocaengplus.vocaengplus.R
+import com.vocaengplus.vocaengplus.databinding.ActivitySearchBinding
 import com.vocaengplus.vocaengplus.databinding.NaveraddwordBinding
 import com.vocaengplus.vocaengplus.databinding.NaverhelpBinding
-import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.ui.util.Validation
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,75 +26,82 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
-    lateinit var clientId:String
-    lateinit var clientSecret:String
-    val initialization = Initialization
-    lateinit var validation: Validation
-    var isKortoEng=true
+    private lateinit var binding: ActivitySearchBinding
+    private val searchViewModel: SearchViewModel by viewModels()
+    var isKortoEng = true
 
-    val scope= CoroutineScope(Dispatchers.IO)
+    val scope = CoroutineScope(Dispatchers.IO)
+
+    private val helpDialog: AlertDialog by lazy {
+        val dlgBinding = NaverhelpBinding.inflate(layoutInflater)
+        AlertDialog.Builder(this)
+            .setView(dlgBinding.root)
+            .setNeutralButton("확인") { _, _ ->
+                {
+
+                }
+            }.create()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        clientId=resources.getString(R.string.clientID)
-        clientSecret=resources.getString(R.string.clientSecret)
         init()
         initNaver()
     }
 
-    private fun init(){
-        validation= Validation
-
-        val source=findViewById<TextView>(R.id.sourceTextView)
-        val target=findViewById<TextView>(R.id.targetTextView)
-        val imagebtn=findViewById<ImageButton>(R.id.switchImageButton)
-        val helpbtn=findViewById<ImageButton>(R.id.helpButton)
+    private fun init() {
 
         imagebtn.setOnClickListener {
-            if(isKortoEng){
-                source.text="영어"
-                target.text="한국어"
-                isKortoEng=false
-            }
-            else{
-                source.text="한국어"
-                target.text="영어"
-                isKortoEng=true
+            if (isKortoEng) {
+                source.text = "영어"
+                target.text = "한국어"
+                isKortoEng = false
+            } else {
+                source.text = "한국어"
+                target.text = "영어"
+                isKortoEng = true
             }
         }
 
-        helpbtn.setOnClickListener {
-            val dlgBinding= NaverhelpBinding.inflate(layoutInflater)
-            val builder= AlertDialog.Builder(this)
-            builder.setView(dlgBinding.root)
-                    .setNeutralButton("확인"){ _, _ ->{
+        binding.run {
+            helpButton.setOnClickListener {
+                helpDialog.show()
+            }
 
-                    }
-                    }
-            val dlg=builder.create()
-            dlg.show()
+            switchImageButton.setOnClickListener {
+                viewmodel
+            }
+
+            searchButton.setOnClickListener {
+
+            }
         }
+
 
     }
-    private fun initNaver(){
-        val searchbtn=findViewById<Button>(R.id.searchButton)
-        val searchresult=findViewById<TextView>(R.id.searchResultTextView)
-        var result:String=""
+
+    private fun initNaver() {
+        val searchbtn = findViewById<Button>(R.id.searchButton)
+        val searchresult = findViewById<TextView>(R.id.searchResultTextView)
+        var result: String = ""
 
         searchbtn.setOnClickListener {
-            val inputword=findViewById<EditText>(R.id.inputWordEditText)
-            if(isKortoEng){
-                if(!validation.isValidateMeaning(inputword.text.toString())){
-                    Toast.makeText(this, "한국어 뜻 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            val inputword = findViewById<EditText>(R.id.inputWordEditText)
+            if (isKortoEng) {
+                if (!validation.isValidateMeaning(inputword.text.toString())) {
+                    Toast.makeText(this, "한국어 뜻 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
-            }
-            else{
-                if(!validation.isValidateWord(inputword.text.toString())){
-                    Toast.makeText(this, "영단어 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                if (!validation.isValidateWord(inputword.text.toString())) {
+                    Toast.makeText(this, "영단어 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
             }
@@ -110,9 +117,9 @@ class SearchActivity : AppCompatActivity() {
                     con.setRequestProperty("X-Naver-Client-Secret", clientSecret)
                     // post request
 
-                    val postParams = if(isKortoEng){
+                    val postParams = if (isKortoEng) {
                         "source=ko&target=en&text=$text"
-                    } else{
+                    } else {
                         "source=en&target=ko&text=$text"
                     }
                     con.doOutput = true
@@ -135,25 +142,30 @@ class SearchActivity : AppCompatActivity() {
                     br.close()
                     println(response.toString())
                     val jsonObject = JSONObject(response.toString())
-                    val jsonObject2 = jsonObject.getJSONObject("message").getJSONObject("result") //결과가 들어있는 태그
+                    val jsonObject2 =
+                        jsonObject.getJSONObject("message").getJSONObject("result") //결과가 들어있는 태그
 
-                    result=jsonObject2.get("translatedText").toString()
-                    if(isKortoEng){
-                        result=result.replace(".", "") //.빼기
+                    result = jsonObject2.get("translatedText").toString()
+                    if (isKortoEng) {
+                        result = result.replace(".", "") //.빼기
                     }
 
                 } catch (e: Exception) {
                     println(e)
                 }
 
-                withContext(Dispatchers.Main){
-                    val resultarea=findViewById<TextView>(R.id.searchResultTextView)
-                    resultarea.text=result
+                withContext(Dispatchers.Main) {
+                    val resultarea = findViewById<TextView>(R.id.searchResultTextView)
+                    resultarea.text = result
 
                     addWord()
 
-                    val manager: InputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                    manager.hideSoftInputFromWindow(currentFocus!!.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+                    val manager: InputMethodManager =
+                        getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    manager.hideSoftInputFromWindow(
+                        currentFocus!!.windowToken,
+                        InputMethodManager.HIDE_NOT_ALWAYS
+                    )
 
                 }
             }
@@ -163,39 +175,45 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-    private fun addWord(){
-        val naveraddbtn=findViewById<TextView>(R.id.wordAddButton)
+    private fun addWord() {
+        val naveraddbtn = findViewById<TextView>(R.id.wordAddButton)
         naveraddbtn.setOnClickListener {
-            val dlgBinding= NaveraddwordBinding.inflate(layoutInflater)
-            if(isKortoEng){
-                if(findViewById<TextView>(R.id.searchResultTextView).text.toString().length<=1){
+            val dlgBinding = NaveraddwordBinding.inflate(layoutInflater)
+            if (isKortoEng) {
+                if (findViewById<TextView>(R.id.searchResultTextView).text.toString().length <= 1) {
                     Toast.makeText(this, "영단어가 올바르지 않아 추가할 수 없습니다", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                if(!validation.isValidateWord(findViewById<TextView>(R.id.searchResultTextView).text.toString())){
-                    Toast.makeText(this, "영단어 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                if (!validation.isValidateWord(findViewById<TextView>(R.id.searchResultTextView).text.toString())) {
+                    Toast.makeText(this, "영단어 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
 
-                dlgBinding.naveraddword.text=findViewById<TextView>(R.id.searchResultTextView).text
-                if(dlgBinding.naveraddword.text.toString().length>40){
-                    dlgBinding.naveraddword.text=dlgBinding.naveraddword.text.toString().substring(0, 41)
+                dlgBinding.naveraddword.text =
+                    findViewById<TextView>(R.id.searchResultTextView).text
+                if (dlgBinding.naveraddword.text.toString().length > 40) {
+                    dlgBinding.naveraddword.text =
+                        dlgBinding.naveraddword.text.toString().substring(0, 41)
                 }
-                dlgBinding.naveraddmeaning.text=findViewById<EditText>(R.id.inputWordEditText).text
-            }
-            else{
-                if(!validation.isValidateMeaning(findViewById<TextView>(R.id.searchResultTextView).text.toString())){
-                    Toast.makeText(this, "한국어 뜻 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+                dlgBinding.naveraddmeaning.text =
+                    findViewById<EditText>(R.id.inputWordEditText).text
+            } else {
+                if (!validation.isValidateMeaning(findViewById<TextView>(R.id.searchResultTextView).text.toString())) {
+                    Toast.makeText(this, "한국어 뜻 입력이 올바르지 않아 번역을 진행할 수 없습니다.", Toast.LENGTH_SHORT)
+                        .show()
                     return@setOnClickListener
                 }
 
-                dlgBinding.naveraddword.text=findViewById<EditText>(R.id.inputWordEditText).text
-                dlgBinding.naveraddmeaning.text=findViewById<TextView>(R.id.searchResultTextView).text
-                if(dlgBinding.naveraddmeaning.text.toString().length>40){
-                    dlgBinding.naveraddmeaning.text=dlgBinding.naveraddmeaning.text.toString().substring(0, 41)
+                dlgBinding.naveraddword.text = findViewById<EditText>(R.id.inputWordEditText).text
+                dlgBinding.naveraddmeaning.text =
+                    findViewById<TextView>(R.id.searchResultTextView).text
+                if (dlgBinding.naveraddmeaning.text.toString().length > 40) {
+                    dlgBinding.naveraddmeaning.text =
+                        dlgBinding.naveraddmeaning.text.toString().substring(0, 41)
                 }
             }
-            val dlg= SearchAddDiaglog(dlgBinding.root)
+            val dlg = SearchAddDiaglog(dlgBinding.root)
 
             dlg.show(supportFragmentManager, "NaverAddDialog")
         }

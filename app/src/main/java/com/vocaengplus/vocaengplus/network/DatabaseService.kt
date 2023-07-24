@@ -1,6 +1,5 @@
 package com.vocaengplus.vocaengplus.network
 
-import com.vocaengplus.vocaengplus.model.data.newData.TestResultLog
 import com.vocaengplus.vocaengplus.model.data.newData.User
 import com.vocaengplus.vocaengplus.network.dto.PostDTO
 import com.vocaengplus.vocaengplus.network.dto.TestResultLogDTO

@@ -1,16 +1,12 @@
 package com.vocaengplus.vocaengplus.ui.review
 
 import android.os.Bundle
-import android.view.View
-import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.adapter.ReviewListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityReviewBinding
 import com.vocaengplus.vocaengplus.databinding.DialogWordListInfoBinding

@@ -1,16 +1,11 @@
 package com.vocaengplus.vocaengplus.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.ItemTestResultBinding
-import com.vocaengplus.vocaengplus.model.data.newData.Test
 import com.vocaengplus.vocaengplus.model.data.newData.TestResult
 
 class TestResultListAdapter() :

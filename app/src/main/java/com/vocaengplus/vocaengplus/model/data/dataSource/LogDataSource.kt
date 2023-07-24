@@ -10,7 +10,6 @@ import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.dto.RequestUser
 import com.vocaengplus.vocaengplus.network.dto.toWord
 import com.vocaengplus.vocaengplus.ui.util.getTodayYearMonth
-import java.lang.Exception
 import javax.inject.Inject
 
 class LogDataSource @Inject constructor(
