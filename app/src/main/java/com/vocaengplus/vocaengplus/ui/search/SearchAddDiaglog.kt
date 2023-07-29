@@ -4,20 +4,14 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.DialogAddSearchWordBinding
-import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+import com.vocaengplus.vocaengplus.model.data.Word
+import com.vocaengplus.vocaengplus.model.data.WordList
 
 interface SearchAddDialogListener {
     fun onWordListClickListener(position: Int)

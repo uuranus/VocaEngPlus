@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.vocaengplus.vocaengplus.ui.login.RegisterViewModel" />
+            type="com.vocaengplus.vocaengplus.ui.register.RegisterViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.login.RegisterActivity">
+        tools:context=".ui.register.RegisterActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

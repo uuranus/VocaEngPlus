@@ -2,10 +2,10 @@ package com.vocaengplus.vocaengplus.ui.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
-import com.vocaengplus.vocaengplus.model.data.repository.UserRepository
-import com.vocaengplus.vocaengplus.model.data.repository.WordRepository
+import com.vocaengplus.vocaengplus.model.data.Word
+import com.vocaengplus.vocaengplus.model.data.WordList
+import com.vocaengplus.vocaengplus.model.repository.UserRepository
+import com.vocaengplus.vocaengplus.model.repository.WordRepository
 import com.vocaengplus.vocaengplus.util.Validation
 import com.vocaengplus.vocaengplus.util.getToday
 import dagger.hilt.android.lifecycle.HiltViewModel

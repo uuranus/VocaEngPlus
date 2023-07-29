@@ -10,7 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.vocaengplus.vocaengplus.adapter.AddCategoryListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityAddCategoryBinding
-import com.vocaengplus.vocaengplus.model.data.newData.Word
+import com.vocaengplus.vocaengplus.model.data.Word
 import com.vocaengplus.vocaengplus.view.WordDialogFragment
 import com.vocaengplus.vocaengplus.view.WordDialogListener
 import dagger.hilt.android.AndroidEntryPoint

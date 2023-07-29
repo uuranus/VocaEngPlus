@@ -5,17 +5,17 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.databinding.MainTitleBinding
+import com.vocaengplus.vocaengplus.databinding.ViewMainTitleBinding
 
 class MainTitleView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private var binding: MainTitleBinding? = null
+    private var binding: ViewMainTitleBinding? = null
     private var numberText: String
     private var titleText: String
 
     init {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        binding = MainTitleBinding.inflate(inflater, this, true)
+        binding = ViewMainTitleBinding.inflate(inflater, this, true)
 
         context.theme.obtainStyledAttributes(
             attrs,

@@ -7,7 +7,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.vocaengplus.vocaengplus.model.data.newData.TestResult
+import com.vocaengplus.vocaengplus.R
+import com.vocaengplus.vocaengplus.model.data.TestResult
 
 
 @BindingAdapter("isSelected")
@@ -21,6 +22,16 @@ fun ImageView.setImageUrl(url: Uri?) {
 
     Glide.with(this)
         .load(url)
+        .circleCrop()
+        .into(this)
+}
+
+@BindingAdapter("setProfileImageUrl")
+fun ImageView.setProfileImageUrl(url: Uri?) {
+
+    Glide.with(this)
+        .load(url)
+        .placeholder(R.drawable.default1)
         .circleCrop()
         .into(this)
 }
@@ -45,11 +56,11 @@ fun setInCorrectData(view: TextView, results: List<TestResult>) {
 }
 
 @BindingAdapter("translateWord")
-fun translateWord(view: TextView, isKorToEng:Boolean) {
-    view.text = if(isKorToEng) "한국어" else "영어"
+fun translateWord(view: TextView, isKorToEng: Boolean) {
+    view.text = if (isKorToEng) "한국어" else "영어"
 }
 
 @BindingAdapter("translatedWord")
-fun translatedWord(view: TextView, isKorToEng:Boolean) {
-    view.text = if(isKorToEng) "영어" else "한국어"
+fun translatedWord(view: TextView, isKorToEng: Boolean) {
+    view.text = if (isKorToEng) "영어" else "한국어"
 }

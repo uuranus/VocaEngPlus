@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.vocaengplus.vocaengplus.model.data.newData.Word" />
+            type="com.vocaengplus.vocaengplus.model.data.Word" />
     </data>
 
     <LinearLayout

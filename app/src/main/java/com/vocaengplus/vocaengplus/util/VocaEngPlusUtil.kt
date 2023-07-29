@@ -1,7 +1,7 @@
 package com.vocaengplus.vocaengplus.util
 
-import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.Word
+import com.vocaengplus.vocaengplus.model.data.WordList
 
 enum class WORDLIST {
     TOEIC,

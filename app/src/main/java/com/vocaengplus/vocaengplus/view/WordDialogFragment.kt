@@ -7,7 +7,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.vocaengplus.vocaengplus.databinding.DialogWordBinding
-import com.vocaengplus.vocaengplus.model.data.newData.Word
+import com.vocaengplus.vocaengplus.model.data.Word
 
 interface WordDialogListener {
     fun onDialogPositiveClick(dialog: WordDialogFragment, word: Word)

@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.vocaengplus.vocaengplus.model.data.newData.TestResult" />
+            type="com.vocaengplus.vocaengplus.model.data.TestResult" />
     </data>
 
     <LinearLayout

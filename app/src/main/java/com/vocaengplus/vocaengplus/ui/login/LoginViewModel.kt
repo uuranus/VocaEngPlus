@@ -2,8 +2,8 @@ package com.vocaengplus.vocaengplus.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vocaengplus.vocaengplus.model.data.newData.User
-import com.vocaengplus.vocaengplus.model.data.repository.LoginRepository
+import com.vocaengplus.vocaengplus.model.data.User
+import com.vocaengplus.vocaengplus.model.repository.LoginRepository
 import com.vocaengplus.vocaengplus.util.Validation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

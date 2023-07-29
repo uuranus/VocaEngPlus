@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -16,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.FragmentTestMainBinding
-import com.vocaengplus.vocaengplus.databinding.TesthelpBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,16 +25,6 @@ class TestMainFragment : Fragment() {
     private var _binding: FragmentTestMainBinding? = null
     private val binding: FragmentTestMainBinding get() = _binding!!
     private val testViewModel: TestViewModel by activityViewModels()
-    private val helpDialog: AlertDialog by lazy {
-        val dlgBinding = TesthelpBinding.inflate(layoutInflater)
-        AlertDialog.Builder(requireContext())
-            .setView(dlgBinding.root)
-            .setNeutralButton("확인") { _, _ ->
-                {
-
-                }
-            }.create()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,10 +58,6 @@ class TestMainFragment : Fragment() {
         }
 
         binding.run {
-            helpButton.setOnClickListener {
-                helpDialog.show()
-            }
-
             testTypeSpinner.adapter =
                 ArrayAdapter(
                     requireContext(),

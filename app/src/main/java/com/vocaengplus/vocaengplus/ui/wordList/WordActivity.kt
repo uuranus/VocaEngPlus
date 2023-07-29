@@ -16,7 +16,7 @@ import com.vocaengplus.vocaengplus.adapter.WordAdapterListener
 import com.vocaengplus.vocaengplus.adapter.WordListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityWordBinding
 import com.vocaengplus.vocaengplus.databinding.HelpWordBinding
-import com.vocaengplus.vocaengplus.model.data.newData.Word
+import com.vocaengplus.vocaengplus.model.data.Word
 import com.vocaengplus.vocaengplus.view.WordDialogFragment
 import com.vocaengplus.vocaengplus.view.WordDialogListener
 import dagger.hilt.android.AndroidEntryPoint

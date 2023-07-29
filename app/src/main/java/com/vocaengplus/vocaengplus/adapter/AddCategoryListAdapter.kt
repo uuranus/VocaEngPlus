@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.databinding.ItemSettingWordBinding
-import com.vocaengplus.vocaengplus.model.data.newData.Word
+import com.vocaengplus.vocaengplus.model.data.Word
 
 class AddCategoryListAdapter : ListAdapter<Word, AddCategoryListAdapter.ViewHolder>(diffUtil) {
 

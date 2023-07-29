@@ -11,7 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.Snackbar
 import com.vocaengplus.vocaengplus.adapter.SettingListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivitySettingBinding
-import com.vocaengplus.vocaengplus.databinding.EditcategoryBinding
+import com.vocaengplus.vocaengplus.databinding.DialogEditWordListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -37,8 +37,8 @@ class SettingActivity : AppCompatActivity() {
     }
     private val settingViewModel: SettingViewModel by viewModels()
 
-    private val editDialogView: EditcategoryBinding by lazy {
-        EditcategoryBinding.inflate(layoutInflater)
+    private val editDialogView: DialogEditWordListBinding by lazy {
+        DialogEditWordListBinding.inflate(layoutInflater)
     }
 
     private val editWordListDialog: AlertDialog by lazy {

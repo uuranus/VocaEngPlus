@@ -59,16 +59,15 @@ class SearchActivity : AppCompatActivity() {
                 searchViewModel.translate()
             }
 
-            wordAddButton.setOnClickListener {
-                addWordDialog.showDialog(supportFragmentManager, searchViewModel.getCurrentWord())
-                searchViewModel.getWordLists()
-            }
+//            wordAddButton.setOnClickListener {
+//                addWordDialog.showDialog(supportFragmentManager, searchViewModel.getCurrentWord())
+//                searchViewModel.getWordLists()
+//            }
         }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 searchViewModel.wordLists.collectLatest {
-                    println("ittttt $it")
                     if (it.isNotEmpty()) {
                         addWordDialog.setWordList(it)
                     }

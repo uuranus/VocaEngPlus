@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.databinding.ItemTestResultBinding
-import com.vocaengplus.vocaengplus.model.data.newData.TestResult
+import com.vocaengplus.vocaengplus.model.data.TestResult
 
 class TestResultListAdapter() :
     ListAdapter<TestResult, TestResultListAdapter.ViewHolder>(diffUtil) {

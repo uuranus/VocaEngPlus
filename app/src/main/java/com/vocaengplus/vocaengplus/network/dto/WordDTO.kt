@@ -1,8 +1,8 @@
 package com.vocaengplus.vocaengplus.network.dto
 
 import com.google.gson.annotations.SerializedName
-import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.Word
+import com.vocaengplus.vocaengplus.model.data.WordList
 
 data class WordListDTO(
     @SerializedName("wordListName") val wordListName: String,

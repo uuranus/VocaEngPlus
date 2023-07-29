@@ -1,12 +1,14 @@
 package com.vocaengplus.vocaengplus.network.auth
 
+import android.net.Uri
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
+import com.vocaengplus.vocaengplus.model.data.UserAuth
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import kotlin.random.Random
@@ -58,7 +60,7 @@ object AuthService {
 
     fun loginWithGoogle(
         credential: GoogleAuthCredential,
-        callback: (Result<UserAuth>) -> Unit
+        callback: (Result<UserAuth>) -> Unit,
     ) {
         loginWithCredential(credential, callback)
     }
@@ -74,7 +76,7 @@ object AuthService {
 
     private suspend fun loginWithEmailAndPassword(
         email: String,
-        password: String
+        password: String,
     ): Result<UserAuth> {
         return try {
             val authResult = firebaseAuth.signInWithEmailAndPassword(email, password).await()
@@ -91,7 +93,7 @@ object AuthService {
 
     private fun loginWithCredential(
         credential: AuthCredential,
-        callback: (Result<UserAuth>) -> Unit
+        callback: (Result<UserAuth>) -> Unit,
     ) {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
@@ -139,6 +141,23 @@ object AuthService {
         } catch (e: FirebaseException) {
             Result.failure(Exception("로그인에 실패하였습니다"))
         }
+    }
+
+    suspend fun setProfile(imageUrl: Uri?, nickname: String) {
+        val profileUpdates = if (imageUrl == null) {
+            userProfileChangeRequest {
+                displayName = nickname
+            }
+        } else {
+            userProfileChangeRequest {
+                photoUri = imageUrl
+                displayName = nickname
+            }
+        }
+
+        firebaseAuth.currentUser?.updateProfile(
+            profileUpdates
+        )?.await()
     }
 
     suspend fun setNewPassword(email: String) {

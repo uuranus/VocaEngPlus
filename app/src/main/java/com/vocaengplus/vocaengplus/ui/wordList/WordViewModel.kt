@@ -2,9 +2,9 @@ package com.vocaengplus.vocaengplus.ui.wordList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vocaengplus.vocaengplus.model.data.newData.Word
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
-import com.vocaengplus.vocaengplus.model.data.repository.WordRepository
+import com.vocaengplus.vocaengplus.model.data.Word
+import com.vocaengplus.vocaengplus.model.data.WordList
+import com.vocaengplus.vocaengplus.model.repository.WordRepository
 import com.vocaengplus.vocaengplus.util.Validation
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -12,8 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.vocaengplus.vocaengplus.R
 import com.vocaengplus.vocaengplus.databinding.ActivityLoginBinding
+import com.vocaengplus.vocaengplus.databinding.DialogGuestBinding
 import com.vocaengplus.vocaengplus.databinding.FindpwBinding
-import com.vocaengplus.vocaengplus.databinding.GuestBinding
+import com.vocaengplus.vocaengplus.ui.MainActivity
+import com.vocaengplus.vocaengplus.ui.register.RegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -39,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private val guestLoginAlertDialog: AlertDialog by lazy {
-        val dlgBinding = GuestBinding.inflate(layoutInflater)
+        val dlgBinding = DialogGuestBinding.inflate(layoutInflater)
         AlertDialog.Builder(this@LoginActivity)
             .setView(dlgBinding.root)
             .setPositiveButton("확인") { _, _ ->

@@ -1,14 +1,13 @@
 package com.vocaengplus.vocaengplus.di
 
-import com.vocaengplus.vocaengplus.model.data.repository.UserRepository
-import com.vocaengplus.vocaengplus.network.DatabaseService
-import com.vocaengplus.vocaengplus.network.SearchAPIService
-import com.vocaengplus.vocaengplus.network.StorageService
+import com.vocaengplus.vocaengplus.model.repository.UserRepository
 import com.vocaengplus.vocaengplus.network.auth.AuthService
+import com.vocaengplus.vocaengplus.network.service.DatabaseService
+import com.vocaengplus.vocaengplus.network.service.SearchAPIService
+import com.vocaengplus.vocaengplus.network.service.StorageService
 import com.vocaengplus.vocaengplus.util.CLIENT_ID
 import com.vocaengplus.vocaengplus.util.CLIENT_SECRET
 import com.vocaengplus.vocaengplus.util.DATABASE_BASE_URL
-import com.vocaengplus.vocaengplus.util.SEARCH_API_URL
 import com.vocaengplus.vocaengplus.util.STORAGE_BASE_URL
 import dagger.Module
 import dagger.Provides

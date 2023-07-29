@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VocaEngPlus">
         <activity
-            android:name=".ui.login.RoutingActivity"
+            android:name=".ui.RoutingActivity"
             android:exported="true"
             android:theme="@style/Theme.VocaEngPlus.Starting">
             <intent-filter>
@@ -24,11 +24,11 @@
         </activity>
         <activity android:name=".ui.profile.ProfileActivity" />
         <activity
-            android:name=".ui.login.MainActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/Theme.VocaEngPlus.NoActionBar" />
         <activity android:name=".ui.setting.AddWordListActivity" />
         <activity android:name=".ui.login.LoginActivity" />
-        <activity android:name=".ui.login.RegisterActivity" />
+        <activity android:name=".ui.register.RegisterActivity" />
         <activity android:name=".ui.community.CommunityActivity" />
         <activity android:name=".ui.statistics.StatisticsActivity" />
         <activity android:name=".ui.search.SearchActivity" />

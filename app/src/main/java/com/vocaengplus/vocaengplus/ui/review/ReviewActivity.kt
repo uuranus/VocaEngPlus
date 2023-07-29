@@ -10,8 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.vocaengplus.vocaengplus.adapter.ReviewListAdapter
 import com.vocaengplus.vocaengplus.databinding.ActivityReviewBinding
 import com.vocaengplus.vocaengplus.databinding.DialogWordListInfoBinding
-import com.vocaengplus.vocaengplus.databinding.ReviewhelpBinding
-import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import com.vocaengplus.vocaengplus.model.data.WordList
 import com.vocaengplus.vocaengplus.util.toDateString
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -34,14 +33,6 @@ class ReviewActivity : AppCompatActivity() {
                 reviewViewModel.getWordListInfo(position)
             }
         }
-    }
-
-    private val helpDialog: AlertDialog by lazy {
-        val dlgBinding = ReviewhelpBinding.inflate(layoutInflater)
-        AlertDialog.Builder(this)
-            .setView(dlgBinding.root)
-            .setNeutralButton("확인", null)
-            .create()
     }
 
     private val wordListDialogView: DialogWordListInfoBinding by lazy {
@@ -68,10 +59,6 @@ class ReviewActivity : AppCompatActivity() {
             vm = reviewViewModel
             lifecycleOwner = this@ReviewActivity
             reviewRecyclerView.adapter = reviewAdapter
-        }
-
-        binding.helpbutton.setOnClickListener {
-            helpDialog.show()
         }
 
         binding.blackBox.setOnClickListener {
