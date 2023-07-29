@@ -1,4 +1,4 @@
-package com.vocaengplus.vocaengplus.ui.util
+package com.vocaengplus.vocaengplus.util
 
 import java.text.SimpleDateFormat
 import java.util.Calendar

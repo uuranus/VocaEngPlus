@@ -24,6 +24,12 @@ class WordRepository @Inject constructor(
         return dataSource.addWord(requestUser, wordListUid, words)
     }
 
+    suspend fun addOneWord(wordListUid: String, word: Word): Result<Boolean> {
+        val requestUser = getRequestUser()
+
+        return dataSource.addOneWord(requestUser, wordListUid, word)
+    }
+
     suspend fun editWord(wordListUid: String, words: List<Word>): Result<Boolean> {
         val requestUser = getRequestUser()
 

@@ -95,6 +95,14 @@ interface DatabaseService {
         @Body data: List<WordDTO>,
     ): Response<List<WordDTO>>
 
+    @POST("/WordList/{uid}/{wordListUid}/words.json")
+    suspend fun postWord(
+        @Path("uid") uid: String,
+        @Path("wordListUid") wordListUid: String,
+        @Query("auth") token: String,
+        @Body data: WordDTO,
+    ): Response<PostDTO>
+
     @DELETE("/WordList/{uid}/{wordListUid}.json")
     suspend fun deleteWords(
         @Path("uid") uid: String,
@@ -109,7 +117,7 @@ interface DatabaseService {
     suspend fun getReviewWords(
         @Path("uid") uid: String,
         @Query("auth") token: String,
-    ): Response<Map<String,List<WordDTO>>>
+    ): Response<Map<String, List<WordDTO>>>
 
     @POST("/UserLog/{uid}/review.json")
     suspend fun postReviewWords(

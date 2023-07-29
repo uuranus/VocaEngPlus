@@ -23,7 +23,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/addcategory"
+            android:id="@+id/wordListTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -34,7 +34,7 @@
             android:fontFamily="@font/bold_font"/>
 
         <Spinner
-            android:id="@+id/naveraddcategory"
+            android:id="@+id/wordListSpinner"
             android:layout_width="0dp"
             android:ems="10"
             android:layout_weight="3"
@@ -49,7 +49,7 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/addword"
+            android:id="@+id/wordTextView"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_margin="5dp"
@@ -60,7 +60,7 @@
             android:fontFamily="@font/bold_font"/>
 
         <TextView
-            android:id="@+id/naveraddword"
+            android:id="@+id/wordEditText"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
 
 
         <TextView
-            android:id="@+id/addmeaning"
+            android:id="@+id/meaningTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -91,7 +91,7 @@
             android:fontFamily="@font/bold_font"/>
 
         <TextView
-            android:id="@+id/naveraddmeaning"
+            android:id="@+id/meaningEditText"
             android:layout_width="0dp"
             android:ems="10"
             android:layout_weight="3"

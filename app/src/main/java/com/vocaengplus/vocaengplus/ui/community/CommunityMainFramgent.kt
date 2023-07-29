@@ -15,7 +15,7 @@ import com.vocaengplus.vocaengplus.databinding.FragmentCommunityMainBinding
 import com.vocaengplus.vocaengplus.di.Initialization
 import com.vocaengplus.vocaengplus.model.data.CommunityCategory
 import com.vocaengplus.vocaengplus.model.data.Voca
-import com.vocaengplus.vocaengplus.ui.util.Validation
+import com.vocaengplus.vocaengplus.util.Validation
 
 class CommunityMainFramgent : Fragment() {
     var binding: FragmentCommunityMainBinding?=null

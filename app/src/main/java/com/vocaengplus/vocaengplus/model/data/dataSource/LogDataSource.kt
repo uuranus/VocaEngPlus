@@ -9,7 +9,7 @@ import com.vocaengplus.vocaengplus.model.data.newData.toWordDto
 import com.vocaengplus.vocaengplus.network.DatabaseService
 import com.vocaengplus.vocaengplus.network.dto.RequestUser
 import com.vocaengplus.vocaengplus.network.dto.toWord
-import com.vocaengplus.vocaengplus.ui.util.getTodayYearMonth
+import com.vocaengplus.vocaengplus.util.getTodayYearMonth
 import javax.inject.Inject
 
 class LogDataSource @Inject constructor(

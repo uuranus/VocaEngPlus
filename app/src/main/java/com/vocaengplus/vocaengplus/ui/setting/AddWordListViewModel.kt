@@ -6,8 +6,8 @@ import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
 import com.vocaengplus.vocaengplus.model.data.repository.UserRepository
 import com.vocaengplus.vocaengplus.model.data.repository.WordRepository
-import com.vocaengplus.vocaengplus.ui.util.Validation
-import com.vocaengplus.vocaengplus.ui.util.getToday
+import com.vocaengplus.vocaengplus.util.Validation
+import com.vocaengplus.vocaengplus.util.getToday
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

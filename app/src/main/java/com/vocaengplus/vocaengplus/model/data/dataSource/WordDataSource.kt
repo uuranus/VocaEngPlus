@@ -34,6 +34,27 @@ class WordDataSource @Inject constructor(
         }
     }
 
+    suspend fun addOneWord(
+        requestUser: RequestUser,
+        wordListUid: String,
+        word: Word,
+    ): Result<Boolean> {
+        val networkResponse =
+            databaseService.postWord(
+                requestUser.uid,
+                wordListUid,
+                requestUser.idToken,
+                word.toWordDto()
+            )
+        return if (networkResponse.isSuccessful) {
+            networkResponse.body()?.let {
+                Result.success(true)
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
+
     suspend fun editWord(
         requestUser: RequestUser,
         wordListUid: String,
@@ -175,7 +196,9 @@ class WordDataSource @Inject constructor(
         return if (networkResponse.isSuccessful) {
             networkResponse.body()?.let {
                 Result.success(it.map { it2 -> it2.toWord() })
+
             } ?: Result.failure(Exception())
+
         } else {
             Result.failure(Exception())
         }

@@ -2,14 +2,19 @@ package com.vocaengplus.vocaengplus.di
 
 import com.vocaengplus.vocaengplus.model.data.repository.UserRepository
 import com.vocaengplus.vocaengplus.network.DatabaseService
+import com.vocaengplus.vocaengplus.network.SearchAPIService
 import com.vocaengplus.vocaengplus.network.StorageService
 import com.vocaengplus.vocaengplus.network.auth.AuthService
-import com.vocaengplus.vocaengplus.ui.util.DATABASE_BASE_URL
-import com.vocaengplus.vocaengplus.ui.util.STORAGE_BASE_URL
+import com.vocaengplus.vocaengplus.util.CLIENT_ID
+import com.vocaengplus.vocaengplus.util.CLIENT_SECRET
+import com.vocaengplus.vocaengplus.util.DATABASE_BASE_URL
+import com.vocaengplus.vocaengplus.util.SEARCH_API_URL
+import com.vocaengplus.vocaengplus.util.STORAGE_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,6 +24,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+    private val interceptor = Interceptor {
+        val newRequest = it
+            .request()
+            .newBuilder()
+            .addHeader("X-Naver-Client-Id", CLIENT_ID)
+            .addHeader("X-Naver-Client-Secret", CLIENT_SECRET)
+            .build()
+        it.proceed(newRequest)
+    }
 
     @Qualifier
     annotation class StorageRetrofit
@@ -26,16 +40,34 @@ object NetworkModule {
     @Qualifier
     annotation class DatabaseRetrofit
 
+    @Qualifier
+    annotation class SearchRetrofit
+
+    @Qualifier
+    annotation class VocaEngPlusOkHttpClient
+
+    @Qualifier
+    annotation class SearchOkHttpClient
+
+
+    @VocaEngPlusOkHttpClient
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideVocaEngPlusOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder().build()
+    }
+
+    @SearchOkHttpClient
+    @Provides
+    @Singleton
+    fun provideSearchOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
     }
 
     @DatabaseRetrofit
     @Provides
     @Singleton
-    fun provideDatabaseRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideDatabaseRetrofit(@VocaEngPlusOkHttpClient okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(DATABASE_BASE_URL)
@@ -46,13 +78,24 @@ object NetworkModule {
     @StorageRetrofit
     @Provides
     @Singleton
-    fun provideStorageRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun provideStorageRetrofit(@VocaEngPlusOkHttpClient okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .client(okHttpClient)
             .baseUrl(STORAGE_BASE_URL)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+//    @SearchRetrofit
+//    @Provides
+//    @Singleton
+//    fun provideSearchRetrofit(@SearchOkHttpClient okHttpClient: OkHttpClient): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(SEARCH_API_URL)
+//            .client(okHttpClient)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
 
     @Provides
     @Singleton
@@ -65,6 +108,10 @@ object NetworkModule {
     fun providesStorageService(@StorageRetrofit retrofit: Retrofit): StorageService {
         return retrofit.create(StorageService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun providesSearchService() = SearchAPIService()
 
     @Provides
     @Singleton

@@ -1,15 +1,15 @@
 package com.vocaengplus.vocaengplus.model.data.repository
 
-import com.vocaengplus.vocaengplus.model.data.LoginDataSource
+import com.vocaengplus.vocaengplus.model.data.dataSource.LoginDataSource
 import com.vocaengplus.vocaengplus.model.data.newData.User
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.model.data.newData.toUserDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordDto
 import com.vocaengplus.vocaengplus.model.data.newData.toWordListDto
 import com.vocaengplus.vocaengplus.network.auth.AuthService
-import com.vocaengplus.vocaengplus.ui.util.WORDLIST
-import com.vocaengplus.vocaengplus.ui.util.makeDefaultWordList
-import com.vocaengplus.vocaengplus.ui.util.makeDefaultWords
+import com.vocaengplus.vocaengplus.util.WORDLIST
+import com.vocaengplus.vocaengplus.util.makeDefaultWordList
+import com.vocaengplus.vocaengplus.util.makeDefaultWords
 import javax.inject.Inject
 
 class LoginRepository @Inject constructor(

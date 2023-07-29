@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.vocaengplus.vocaengplus.databinding.ItemWordListBinding
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
-import com.vocaengplus.vocaengplus.ui.util.toDateString
+import com.vocaengplus.vocaengplus.util.toDateString
 
 class SettingListAdapter : ListAdapter<WordList, SettingListAdapter.ViewHolder>(diffUtil) {
     interface OnItemClickListener {

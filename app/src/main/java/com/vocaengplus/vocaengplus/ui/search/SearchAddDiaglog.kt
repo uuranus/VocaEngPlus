@@ -3,91 +3,83 @@ package com.vocaengplus.vocaengplus.ui.search
 import android.app.Dialog
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.vocaengplus.vocaengplus.R
-import com.vocaengplus.vocaengplus.di.Initialization
-import com.vocaengplus.vocaengplus.model.data.Voca
+import com.vocaengplus.vocaengplus.databinding.DialogAddSearchWordBinding
+import com.vocaengplus.vocaengplus.model.data.newData.Word
+import com.vocaengplus.vocaengplus.model.data.newData.WordList
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class SearchAddDiaglog(v: View) :DialogFragment() {
-    private val v=v
+interface SearchAddDialogListener {
+    fun onWordListClickListener(position: Int)
+    fun onPositiveClickListener()
+    fun onNegativeClickListener()
+}
 
-    lateinit var databaseref:DatabaseReference
-    lateinit var firebaseAuth:FirebaseAuth
-    lateinit var firebaseUser:FirebaseUser
-    lateinit var uid:String
-    val initialization= Initialization
-
+class SearchAddDialog(val listener: SearchAddDialogListener) : DialogFragment() {
+    private lateinit var binding: DialogAddSearchWordBinding
+    private var currentWord: Word? = null
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        databaseref= initialization.getDBref()
-        firebaseAuth= initialization.getFBauth()
-        firebaseUser=initialization.getFBuser()
-        uid=initialization.getuid()
 
-        val spinner=v.findViewById<Spinner>(R.id.naveraddcategory)
+        binding = DialogAddSearchWordBinding.inflate(layoutInflater)
 
-        var categories=ArrayList<String>()
-
-        databaseref.child("UserData").child(uid.toString()).child("downloadNames").get().addOnSuccessListener {
-            for(child in it.children){
-                if(child.value.toString()=="오답노트"){
-                    continue
-                }
-                categories.add(child.value.toString())
-            }
-
-            spinner.adapter= ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line,categories)
-            spinner.setSelection(0)
-        }
-
-        val dlgBuilder:androidx.appcompat.app.AlertDialog.Builder=androidx.appcompat.app.AlertDialog.Builder(
-                requireContext(),android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar_MinWidth)
-
-        dlgBuilder.setView(v)
-                .setPositiveButton("추가"){
-            _,_ ->
-                    val naveraddword=v.findViewById<TextView>(R.id.naveraddword)
-                    val naveraddmeaning=v.findViewById<TextView>(R.id.naveraddmeaning)
-                    val naveraddcategory=spinner.selectedItem.toString()
-
-                    val addword=naveraddword.text.toString()
-                    val addmeaning=naveraddmeaning.text.toString()
-
-                    databaseref.child("UserData").child(uid.toString()).child("downloadData").child(naveraddcategory)
-                            .child("words").child(addword).setValue(Voca(naveraddcategory,addword,addmeaning,0))
-
-
-                    val date=initialization.getdate().substring(0,7)
-                    //log추가
-                    databaseref.child("UserLog").child(uid.toString()).get().addOnSuccessListener {
-                        if(it.hasChild(date)){
-                            databaseref.child("UserLog").child(uid.toString()).child(date).child("AddDelete").child("addWord").get().addOnSuccessListener {
-                                var add=it.value.toString().toInt()
-                                databaseref.child("UserLog").child(uid.toString()).child(date).child("AddDelete").child("addWord").setValue(++add)
-                            }
-                        }
-                        else{
-                            initialization.initData("addWord")
-                        }
-                    }
-                    Toast.makeText(requireContext(),"단어 추가 완료",Toast.LENGTH_SHORT).show()
-
-            }
-                .setNegativeButton("취소"){
-                    _,_ ->
-
+        binding.wordListSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    listener.onWordListClickListener(position)
                 }
 
-        val dlg=dlgBuilder.create()
-        return dlg
+                override fun onNothingSelected(parent: AdapterView<*>?) = Unit
 
+            }
 
+        return AlertDialog.Builder(requireContext())
+            .setView(binding.root)
+            .setPositiveButton("추가") { _, _ ->
+                listener.onPositiveClickListener()
+            }
+            .setNegativeButton("취소") { _, _ ->
+                dismiss()
+            }.create()
     }
 
+    fun showDialog(manager: FragmentManager, word: Word) {
+        show(manager, tag)
+        currentWord = word
+    }
+
+    fun setWordList(wordList: List<WordList>) {
+        binding.wordListSpinner.adapter =
+            ArrayAdapter(
+                requireContext(),
+                R.layout.support_simple_spinner_dropdown_item,
+                wordList.map { it2 -> it2.wordListName }
+            )
+    }
+
+    override fun onStart() {
+        super.onStart()
+        setCurrentWord()
+    }
+
+    private fun setCurrentWord() {
+        binding.run {
+            wordEditText.setText(currentWord?.word)
+            meaningEditText.setText(currentWord?.meaning)
+        }
+    }
 }

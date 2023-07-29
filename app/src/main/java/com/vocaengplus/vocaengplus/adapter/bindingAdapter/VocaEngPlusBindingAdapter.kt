@@ -43,3 +43,13 @@ fun setCorrectData(view: TextView, results: List<TestResult>) {
 fun setInCorrectData(view: TextView, results: List<TestResult>) {
     view.text = "틀린 개수 : ${results.count { it.isCorrect.not() }}개"
 }
+
+@BindingAdapter("translateWord")
+fun translateWord(view: TextView, isKorToEng:Boolean) {
+    view.text = if(isKorToEng) "한국어" else "영어"
+}
+
+@BindingAdapter("translatedWord")
+fun translatedWord(view: TextView, isKorToEng:Boolean) {
+    view.text = if(isKorToEng) "영어" else "한국어"
+}

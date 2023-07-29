@@ -12,7 +12,7 @@ import com.vocaengplus.vocaengplus.databinding.ActivityReviewBinding
 import com.vocaengplus.vocaengplus.databinding.DialogWordListInfoBinding
 import com.vocaengplus.vocaengplus.databinding.ReviewhelpBinding
 import com.vocaengplus.vocaengplus.model.data.newData.WordList
-import com.vocaengplus.vocaengplus.ui.util.toDateString
+import com.vocaengplus.vocaengplus.util.toDateString
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

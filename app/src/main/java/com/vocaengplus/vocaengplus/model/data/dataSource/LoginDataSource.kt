@@ -1,4 +1,4 @@
-package com.vocaengplus.vocaengplus.model.data
+package com.vocaengplus.vocaengplus.model.data.dataSource
 
 import com.vocaengplus.vocaengplus.model.data.newData.UserAuth
 import com.vocaengplus.vocaengplus.network.DatabaseService

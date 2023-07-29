@@ -1,4 +1,4 @@
-package com.vocaengplus.vocaengplus.ui.util
+package com.vocaengplus.vocaengplus.util
 
 import com.vocaengplus.vocaengplus.model.data.newData.Word
 import com.vocaengplus.vocaengplus.model.data.newData.WordList

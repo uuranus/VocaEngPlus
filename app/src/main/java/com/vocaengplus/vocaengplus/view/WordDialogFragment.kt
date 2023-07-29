@@ -20,7 +20,6 @@ class WordDialogFragment(private val listener: WordDialogListener) : DialogFragm
     private var oldWord: Word? = null
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        println("oncreateDialog")
         activity?.let {
             val inflater = requireActivity().layoutInflater
             dialogWordBinding = DialogWordBinding.inflate(inflater)
